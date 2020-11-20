@@ -1,0 +1,15 @@
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.csprojAssemblyReference.cache
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\MainWindow.g.cs
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\App.g.cs
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.cache
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.lref
+C:\Development\Visual Studio\Torpedo\Torpedo\bin\Debug\Torpedo.exe.config
+C:\Development\Visual Studio\Torpedo\Torpedo\bin\Debug\Torpedo.exe
+C:\Development\Visual Studio\Torpedo\Torpedo\bin\Debug\Torpedo.pdb
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\MainWindow.baml
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.g.resources
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.Properties.Resources.resources
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.csproj.GenerateResource.cache
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CoreCompileInputs.cache
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.exe
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.pdb
