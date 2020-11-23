@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace Torpedo
 {
@@ -20,11 +21,8 @@ namespace Torpedo
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int[] clickedCoordGuessP1 = new int[2];
-        public int[] clickedCoordOwnP1 = new int[2];
-        public int[] clickedCoordGuessP2 = new int[2];
-        public int[] clickedCoordOwnP2 = new int[2];
-        List<Button> shipCoordListP1 = new List<Button>();
+        bool turn = false;
+        List<Button> shipButtonListP1 = new List<Button>();
         List<Ship> ShipsP1 = new List<Ship>()
         {
             new Ship(1),
@@ -33,7 +31,7 @@ namespace Torpedo
             new Ship(4),
             new Ship(5)
         };
-        List<Button> shipCoordListP2 = new List<Button>();
+        List<Button> shipButtonListP2 = new List<Button>();
         List<Ship> ShipsP2 = new List<Ship>()
         {
             new Ship(1),
@@ -84,120 +82,227 @@ namespace Torpedo
             clickedButton.Click -= new RoutedEventHandler(btnEvent);
             int _row = (int)clickedButton.GetValue(Grid.RowProperty);
             int _column = (int)clickedButton.GetValue(Grid.ColumnProperty);
-            var element = VisualTreeHelper.GetParent(clickedButton) as Grid;
-            if (element.Name == guessGrid.Name)
+            var btnsGrid = VisualTreeHelper.GetParent(clickedButton) as Grid;
+
+            Debug.WriteLine(_row + " " + _column+"  "+btnsGrid.Name);
+
+            if (btnsGrid.Name == P1Grid.Name)
             {
-                clickedCoordGuessP1[0] = (int)clickedButton.GetValue(Grid.RowProperty);
-                clickedCoordGuessP1[1] = (int)clickedButton.GetValue(Grid.ColumnProperty);
+                shipButtonListP1.Add(clickedButton);
+                buildShip(btnsGrid);
+            }
+
+            if (btnsGrid.Name == P2Grid.Name)
+            {
+                shipButtonListP2.Add(clickedButton);
+                buildShip(btnsGrid);
+            }
+
+            if (btnsGrid.Name == P1GuessGrid.Name)
+            {
                 checkHit(clickedButton);
             }
-            if(element.Name == myGrid.Name)
-            {
-                clickedCoordOwnP1[0] = (int)clickedButton.GetValue(Grid.RowProperty);
-                clickedCoordOwnP1[1] = (int)clickedButton.GetValue(Grid.ColumnProperty);
-                shipCoordListP1.Add(clickedButton);
-                buildShip(element);
-            }
-            if (element.Name == guessGridEnemy.Name)
-            {
-                clickedCoordGuessP2[0] = (int)clickedButton.GetValue(Grid.RowProperty);
-                clickedCoordGuessP2[1] = (int)clickedButton.GetValue(Grid.ColumnProperty);
-            }
-            if (element.Name == enemyGrid.Name)
-            {
-                clickedCoordOwnP2[0] = (int)clickedButton.GetValue(Grid.RowProperty);
-                clickedCoordOwnP2[1] = (int)clickedButton.GetValue(Grid.ColumnProperty);
-                shipCoordListP2.Add(clickedButton);
-                buildShip(element);
-            }
 
-          //  lastClicked.Content = "Row: "+clickedCoordGuessP1[0] + "  " + "Column: "+clickedCoordGuessP1[1]+" on "+element.Name;
+            if (btnsGrid.Name == P2GuessGrid.Name)
+            {
+                checkHit(clickedButton);
+            }
+            updateGameState();
         }
 
-        public void checkHit(Button btnToColor)
+        public void updateGameState()
         {
-            foreach (Ship ship in ShipsP2)
+            turn = !turn;
+            if (ShipsP1.TrueForAll(ship => ship.isDead == true) || ShipsP2.TrueForAll(ship => ship.isDead == true))
             {
-                foreach (int[] coords in ship.coordinates)
+                disableGridButtons(P1GuessGrid);
+                disableGridButtons(P2GuessGrid);
+                disableGridButtons(P1Grid);
+                disableGridButtons(P2Grid);
+
+                //Ide jön a fájlba írás!
+
+                if(ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {
-                    if (coords[0] == clickedCoordGuessP1[0] && coords[1] == clickedCoordGuessP1[1])
+                    Debug.WriteLine("P2 won!");
+                }
+                else
+                {
+                    Debug.WriteLine("P1 won!");
+                }
+                return;
+            }
+            if (shipSizeP1 == 6 && shipSizeP2 == 6)
+            {
+                if (turn)
+                {
+                    reEnableGridButtons(P1GuessGrid);
+                    disableGridButtons(P2GuessGrid);
+                }
+                else
+                {
+                    reEnableGridButtons(P2GuessGrid);
+                    disableGridButtons(P1GuessGrid);
+                }              
+            }
+        }
+
+        public void checkHit(Button btnToCheck)
+        {
+            if (turn)
+            {
+                foreach (Ship ship in ShipsP2)
+                {
+                    int[] matchedCoords = ship.coordinates.FirstOrDefault(coords => (coords[0] == (int)btnToCheck.GetValue(Grid.RowProperty) &&
+                     coords[1] == (int)btnToCheck.GetValue(Grid.ColumnProperty)));
+
+                    if (matchedCoords != null)
                     {
-                        lastClicked.Content = "hit";
+                        Debug.WriteLine("P2s ship got hit");
                         ship.hits++;
-                        btnToColor.Background = Brushes.Red;
+                        btnToCheck.Background = Brushes.Red;
                         if (ship.hits >= ship.Length)
                         {
-                            lastClicked.Content = "ship is dead";
-                            btnToColor.Background = Brushes.Black;
+                            Debug.WriteLine($"P2s {ship.Length} size ship is dead");
+                            ship.isDead = true;
+                            makeShipLookDead(ship, 2);
                         }
                         return;
                     }
-                    else
+                }
+                Debug.WriteLine("No hit on P2s ships");
+            }
+
+            else
+            {
+                foreach (Ship ship in ShipsP1)
+                {
+                    int[] matchedCoords = ship.coordinates.FirstOrDefault(coords => (coords[0] == (int)btnToCheck.GetValue(Grid.RowProperty) &&
+                     coords[1] == (int)btnToCheck.GetValue(Grid.ColumnProperty)));
+
+                    if (matchedCoords != null)
                     {
-                        btnToColor.Background = Brushes.Blue;
-                        lastClicked.Content = " no hit";
+                        Debug.WriteLine("P1s ship got hit");
+                        ship.hits++;
+                        btnToCheck.Background = Brushes.Red;
+                        if (ship.hits >= ship.Length)
+                        {
+                            Debug.WriteLine($"P1s {ship.Length} size ship is dead");
+                            ship.isDead = true;
+                            makeShipLookDead(ship, 1);
+                        }
+                        return;
                     }
+                }
+                Debug.WriteLine("No hit on P1s ships");
+            }
+        }
+
+        private void makeShipLookDead(Ship ship, int player)
+        {
+            if (player == 2)
+            {
+                IEnumerable<Button> buttonsOnGrid = P2Grid.Children.OfType<Button>();
+                IEnumerable<Button> buttonsOnGuessGrid = P1GuessGrid.Children.OfType<Button>();
+
+                foreach (var coords in ship.coordinates)
+                {
+                    Button btnToColor = buttonsOnGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
+                    btnToColor.Background = Brushes.Black;
+
+                    btnToColor = buttonsOnGuessGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
+                    btnToColor.Background = Brushes.Black; ;
+                }
+                    
+            }
+            if (player == 1)
+            {
+                IEnumerable<Button> buttonsOnGrid = P1Grid.Children.OfType<Button>();
+                IEnumerable<Button> buttonsOnGuessGrid = P2GuessGrid.Children.OfType<Button>();
+
+                foreach (var coords in ship.coordinates)
+                {
+                    Button btnToColor = buttonsOnGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
+                    btnToColor.Background = Brushes.Black;
+
+                    btnToColor = buttonsOnGuessGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
+                    btnToColor.Background = Brushes.Black; ;
                 }
             }
         }
 
         public void buildShip(Grid gridToBuildOn)
         {
-            if (gridToBuildOn.Name == myGrid.Name)
+            if (gridToBuildOn.Name == P1Grid.Name)
             {
-                if (shipCoordListP1.Count == shipSizeP1)
+                if (shipButtonListP1.Count == shipSizeP1)
                 {
                     for (int i = 0; i < shipSizeP1; i++)
                     {
-                        int coordx = (int)shipCoordListP1.ElementAt(i).GetValue(Grid.RowProperty);
-                        int coordy = (int)shipCoordListP1.ElementAt(i).GetValue(Grid.ColumnProperty);
+                        int coordx = (int)shipButtonListP1.ElementAt(i).GetValue(Grid.RowProperty);
+                        int coordy = (int)shipButtonListP1.ElementAt(i).GetValue(Grid.ColumnProperty);
                         int[] coords = { coordx, coordy };
                         ShipsP1.ElementAt(shipSizeP1 - 1).coordinates.Add(coords);
                     }
                     shipSizeP1++;
-                    if (shipCoordListP1.Count() == 5)
+                    if (shipButtonListP1.Count() == 5)
                     {
-                        disableOwnFieldButtons(myGrid);
+                        disableGridButtons(P1Grid);
                     }
-                    shipCoordListP1.Clear();
+                    shipButtonListP1.Clear();
                 }
             }
-            if (gridToBuildOn.Name == enemyGrid.Name)
+            if (gridToBuildOn.Name == P2Grid.Name)
             {
-                if (shipCoordListP2.Count == shipSizeP2)
+                if (shipButtonListP2.Count == shipSizeP2)
                 {
                     for (int i = 0; i < shipSizeP2; i++)
                     {
-                        int coordx = (int)shipCoordListP2.ElementAt(i).GetValue(Grid.RowProperty);
-                        int coordy = (int)shipCoordListP2.ElementAt(i).GetValue(Grid.ColumnProperty);
+                        int coordx = (int)shipButtonListP2.ElementAt(i).GetValue(Grid.RowProperty);
+                        int coordy = (int)shipButtonListP2.ElementAt(i).GetValue(Grid.ColumnProperty);
                         int[] coords = { coordx, coordy };
                         ShipsP2.ElementAt(shipSizeP2 - 1).coordinates.Add(coords);
                     }
                     shipSizeP2++;
-                    if (shipCoordListP2.Count() == 5)
+                    if (shipButtonListP2.Count() == 5)
                     {
-                        disableOwnFieldButtons(enemyGrid);
+                        disableGridButtons(P2Grid);
                     }
-                    shipCoordListP2.Clear();
+                    shipButtonListP2.Clear();
                 }
-            }
+            }          
         }
-        public void disableOwnFieldButtons(Grid ownGrid)
+        public void disableGridButtons(Grid grid)
         {
-            foreach (Button button in ownGrid.Children.OfType<Button>())
+            foreach (Button button in grid.Children.OfType<Button>())
             {
                 button.Click -= new RoutedEventHandler(btnEvent);
             }
         }
 
+        public void reEnableGridButtons(Grid grid)
+        {
+            foreach (Button button in grid.Children.OfType<Button>().Where<Button>(btn => (btn.Background != Brushes.Black && btn.Background!= Brushes.Red && btn.Background != Brushes.Blue)))
+            {
+                button.Click += new RoutedEventHandler(btnEvent);
+            }
+        }
+
+        public void startGameSate()
+        {
+            disableGridButtons(P1GuessGrid);
+            disableGridButtons(P2GuessGrid);
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            BuildGrid(guessGrid);
-            BuildGrid(myGrid);
-            BuildGrid(guessGridEnemy);
-            BuildGrid(enemyGrid);
-            
+            BuildGrid(P1GuessGrid);
+            BuildGrid(P1Grid);
+            BuildGrid(P2GuessGrid);
+            BuildGrid(P2Grid);
+
+            startGameSate();        
         }
     }
 }

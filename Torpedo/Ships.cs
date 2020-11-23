@@ -14,6 +14,8 @@ namespace Torpedo
 
         public int hits = 0;
 
+        public bool isDead = false;
+
         public Ship(int length)
         {
             this.Length=length;
