@@ -21,24 +21,27 @@ namespace Torpedo
     /// </summary>
     public partial class MainWindow : Window
     {
+        StatsWindow statsWindow;
+
         bool turn = false;
+        public string player1Name, player2Name; 
         List<Button> shipButtonListP1 = new List<Button>();
         List<Ship> ShipsP1 = new List<Ship>()
         {
-            new Ship(1),
-            new Ship(2),
-            new Ship(3),
-            new Ship(4),
-            new Ship(5)
+            new Ship(1,"Destroyer"),
+            new Ship(2, "Submarine"),
+            new Ship(3, "Cruiser"),
+            new Ship(4, "Battleship"),
+            new Ship(5, "Carrier")
         };
         List<Button> shipButtonListP2 = new List<Button>();
         List<Ship> ShipsP2 = new List<Ship>()
         {
-            new Ship(1),
-            new Ship(2),
-            new Ship(3),
-            new Ship(4),
-            new Ship(5)
+            new Ship(1,"Destroyer"),
+            new Ship(2, "Submarine"),
+            new Ship(3, "Cruiser"),
+            new Ship(4, "Battleship"),
+            new Ship(5, "Carrier")
         };
 
         public int shipSizeP1 = 1;
@@ -107,6 +110,7 @@ namespace Torpedo
             {
                 checkHit(clickedButton);
             }
+            
             updateGameState();
         }
 
@@ -136,12 +140,12 @@ namespace Torpedo
             {
                 if (turn)
                 {
-                    reEnableGridButtons(P1GuessGrid);
+                    reEnableNotClickedGridButtons(P1GuessGrid);
                     disableGridButtons(P2GuessGrid);
                 }
                 else
                 {
-                    reEnableGridButtons(P2GuessGrid);
+                    reEnableNotClickedGridButtons(P2GuessGrid);
                     disableGridButtons(P1GuessGrid);
                 }              
             }
@@ -149,6 +153,7 @@ namespace Torpedo
 
         public void checkHit(Button btnToCheck)
         {
+            statsWindow.incRound();
             if (turn)
             {
                 foreach (Ship ship in ShipsP2)
@@ -161,10 +166,12 @@ namespace Torpedo
                         Debug.WriteLine("P2s ship got hit");
                         ship.hits++;
                         btnToCheck.Background = Brushes.Red;
+                        statsWindow.incP1HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P2s {ship.Length} size ship is dead");
                             ship.isDead = true;
+                            statsWindow.listP2ShipStats(ShipsP2);
                             makeShipLookDead(ship, 2);
                         }
                         return;
@@ -185,10 +192,12 @@ namespace Torpedo
                         Debug.WriteLine("P1s ship got hit");
                         ship.hits++;
                         btnToCheck.Background = Brushes.Red;
+                        statsWindow.incP2HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P1s {ship.Length} size ship is dead");
                             ship.isDead = true;
+                            statsWindow.listP2ShipStats(ShipsP1);
                             makeShipLookDead(ship, 1);
                         }
                         return;
@@ -280,7 +289,7 @@ namespace Torpedo
             }
         }
 
-        public void reEnableGridButtons(Grid grid)
+        public void reEnableNotClickedGridButtons(Grid grid)
         {
             foreach (Button button in grid.Children.OfType<Button>().Where<Button>(btn => (btn.Background != Brushes.Black && btn.Background!= Brushes.Red && btn.Background != Brushes.Blue)))
             {
@@ -292,7 +301,9 @@ namespace Torpedo
         {
             disableGridButtons(P1GuessGrid);
             disableGridButtons(P2GuessGrid);
+            statsWindow.Show();
         }
+
 
         public MainWindow()
         {
@@ -302,7 +313,17 @@ namespace Torpedo
             BuildGrid(P2GuessGrid);
             BuildGrid(P2Grid);
 
-            startGameSate();        
+            NamePopUp player1NamePopUp = new NamePopUp("Please enter P1 name:", "Player1");
+            player1NamePopUp.ShowDialog();
+            player1Name = player1NamePopUp.Answer;
+
+            NamePopUp player2NamePopUp = new NamePopUp("Please enter P2 name:", "Player2");
+            player2NamePopUp.ShowDialog();
+            player2Name = player2NamePopUp.Answer;
+
+            statsWindow = new StatsWindow(player1Name, player2Name);
+           
+            startGameSate();
         }
     }
 }

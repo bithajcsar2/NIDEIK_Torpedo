@@ -13,3 +13,7 @@ C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.csproj.GenerateRe
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CoreCompileInputs.cache
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.exe
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.pdb
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\NamePopUp.g.cs
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\NamePopUp.baml
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\StatsWindow.g.cs
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\StatsWindow.baml

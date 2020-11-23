@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Torpedo
 {
-    class Ship
+    public class Ship
     {
         public int Length { get; set; }
 
@@ -14,11 +14,14 @@ namespace Torpedo
 
         public int hits = 0;
 
+        public string name;
+
         public bool isDead = false;
 
-        public Ship(int length)
+        public Ship(int length, string name)
         {
             this.Length=length;
+            this.name = name;
         }
     }
 }
