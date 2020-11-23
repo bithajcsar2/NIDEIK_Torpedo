@@ -56,12 +56,16 @@ namespace Torpedo
                 gridToBuild.ColumnDefinitions.Add(new ColumnDefinition());
                 Label horLabel = new Label();
                 horLabel.Content = (char)('A' + i - 1);
+                horLabel.VerticalAlignment = VerticalAlignment.Center;
+                horLabel.HorizontalAlignment = HorizontalAlignment.Center;
                 gridToBuild.Children.Add(horLabel);
                 Grid.SetRow(horLabel, 0);
                 Grid.SetColumn(horLabel, i);
 
                 Label verLabel = new Label();
                 verLabel.Content = i;
+                verLabel.VerticalAlignment = VerticalAlignment.Center;
+                verLabel.HorizontalAlignment = HorizontalAlignment.Center;
                 gridToBuild.Children.Add(verLabel);
                 Grid.SetRow(verLabel, i);
                 Grid.SetColumn(verLabel, 0);
@@ -313,6 +317,7 @@ namespace Torpedo
             BuildGrid(P2GuessGrid);
             BuildGrid(P2Grid);
 
+
             NamePopUp player1NamePopUp = new NamePopUp("Please enter P1 name:", "Player1");
             player1NamePopUp.ShowDialog();
             player1Name = player1NamePopUp.Answer;
@@ -322,10 +327,10 @@ namespace Torpedo
             player2Name = player2NamePopUp.Answer;
 
             statsWindow = new StatsWindow(player1Name, player2Name);
-            p1GuessGridLabel.Content = player1Name + "s guess grid";
-            p1GridLabel.Content = player1Name + "s grid";
-            p2GuessGridLabel.Content = player2Name + "s guess grid";
-            p2GridLabel.Content = player2Name + "s grid";
+            p1GuessGridLabel.Content = player1Name + "s firing board";
+            p1GridLabel.Content = player1Name + "s board";
+            p2GuessGridLabel.Content = player2Name + "s firing board";
+            p2GridLabel.Content = player2Name + "s board";
             startGameSate();
         }
     }
