@@ -18,20 +18,18 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Tüzelő Tábla P1" FontSize="24"/>
+        <Label x:Name="p1GuessGridLabel" Grid.Row="0" Grid.Column="0" Content="Tüzelő Tábla P1" FontSize="24"/>
         <Grid x:Name="P1GuessGrid" ShowGridLines="true" Grid.Row="1" Grid.Column="0"/>
-
-        <Label x:Name="lastClicked" Grid.Row="2"/>
         
-        <Label Grid.Row="2" Grid.Column="0" Content="Saját Tábla P1" FontSize="24"/>
+        <Label x:Name="p1GridLabel" Grid.Row="2" Grid.Column="0" Content="Saját Tábla P1" FontSize="24"/>
         
         <Grid x:Name="P1Grid" ShowGridLines="true" Grid.Row="3" Grid.Column="0"/>
 
-        <Label Grid.Row="0" Grid.Column="1" Content="Tüzelő Tábla P2" FontSize="24"/>
+        <Label x:Name="p2GuessGridLabel" Grid.Row="0" Grid.Column="1" Content="Tüzelő Tábla P2" FontSize="24"/>
         <Grid x:Name="P2GuessGrid" ShowGridLines="true" Grid.Row="1" Grid.Column="1"/>
 
 
-        <Label Grid.Row="2" Grid.Column="1" Content="Saját Tábla P2" FontSize="24"/>
+        <Label x:Name="p2GridLabel" Grid.Row="2" Grid.Column="1" Content="Saját Tábla P2" FontSize="24"/>
         <Grid x:Name="P2Grid" ShowGridLines="true" Grid.Row="3" Grid.Column="1"/>
 
 

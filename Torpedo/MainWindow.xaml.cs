@@ -197,7 +197,7 @@ namespace Torpedo
                         {
                             Debug.WriteLine($"P1s {ship.Length} size ship is dead");
                             ship.isDead = true;
-                            statsWindow.listP2ShipStats(ShipsP1);
+                            statsWindow.listP1ShipStats(ShipsP1);
                             makeShipLookDead(ship, 1);
                         }
                         return;
@@ -322,7 +322,10 @@ namespace Torpedo
             player2Name = player2NamePopUp.Answer;
 
             statsWindow = new StatsWindow(player1Name, player2Name);
-           
+            p1GuessGridLabel.Content = player1Name + "s guess grid";
+            p1GridLabel.Content = player1Name + "s grid";
+            p2GuessGridLabel.Content = player2Name + "s guess grid";
+            p2GridLabel.Content = player2Name + "s grid";
             startGameSate();
         }
     }
