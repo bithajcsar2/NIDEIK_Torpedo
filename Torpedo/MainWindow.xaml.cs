@@ -28,7 +28,7 @@ namespace Torpedo
         List<Button> shipButtonListP1 = new List<Button>();
         List<Ship> ShipsP1 = new List<Ship>()
         {
-            new Ship(1,"Destroyer"),
+            new Ship(1, "Destroyer"),
             new Ship(2, "Submarine"),
             new Ship(3, "Cruiser"),
             new Ship(4, "Battleship"),
@@ -37,7 +37,7 @@ namespace Torpedo
         List<Button> shipButtonListP2 = new List<Button>();
         List<Ship> ShipsP2 = new List<Ship>()
         {
-            new Ship(1,"Destroyer"),
+            new Ship(1, "Destroyer"),
             new Ship(2, "Submarine"),
             new Ship(3, "Cruiser"),
             new Ship(4, "Battleship"),
@@ -167,13 +167,13 @@ namespace Torpedo
 
                     if (matchedCoords != null)
                     {
-                        Debug.WriteLine("P2s ship got hit");
+                        Debug.WriteLine("P2's ship got hit");
                         ship.hits++;
                         btnToCheck.Background = Brushes.Red;
                         statsWindow.incP1HitCount();
                         if (ship.hits >= ship.Length)
                         {
-                            Debug.WriteLine($"P2s {ship.Length} size ship is dead");
+                            Debug.WriteLine($"P2's {ship.Length} size ship is dead");
                             ship.isDead = true;
                             statsWindow.listP2ShipStats(ShipsP2);
                             makeShipLookDead(ship, 2);
@@ -181,7 +181,7 @@ namespace Torpedo
                         return;
                     }
                 }
-                Debug.WriteLine("No hit on P2s ships");
+                Debug.WriteLine("No hit on P2's ships");
             }
 
             else
@@ -193,13 +193,13 @@ namespace Torpedo
 
                     if (matchedCoords != null)
                     {
-                        Debug.WriteLine("P1s ship got hit");
+                        Debug.WriteLine("P1's ship got hit");
                         ship.hits++;
                         btnToCheck.Background = Brushes.Red;
                         statsWindow.incP2HitCount();
                         if (ship.hits >= ship.Length)
                         {
-                            Debug.WriteLine($"P1s {ship.Length} size ship is dead");
+                            Debug.WriteLine($"P1's {ship.Length} size ship is dead");
                             ship.isDead = true;
                             statsWindow.listP1ShipStats(ShipsP1);
                             makeShipLookDead(ship, 1);
@@ -207,7 +207,7 @@ namespace Torpedo
                         return;
                     }
                 }
-                Debug.WriteLine("No hit on P1s ships");
+                Debug.WriteLine("No hit on P1's ships");
             }
         }
 
@@ -224,7 +224,7 @@ namespace Torpedo
                     btnToColor.Background = Brushes.Black;
 
                     btnToColor = buttonsOnGuessGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
-                    btnToColor.Background = Brushes.Black; ;
+                    btnToColor.Background = Brushes.Black;
                 }
                     
             }
@@ -239,7 +239,7 @@ namespace Torpedo
                     btnToColor.Background = Brushes.Black;
 
                     btnToColor = buttonsOnGuessGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
-                    btnToColor.Background = Brushes.Black; ;
+                    btnToColor.Background = Brushes.Black;
                 }
             }
         }
@@ -318,19 +318,19 @@ namespace Torpedo
             BuildGrid(P2Grid);
 
 
-            NamePopUp player1NamePopUp = new NamePopUp("Please enter P1 name:", "Player1");
+            NamePopUp player1NamePopUp = new NamePopUp("Please enter the first player's name:", "Player1");
             player1NamePopUp.ShowDialog();
             player1Name = player1NamePopUp.Answer;
 
-            NamePopUp player2NamePopUp = new NamePopUp("Please enter P2 name:", "Player2");
+            NamePopUp player2NamePopUp = new NamePopUp("Please enter the second player's name:", "Player2");
             player2NamePopUp.ShowDialog();
             player2Name = player2NamePopUp.Answer;
 
             statsWindow = new StatsWindow(player1Name, player2Name);
-            p1GuessGridLabel.Content = player1Name + "s firing board";
-            p1GridLabel.Content = player1Name + "s board";
-            p2GuessGridLabel.Content = player2Name + "s firing board";
-            p2GridLabel.Content = player2Name + "s board";
+            p1GuessGridLabel.Content = player1Name + "'s firing board";
+            p1GridLabel.Content = player1Name + "'s board";
+            p2GuessGridLabel.Content = player2Name + "'s firing board";
+            p2GridLabel.Content = player2Name + "'s board";
             startGameSate();
         }
     }

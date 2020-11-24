@@ -110,5 +110,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="namePopUpBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ikon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="gameBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="statisztikaBackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

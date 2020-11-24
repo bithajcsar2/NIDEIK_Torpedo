@@ -41,5 +41,6 @@ namespace Torpedo
 		{
 			get { return txtAnswer.Text; }
 		}
-	}
+
+    }
 }

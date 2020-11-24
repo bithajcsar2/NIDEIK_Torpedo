@@ -6,8 +6,11 @@
         xmlns:local="clr-namespace:Torpedo"
         mc:Ignorable="d"
           Title="Input" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
-        ContentRendered="Window_ContentRendered">
-    <Grid Margin="15">
+        ContentRendered="Window_ContentRendered" AllowsTransparency="False" ResizeMode="NoResize" Height="255" Width="420">
+    <Window.Background>
+        <ImageBrush ImageSource="namePopUpBackground.png"/>
+    </Window.Background>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -18,13 +21,17 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Image Source="/WpfTutorialSamples;component/Images/question32.png" Width="32" Height="32" Grid.RowSpan="2" Margin="20,0" />
+        <Image Source="ikon.png" Width="100" Height="100" Grid.RowSpan="2" Margin="0,0" />
 
-        <Label Name="lblQuestion" Grid.Column="1">Player name:</Label>
-        <TextBox Name="txtAnswer" Grid.Column="1" Grid.Row="1" MinWidth="250"></TextBox>
+        <Label Name="lblQuestion" Grid.Column="1" Margin="0,0,0,22" Foreground="White">Player name:</Label>
+        <TextBox Name="txtAnswer" Grid.Column="1" MinWidth="150" MaxHeight="100" Margin="5,26,109,0" Padding="5" />
 
-        <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="0,0,10,0">_Ok</Button>
+        <WrapPanel Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,219,37" Grid.Column="1">
+            <Button IsDefault="True" x:Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="0,0,10,0" Height="21" Content="_Ok" Background="#FF509A9F" BorderBrush="{x:Null}">
+                <Button.Foreground>
+                    <SolidColorBrush Color="White"/>
+                </Button.Foreground>
+            </Button>
         </WrapPanel>
     </Grid>
 </Window>

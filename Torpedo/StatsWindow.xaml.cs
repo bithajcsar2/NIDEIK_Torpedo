@@ -43,29 +43,29 @@ namespace Torpedo
 
         public void listP1ShipStats(List<Ship> p1Ships)
         {
-            p1ShipsSatusLabel.Content = player1Name + "s ships alive: ";
+            p1ShipsSatusLabel.Content = player1Name + "'s ships alive: ";
             foreach (var ship in p1Ships.Where(ship => ship.isDead == false))
             {
-                p1ShipsSatusLabel.Content += ship.name.ToString() + " ";
+                p1ShipsSatusLabel.Content += ship.name.ToString() + ", ";
             }
             p1ShipsSatusLabel.Content += "\n and ships sunken: ";
             foreach (var ship in p1Ships.Where(ship => ship.isDead == true))
             {
-                p1ShipsSatusLabel.Content += ship.name.ToString() + " ";
+                p1ShipsSatusLabel.Content += ship.name.ToString() + ", ";
             }
         }
         
         public void listP2ShipStats(List<Ship> p2Ships)
         {
-            p2ShipsSatusLabel.Content = player2Name + "s ships alive: ";
+            p2ShipsSatusLabel.Content = player2Name + "'s ships alive: ";
             foreach (var ship in p2Ships.Where(ship=>ship.isDead==false))
             {
-                p2ShipsSatusLabel.Content += ship.name.ToString()+" ";
+                p2ShipsSatusLabel.Content += ship.name.ToString()+", ";
             }
             p2ShipsSatusLabel.Content += "\n and ships sunken: ";
             foreach (var ship in p2Ships.Where(ship => ship.isDead == true))
             {
-                p2ShipsSatusLabel.Content += ship.name.ToString()+" ";
+                p2ShipsSatusLabel.Content += ship.name.ToString()+", ";
             }
         }
 
@@ -74,8 +74,8 @@ namespace Torpedo
             player1Name = p1Name;
             player2Name = p2Name;
             InitializeComponent();
-            p1ShipsSatusLabel.Content = "All of "+player1Name+"s ships are alive.";
-            p2ShipsSatusLabel.Content = "All of " + player2Name + "s ships are alive.";
+            p1ShipsSatusLabel.Content = "All of "+player1Name+"'s ships are alive.";
+            p2ShipsSatusLabel.Content = "All of " + player2Name + "'s ships are alive.";
 
             p1HitCounterLabel.Content = player1Name + " hit count: " + p1HitCount;
             p2HitCounterLabel.Content = player2Name + " hit count: " + p2HitCount;

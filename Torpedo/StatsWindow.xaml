@@ -5,20 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Torpedo"
         mc:Ignorable="d"
-        Title="StatsWindow" Height="450" Width="400">
-    <Grid>
+        Title="StatsWindow" Height="259.333" Width="600" ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="statisztikaBackground.png"/>
+    </Window.Background>
+    <Grid Margin="3,3,3,0">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            
+
         </Grid.RowDefinitions>
-        <Label x:Name="roundCounterLabel" Content="Round: " Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
-        <Label x:Name="p1HitCounterLabel" Content="P1Hits:" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
-        <Label x:Name="p2HitCounterLabel" Content="P2Hits" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
-        <Label x:Name="p1ShipsSatusLabel" Content="P1Ships" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label x:Name="p2ShipsSatusLabel" Content="P2Ships" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label x:Name="roundCounterLabel" Content="Round: " Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="White" FontSize="13" FontFamily="Tahoma"/>
+        <Label x:Name="p1HitCounterLabel" Content="P1Hits:" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="White" FontSize="13" FontFamily="Tahoma"/>
+        <Label x:Name="p2HitCounterLabel" Content="P2Hits" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="White" FontSize="13" FontFamily="Tahoma"/>
+        <Label x:Name="p1ShipsSatusLabel" Content="P1Ships" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="13" FontFamily="Tahoma"/>
+        <Label x:Name="p2ShipsSatusLabel" Content="P2Ships" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="13" FontFamily="Tahoma"/>
     </Grid>
+
 </Window>
