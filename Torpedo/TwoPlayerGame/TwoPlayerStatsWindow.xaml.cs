@@ -17,7 +17,7 @@ namespace Torpedo
     /// <summary>
     /// Interaction logic for StatsWindow.xaml
     /// </summary>
-    public partial class StatsWindow : Window
+    public partial class TwoPlayerStatsWindow : Window
     {
         public int roundCounter = 1;
         public int p1HitCount = 0, p2HitCount = 0;
@@ -69,7 +69,7 @@ namespace Torpedo
             }
         }
 
-        public StatsWindow(string p1Name, string p2Name)
+        public TwoPlayerStatsWindow(string p1Name, string p2Name)
         {
             player1Name = p1Name;
             player2Name = p2Name;

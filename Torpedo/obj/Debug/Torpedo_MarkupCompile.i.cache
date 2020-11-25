@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\App.xaml
-3-37224094
+3269784659
 
-9854208195
+91658074445
 14-1290796308
-MainWindow.xaml;NamePopUp.xaml;StatsWindow.xaml;
+TwoPlayerGame\TwoPlayerGameState.xaml;mainwindow.xaml;TwoPlayerGame\TwoPlayerStatsWindow.xaml;
 
-True
+False
 

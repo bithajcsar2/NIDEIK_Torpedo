@@ -5,37 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Torpedo"
         mc:Ignorable="d"
-       Title="MainWindow" Height="1000" Width="1000">
-    <Window.Background>
-        <ImageBrush ImageSource="gameBackground.png"/>
-    </Window.Background>
-    <Grid>
-        <Grid.RowDefinitions >
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="27*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="8*"/>
-        </Grid.ColumnDefinitions>
-
-        <Label x:Name="p1GuessGridLabel" Grid.Row="0" Grid.Column="0" Content="Tüzelő Tábla P1" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Tahoma" Foreground="White" Margin="152,14,34,421" Grid.RowSpan="2" Width="310" Grid.ColumnSpan="2"/>
-        <Grid x:Name="P1GuessGrid" Grid.Row="1" Grid.Column="0" Margin="10" Grid.ColumnSpan="2"/>
-
-        <Label x:Name="p1GridLabel" Grid.Row="2" Grid.Column="0" Content="Saját Tábla P1" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Tahoma" Foreground="White" Margin="156,14,32,420" Grid.RowSpan="2" Width="244"/>
-        <Grid x:Name="P1Grid"  Grid.Row="3" Grid.Column="0" Margin="10" Grid.ColumnSpan="2"/>
-
-        <Label x:Name="p2GuessGridLabel" Grid.Row="0" Grid.Column="2" Content="Tüzelő Tábla P2" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Tahoma" Foreground="White" Margin="139,14,47,421" Grid.RowSpan="2" Width="310" Grid.ColumnSpan="2"/>
-        <Grid x:Name="P2GuessGrid" Grid.Row="1" Grid.Column="2" Margin="10" Grid.ColumnSpan="2"/>
-
-
-        <Label x:Name="p2GridLabel" Grid.Row="2" Grid.Column="2" Content="Saját Tábla P2" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Tahoma" Foreground="White" Margin="167,14,85,420" Grid.RowSpan="2" Width="244" Grid.ColumnSpan="2"/>
-        <Grid x:Name="P2Grid"  Grid.Row="3" Grid.Column="2" Margin="10" Grid.ColumnSpan="2"/>
-
-
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FF8BB5B7">
+        <Grid HorizontalAlignment="Center" Height="302" Margin="10,107,0,0" VerticalAlignment="Top" Width="672">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="51*"></RowDefinition>
+                <RowDefinition Height="139*"></RowDefinition>
+                <RowDefinition Height="112*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Egyszemélyes játék" Margin="-15,5,321,3" VerticalAlignment="Center" Height="43" Width="366" FontSize="20" FontFamily="Tahoma" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
+            <Label Grid.Row="0" Content="Kétszemélyes játék" Margin="321,5,-15,3" VerticalAlignment="Center" Height="43" Width="366" FontSize="20" FontFamily="Tahoma" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
+            <StackPanel HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="316">
+                <TextBlock TextWrapping="Wrap" Text="Játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
+                <TextBox Height="32" TextWrapping="Wrap" x:Name="player"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
+                <TextBlock TextWrapping="Wrap" Text="Első játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
+                <TextBox Height="32" TextWrapping="Wrap" x:Name="firstPlayer"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" Height="61" Margin="10,76,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
+                <TextBlock TextWrapping="Wrap" Text="Második játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
+                <TextBox Height="32" TextWrapping="Wrap" x:Name="secondPlayer"/>
+            </StackPanel>
+            <Button Grid.Column="0" Grid.Row="2" Content="Indítás" HorizontalAlignment="Center" Margin="117,10,109,0" VerticalAlignment="Top" Width="110" Height="28" Click="Start1PlayerGame"/>
+            <Button Grid.Column="1" Grid.Row="2" Content="Indítás" HorizontalAlignment="Center" Margin="117,10,109,0" VerticalAlignment="Top" Width="110" Height="28" Click="Start2PlayerGame"/>
+        </Grid>
     </Grid>
 </Window>

@@ -60,10 +60,13 @@
       <DependentUpon>NamePopUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ships.cs" />
-    <Compile Include="StatsWindow.xaml.cs">
-      <DependentUpon>StatsWindow.xaml</DependentUpon>
+    <Compile Include="mainwindow.xaml.cs">
+      <DependentUpon>mainwindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="TwoPlayerGame\TwoPlayerStatsWindow.xaml.cs">
+      <DependentUpon>TwoPlayerStatsWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="TwoPlayerGame\TwoPlayerGameState.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -71,15 +74,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="TwoPlayerGame\TwoPlayerGameState.xaml.cs">
+      <DependentUpon>TwoPlayerGameState.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NamePopUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StatsWindow.xaml">
+    <Page Include="mainwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TwoPlayerGame\TwoPlayerStatsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,16 +118,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="namePopUpBackground.png" />
+    <Resource Include="Images\namePopUpBackground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ikon.png" />
+    <Resource Include="Images\ikon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="gameBackground.png" />
+    <Resource Include="Images\gameBackground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="statisztikaBackground.png" />
+    <Resource Include="Images\statisztikaBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

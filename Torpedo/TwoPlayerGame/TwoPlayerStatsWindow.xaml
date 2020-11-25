@@ -1,13 +1,13 @@
-﻿<Window x:Class="Torpedo.StatsWindow"
+﻿<Window x:Class="Torpedo.TwoPlayerStatsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Torpedo"
         mc:Ignorable="d"
-        Title="StatsWindow" Height="259.333" Width="600" ResizeMode="NoResize">
+        Title="TwoPlayerStatsWindow" Height="259.333" Width="600" ResizeMode="NoResize">
     <Window.Background>
-        <ImageBrush ImageSource="statisztikaBackground.png"/>
+        <ImageBrush ImageSource="/Torpedo;component/Images/statisztikaBackground.png"/>
     </Window.Background>
     <Grid Margin="3,3,3,0">
         <Grid.RowDefinitions>
