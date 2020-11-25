@@ -56,9 +56,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="NamePopUp.xaml.cs">
-      <DependentUpon>NamePopUp.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Ships.cs" />
     <Compile Include="mainwindow.xaml.cs">
       <DependentUpon>mainwindow.xaml</DependentUpon>
@@ -78,10 +75,6 @@
       <DependentUpon>TwoPlayerGameState.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NamePopUp.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="mainwindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,6 +121,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\statisztikaBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dead.png" />
+    <Resource Include="Images\hit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

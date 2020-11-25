@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("statisztikabackground.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/dead.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hit.png")]
 
 

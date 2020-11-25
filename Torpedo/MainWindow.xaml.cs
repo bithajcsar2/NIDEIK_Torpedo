@@ -42,5 +42,10 @@ namespace Torpedo
             twoPlayerGameState.Show();
             this.Close();
         }
+
+        private void firstPlayer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

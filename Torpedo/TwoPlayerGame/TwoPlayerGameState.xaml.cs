@@ -84,7 +84,7 @@ namespace Torpedo
         void btnEvent(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
-            clickedButton.Background = Brushes.Blue;
+            clickedButton.Background = new SolidColorBrush(Color.FromRgb(80, 154, 159));
             clickedButton.Click -= new RoutedEventHandler(btnEvent);
             int _row = (int)clickedButton.GetValue(Grid.RowProperty);
             int _column = (int)clickedButton.GetValue(Grid.ColumnProperty);
@@ -294,7 +294,7 @@ namespace Torpedo
 
         public void reEnableNotClickedGridButtons(Grid grid)
         {
-            foreach (Button button in grid.Children.OfType<Button>().Where<Button>(btn => (btn.Background != Brushes.Black && btn.Background!= Brushes.Red && btn.Background != Brushes.Blue)))
+            foreach (Button button in grid.Children.OfType<Button>().Where<Button>(btn => (btn.Background != Brushes.Black && btn.Background!= Brushes.Red && btn.Background != new SolidColorBrush(Color.FromRgb(80, 154, 159)))))
             {
                 button.Click += new RoutedEventHandler(btnEvent);
             }

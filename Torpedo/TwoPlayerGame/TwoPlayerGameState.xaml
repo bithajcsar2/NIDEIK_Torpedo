@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Torpedo"
         mc:Ignorable="d"
-       Title="TwoPlayerGameState" Height="1000" Width="1000">
+       Title="TwoPlayerGameState" Height="1000" Width="1000" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="/Torpedo;component/Images/gameBackground.png"/>
     </Window.Background>

@@ -10,8 +10,7 @@
         <Grid HorizontalAlignment="Center" Height="302" Margin="10,107,0,0" VerticalAlignment="Top" Width="672">
             <Grid.RowDefinitions>
                 <RowDefinition Height="51*"></RowDefinition>
-                <RowDefinition Height="139*"></RowDefinition>
-                <RowDefinition Height="112*"></RowDefinition>
+                <RowDefinition Height="171*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -19,20 +18,20 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="Egyszemélyes játék" Margin="-15,5,321,3" VerticalAlignment="Center" Height="43" Width="366" FontSize="20" FontFamily="Tahoma" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
             <Label Grid.Row="0" Content="Kétszemélyes játék" Margin="321,5,-15,3" VerticalAlignment="Center" Height="43" Width="366" FontSize="20" FontFamily="Tahoma" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
-            <StackPanel HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="316">
+            <StackPanel HorizontalAlignment="Left" Height="193" Margin="10,10,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="316">
                 <TextBlock TextWrapping="Wrap" Text="Játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
-                <TextBox Height="32" TextWrapping="Wrap" x:Name="player"/>
+                <TextBox Height="32" TextWrapping="Wrap" x:Name="player" BorderBrush="{x:Null}" Padding="5,8"/>
+                <Button Content="Indítás" HorizontalAlignment="Center" Margin="103,10,103,0" VerticalAlignment="Top" Width="110" Height="42" Click="Start1PlayerGame" Background="#FF509A9F" Foreground="White" BorderBrush="{x:Null}"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
                 <TextBlock TextWrapping="Wrap" Text="Első játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
-                <TextBox Height="32" TextWrapping="Wrap" x:Name="firstPlayer"/>
+                <TextBox Height="32" TextWrapping="Wrap" x:Name="firstPlayer" FontFamily="Tahoma" Padding="5,8" TextChanged="firstPlayer_TextChanged" BorderBrush="{x:Null}"/>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Height="61" Margin="10,76,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
+            <StackPanel HorizontalAlignment="Left" Height="196" Margin="10,76,0,-39" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
                 <TextBlock TextWrapping="Wrap" Text="Második játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
-                <TextBox Height="32" TextWrapping="Wrap" x:Name="secondPlayer"/>
+                <TextBox Height="32" TextWrapping="Wrap" x:Name="secondPlayer" FontFamily="Tahoma" Padding="5,8" BorderBrush="{x:Null}"/>
+                <Button Content="Indítás" HorizontalAlignment="Center" Margin="103,10,103,0" VerticalAlignment="Top" Width="110" Height="42" Click="Start2PlayerGame" Background="#FF509A9F" Foreground="White" BorderBrush="{x:Null}"/>
             </StackPanel>
-            <Button Grid.Column="0" Grid.Row="2" Content="Indítás" HorizontalAlignment="Center" Margin="117,10,109,0" VerticalAlignment="Top" Width="110" Height="28" Click="Start1PlayerGame"/>
-            <Button Grid.Column="1" Grid.Row="2" Content="Indítás" HorizontalAlignment="Center" Margin="117,10,109,0" VerticalAlignment="Top" Width="110" Height="28" Click="Start2PlayerGame"/>
         </Grid>
     </Grid>
 </Window>
