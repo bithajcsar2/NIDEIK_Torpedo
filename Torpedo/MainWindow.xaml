@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Torpedo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FF8BB5B7">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" Background="#FF8BB5B7">
+    <Grid Margin="0,32,0,0">
         <Grid HorizontalAlignment="Center" Height="302" Margin="10,107,0,0" VerticalAlignment="Top" Width="672">
             <Grid.RowDefinitions>
                 <RowDefinition Height="51*"></RowDefinition>
@@ -27,11 +27,12 @@
                 <TextBlock TextWrapping="Wrap" Text="Első játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
                 <TextBox Height="32" TextWrapping="Wrap" x:Name="firstPlayer" FontFamily="Tahoma" Padding="5,8" TextChanged="firstPlayer_TextChanged" BorderBrush="{x:Null}"/>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Height="196" Margin="10,76,0,-39" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
+            <StackPanel HorizontalAlignment="Left" Height="127" Margin="10,76,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
                 <TextBlock TextWrapping="Wrap" Text="Második játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
                 <TextBox Height="32" TextWrapping="Wrap" x:Name="secondPlayer" FontFamily="Tahoma" Padding="5,8" BorderBrush="{x:Null}"/>
                 <Button Content="Indítás" HorizontalAlignment="Center" Margin="103,10,103,0" VerticalAlignment="Top" Width="110" Height="42" Click="Start2PlayerGame" Background="#FF509A9F" Foreground="White" BorderBrush="{x:Null}"/>
             </StackPanel>
         </Grid>
+        <Image HorizontalAlignment="Left" Height="131" Margin="82,-29,0,0" VerticalAlignment="Top" Width="631" Source="Images/logó.png" Stretch="UniformToFill"/>
     </Grid>
 </Window>

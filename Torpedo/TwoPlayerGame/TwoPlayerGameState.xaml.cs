@@ -22,6 +22,9 @@ namespace Torpedo
     public partial class TwoPlayerGameState : Window
     {
         TwoPlayerStatsWindow statsWindow;
+        TwoPlayerGameResult resultsWindow = new TwoPlayerGameResult();
+
+        String nextPlayer = MainWindow.player2Name;
 
         bool turn = false;
         List<Button> shipButtonListP1 = new List<Button>();
@@ -45,6 +48,7 @@ namespace Torpedo
 
         public int shipSizeP1 = 1;
         public int shipSizeP2 = 1;
+
         public void BuildGrid(Grid gridToBuild)
         {
             gridToBuild.RowDefinitions.Add(new RowDefinition());
@@ -132,10 +136,16 @@ namespace Torpedo
                 if(ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {
                     Debug.WriteLine("P2 won!");
+                    resultsWindow.Show();
+                    statsWindow.Close();
+                    this.Close();
                 }
                 else
                 {
                     Debug.WriteLine("P1 won!");
+                    resultsWindow.Show();
+                    statsWindow.Close();
+                    this.Close();
                 }
                 return;
             }
@@ -152,11 +162,22 @@ namespace Torpedo
                     disableGridButtons(P1GuessGrid);
                 }              
             }
+
         }
 
         public void checkHit(Button btnToCheck)
         {
             statsWindow.incRound();
+            if(nextPlayer == MainWindow.player2Name)
+            {
+                nextPlayer = MainWindow.player1Name;
+            }
+             else if(nextPlayer == MainWindow.player1Name)
+            {
+                nextPlayer = MainWindow.player2Name;
+            }
+            statsWindow.nextStep(nextPlayer);
+
             if (turn)
             {
                 foreach (Ship ship in ShipsP2)
@@ -292,8 +313,11 @@ namespace Torpedo
             }
         }
 
+
         public void reEnableNotClickedGridButtons(Grid grid)
         {
+            statsWindow.nextStep(nextPlayer);
+
             foreach (Button button in grid.Children.OfType<Button>().Where<Button>(btn => (btn.Background != Brushes.Black && btn.Background!= Brushes.Red && btn.Background != new SolidColorBrush(Color.FromRgb(80, 154, 159)))))
             {
                 button.Click += new RoutedEventHandler(btnEvent);

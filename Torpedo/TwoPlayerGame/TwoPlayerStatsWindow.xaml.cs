@@ -23,6 +23,11 @@ namespace Torpedo
         public int p1HitCount = 0, p2HitCount = 0;
         string player1Name, player2Name;
 
+        public void nextStep(String playerName)
+        {
+            nextPlayerLabel.Content = "You're the next " + playerName + "!";
+        }
+
         public void incRound()
         {
             roundCounter++;

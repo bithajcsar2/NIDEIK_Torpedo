@@ -36,3 +36,5 @@ D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.g.cs
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.baml
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.baml
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.g.cs
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.baml
