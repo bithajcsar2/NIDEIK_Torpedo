@@ -13,10 +13,6 @@ C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.csproj.GenerateRe
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CoreCompileInputs.cache
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.exe
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.pdb
-C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\NamePopUp.g.cs
-C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\NamePopUp.baml
-C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\StatsWindow.g.cs
-C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\StatsWindow.baml
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.exe.config
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.exe
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.pdb
@@ -38,3 +34,9 @@ D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.baml
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.g.cs
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.baml
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.g.cs
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.g.cs
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.g.cs
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.baml
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.baml
+C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.baml

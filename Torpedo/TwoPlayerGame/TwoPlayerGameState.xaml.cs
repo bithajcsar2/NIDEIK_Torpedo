@@ -24,9 +24,9 @@ namespace Torpedo
         TwoPlayerStatsWindow statsWindow;
         TwoPlayerGameResult resultsWindow = new TwoPlayerGameResult();
 
-        String nextPlayer = MainWindow.player2Name;
+        String nextPlayer; 
 
-        bool turn = false;
+        bool turn = true;
         List<Button> shipButtonListP1 = new List<Button>();
         List<Ship> ShipsP1 = new List<Ship>()
         {
@@ -117,13 +117,13 @@ namespace Torpedo
             {
                 checkHit(clickedButton);
             }
-            
             updateGameState();
+
         }
 
         public void updateGameState()
         {
-            turn = !turn;
+           
             if (ShipsP1.TrueForAll(ship => ship.isDead == true) || ShipsP2.TrueForAll(ship => ship.isDead == true))
             {
                 disableGridButtons(P1GuessGrid);
@@ -160,9 +160,9 @@ namespace Torpedo
                 {
                     reEnableNotClickedGridButtons(P2GuessGrid);
                     disableGridButtons(P1GuessGrid);
-                }              
+                }
+                turn = !turn;
             }
-
         }
 
         public void checkHit(Button btnToCheck)
@@ -178,7 +178,7 @@ namespace Torpedo
             }
             statsWindow.nextStep(nextPlayer);
 
-            if (turn)
+            if (!turn)
             {
                 foreach (Ship ship in ShipsP2)
                 {
@@ -189,7 +189,9 @@ namespace Torpedo
                     {
                         Debug.WriteLine("P2's ship got hit");
                         ship.hits++;
-                        btnToCheck.Background = Brushes.Red;
+
+                        makeShipPartHit(btnToCheck, 2);
+
                         statsWindow.incP1HitCount();
                         if (ship.hits >= ship.Length)
                         {
@@ -215,7 +217,9 @@ namespace Torpedo
                     {
                         Debug.WriteLine("P1's ship got hit");
                         ship.hits++;
-                        btnToCheck.Background = Brushes.Red;
+
+                        makeShipPartHit(btnToCheck, 1);
+
                         statsWindow.incP2HitCount();
                         if (ship.hits >= ship.Length)
                         {
@@ -230,6 +234,28 @@ namespace Torpedo
                 Debug.WriteLine("No hit on P1's ships");
             }
         }
+
+        private void makeShipPartHit(Button guessbtn, int player)
+        {
+            if (player == 2)
+            {
+                Button gridButton = P2Grid.Children.OfType<Button>().FirstOrDefault( btn => (int)guessbtn.GetValue(Grid.RowProperty)==(int)btn.GetValue(Grid.RowProperty)
+                    && (int)guessbtn.GetValue(Grid.ColumnProperty)==(int)btn.GetValue(Grid.ColumnProperty));
+
+                guessbtn.Background = Brushes.Red;
+                gridButton.Background = Brushes.Red;
+
+            }
+            if (player == 1)
+            {
+                Button gridButton = P1Grid.Children.OfType<Button>().FirstOrDefault(btn => (int)guessbtn.GetValue(Grid.RowProperty) == (int)btn.GetValue(Grid.RowProperty)
+                   && (int)guessbtn.GetValue(Grid.ColumnProperty) == (int)btn.GetValue(Grid.ColumnProperty));
+
+                guessbtn.Background = Brushes.Red;
+                gridButton.Background = Brushes.Red;
+            }
+        }
+    
 
         private void makeShipLookDead(Ship ship, int player)
         {
@@ -326,6 +352,21 @@ namespace Torpedo
 
         public void startGameSate()
         {
+            var rand = new Random();
+
+            if (rand.Next(2) == 1)
+                turn = true;
+            else
+                turn = false;
+
+            if (turn)
+            {
+                nextPlayer = MainWindow.player1Name;
+            }
+            else
+            {
+                nextPlayer = MainWindow.player2Name;
+            }
             disableGridButtons(P1GuessGrid);
             disableGridButtons(P2GuessGrid);
             statsWindow.Show();

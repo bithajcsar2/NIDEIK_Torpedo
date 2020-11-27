@@ -19,7 +19,7 @@ namespace Torpedo
     /// </summary>
     public partial class TwoPlayerStatsWindow : Window
     {
-        public int roundCounter = 1;
+        public int roundCounter = 0;
         public int p1HitCount = 0, p2HitCount = 0;
         string player1Name, player2Name;
 
