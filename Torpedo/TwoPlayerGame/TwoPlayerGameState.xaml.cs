@@ -245,14 +245,20 @@ namespace Torpedo
                 guessbtn.Background = Brushes.Red;
                 gridButton.Background = Brushes.Red;
 
+                guessbtn.Content = FindResource("Hit");
+                gridButton.Content = FindResource("Hit");
+
             }
             if (player == 1)
             {
-                Button gridButton = P1Grid.Children.OfType<Button>().FirstOrDefault(btn => (int)guessbtn.GetValue(Grid.RowProperty) == (int)btn.GetValue(Grid.RowProperty)
-                   && (int)guessbtn.GetValue(Grid.ColumnProperty) == (int)btn.GetValue(Grid.ColumnProperty));
+                Button gridButton = P1Grid.Children.OfType<Button>().FirstOrDefault( btn => (int)guessbtn.GetValue(Grid.RowProperty)==(int)btn.GetValue(Grid.RowProperty)
+                    && (int)guessbtn.GetValue(Grid.ColumnProperty)==(int)btn.GetValue(Grid.ColumnProperty));
+
 
                 guessbtn.Background = Brushes.Red;
                 gridButton.Background = Brushes.Red;
+                guessbtn.Content = FindResource("Hit");
+                gridButton.Content = FindResource("Hit");
             }
         }
     
@@ -268,11 +274,13 @@ namespace Torpedo
                 {
                     Button btnToColor = buttonsOnGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
                     btnToColor.Background = Brushes.Black;
+                    btnToColor.Content = FindResource("Dead");
 
                     btnToColor = buttonsOnGuessGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
                     btnToColor.Background = Brushes.Black;
+                    btnToColor.Content = FindResource("Dead");
                 }
-                    
+
             }
             if (player == 1)
             {
@@ -283,9 +291,12 @@ namespace Torpedo
                 {
                     Button btnToColor = buttonsOnGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
                     btnToColor.Background = Brushes.Black;
+                    btnToColor.Content = FindResource("Dead");
 
                     btnToColor = buttonsOnGuessGrid.FirstOrDefault(button => ((int)button.GetValue(Grid.RowProperty) == coords[0] && (int)button.GetValue(Grid.ColumnProperty) == coords[1]));
-                    btnToColor.Background = Brushes.Black;
+                    btnToColor.Background = Brushes.Black; 
+                    btnToColor.Content = FindResource("Dead");
+
                 }
             }
         }
@@ -344,7 +355,7 @@ namespace Torpedo
         {
             statsWindow.nextStep(nextPlayer);
 
-            foreach (Button button in grid.Children.OfType<Button>().Where<Button>(btn => (btn.Background != Brushes.Black && btn.Background!= Brushes.Red && btn.Background != new SolidColorBrush(Color.FromRgb(80, 154, 159)))))
+            foreach (Button button in grid.Children.OfType<Button>().Where(btn => btn.Content == null))
             {
                 button.Click += new RoutedEventHandler(btnEvent);
             }

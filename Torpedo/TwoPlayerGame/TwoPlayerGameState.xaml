@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:Torpedo"
         mc:Ignorable="d"
        Title="TwoPlayerGameState" Height="1000" Width="1000" ResizeMode="NoResize">
+    <Window.Resources>
+        <Image x:Key="Hit" Source="/Torpedo;component/Images/hit.png" x:Shared="false"/>
+        <Image x:Key="Dead" Source="/Torpedo;component/Images/dead.png" x:Shared="false"/>
+    </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="/Torpedo;component/Images/gameBackground.png"/>
     </Window.Background>
