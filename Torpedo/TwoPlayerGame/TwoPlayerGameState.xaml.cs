@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Xml.XPath;
 
 namespace Torpedo
 {
@@ -136,6 +137,8 @@ namespace Torpedo
                 if(ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {
                     Debug.WriteLine("P2 won!");
+                    resultsWindow.WriteJson();
+
                     resultsWindow.Show();
                     statsWindow.Close();
                     this.Close();
@@ -143,6 +146,8 @@ namespace Torpedo
                 else
                 {
                     Debug.WriteLine("P1 won!");
+                    resultsWindow.WriteJson();
+
                     resultsWindow.Show();
                     statsWindow.Close();
                     this.Close();
@@ -391,7 +396,6 @@ namespace Torpedo
             BuildGrid(P1Grid);
             BuildGrid(P2GuessGrid);
             BuildGrid(P2Grid);
-
 
             statsWindow = new TwoPlayerStatsWindow(MainWindow.player1Name, MainWindow.player2Name);
             p1GuessGridLabel.Content = MainWindow.player1Name + "'s firing board";
