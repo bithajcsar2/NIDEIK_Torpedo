@@ -137,7 +137,8 @@ namespace Torpedo
                 if(ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {
                     Debug.WriteLine("P2 won!");
-                    resultsWindow.WriteJson();
+                    resultsWindow.WriteJson(MainWindow.player2Name, MainWindow.player1Name,statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, ShipsP1, ShipsP2);
+                    resultsWindow.FillDataGridWithResult();
 
                     resultsWindow.Show();
                     statsWindow.Close();
@@ -146,7 +147,8 @@ namespace Torpedo
                 else
                 {
                     Debug.WriteLine("P1 won!");
-                    resultsWindow.WriteJson();
+                    resultsWindow.WriteJson(MainWindow.player1Name, MainWindow.player2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, ShipsP1, ShipsP2);
+                    resultsWindow.FillDataGridWithResult();
 
                     resultsWindow.Show();
                     statsWindow.Close();
@@ -403,6 +405,9 @@ namespace Torpedo
             p2GuessGridLabel.Content = MainWindow.player2Name + "'s firing board";
             p2GridLabel.Content = MainWindow.player2Name + "'s board";
             startGameSate();
+            resultsWindow.FillDataGridWithResult();
+
+            resultsWindow.Show();
         }
     }
 }

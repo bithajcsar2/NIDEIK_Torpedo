@@ -16,10 +16,11 @@
         </Grid.RowDefinitions>
         <DataGrid x:Name="Results" HorizontalAlignment="Left" Height="310" Margin="10,10,0,0" VerticalAlignment="Top" Width="739" IsReadOnly="True" AutoGenerateColumns="False" Background="White" BorderBrush="#FF509A9F" Foreground="Black">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Győztes neve" Binding="{Binding Winner}" Width="10*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Vesztes neve" Binding="{Binding Loser}" Width="10*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Körök száma" Binding="{Binding NumberOfTurns}" Width="5*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Kilőtt hajók" Binding="{Binding DeadShips}" Width="20*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Győztes neve" Binding="{Binding winner}" Width="10*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Vesztes neve" Binding="{Binding loser}" Width="10*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Körök száma" Binding="{Binding numOfRounds}" Width="5*"></DataGridTextColumn>
+                <DataGridTextColumn Header="P1 Hajók" Binding="{Binding p1ShipsSats}" Width="10*"></DataGridTextColumn>
+                <DataGridTextColumn Header="P2 Hajók" Binding="{Binding p2ShipsSats}" Width="10*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Kilépés" Click="ExitGame" HorizontalAlignment="Left" Margin="260,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Height="40" FontFamily="Tahoma" Background="#FF509A9F" BorderBrush="#FF509A9F" Foreground="White"/>

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,8 @@ namespace Torpedo
         public class Gameresult
         {
             public string winner, loser;
-            public int numOfRounds, p1HitCount, p2HitCount, p1ShipsAlive, p1ShipsSunken, p2ShipsAlive, p2ShipsSunken;
+            public int numOfRounds, p1HitCount, p2HitCount;
+            public string p1ShipsSats, p2ShipsSats;
         }
         public TwoPlayerGameResult()
         {
@@ -43,17 +45,69 @@ namespace Torpedo
             this.Close();
         }
 
-        public void WriteJson()
+        public void FillDataGridWithResult()
         {
-            Gameresult gameresult = new Gameresult();
-            string JSONresult = JsonConvert.SerializeObject(gameresult);
+            List<Gameresult> gameResults = ReadJson();
+            Results.ItemsSource = gameResults;
+        }
+
+        public void WriteJson(string winner, string loser, int numOfRounds, int p1HitCount, int p2HitCount, List<Ship> p1Ships, List<Ship> p2Ships)
+        {
+            Gameresult gameResult = new Gameresult();
+            gameResult.winner = winner;
+            gameResult.loser = loser;
+            gameResult.numOfRounds = numOfRounds;
+            gameResult.p1HitCount = p1HitCount;
+            gameResult.p2HitCount = p2HitCount;
+
+            gameResult.p1ShipsSats = "Ships alive: ";
+            foreach (var ship in p1Ships.Where(ship => ship.isDead == false))
+            {
+                gameResult.p1ShipsSats += ship.name.ToString() + " ";
+            }
+            gameResult.p1ShipsSats += " ships sunken: ";
+            foreach (var ship in p1Ships.Where(ship => ship.isDead == true))
+            {
+                gameResult.p1ShipsSats += ship.name.ToString() + " ";
+            }
+
+            gameResult.p2ShipsSats = "Ships alive: ";
+            foreach (var ship in p2Ships.Where(ship => ship.isDead == false))
+            {
+                gameResult.p2ShipsSats += ship.name.ToString() + " ";
+            }
+            gameResult.p1ShipsSats += " ships sunken: ";
+            foreach (var ship in p2Ships.Where(ship => ship.isDead == true))
+            {
+                gameResult.p2ShipsSats += ship.name.ToString()+ " ";
+            }
+
+
+            
             string path = @"..\..\..\json\stats.json";
 
-            using (var tw = new StreamWriter(path, true))
-            {
-                tw.WriteLine(JSONresult.ToString());
-                tw.Close();
-            }
+            var jsonData = File.ReadAllText(path);
+
+            var gamesResultsList = JsonConvert.DeserializeObject<List<Gameresult>>(jsonData)
+                      ?? new List<Gameresult>();
+
+            string JSONresult = JsonConvert.SerializeObject(gameResult);
+
+            gamesResultsList.Add(gameResult);
+            jsonData = JsonConvert.SerializeObject(gamesResultsList);
+            File.WriteAllText(path, jsonData);
+        }
+        public List<Gameresult> ReadJson()
+        {
+            string path = @"..\..\..\json\stats.json";
+            // read file into a string and deserialize JSON to a type
+            var reader = new JsonTextReader(
+                new StreamReader(path));
+            var serializer = new JsonSerializer();
+            List<Gameresult> list;
+            
+            list = (List<Gameresult>)serializer.Deserialize(reader, typeof(List<Gameresult>));
+            return list;
         }
     }
 }

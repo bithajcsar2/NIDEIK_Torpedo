@@ -84,7 +84,7 @@ namespace Torpedo
 
             p1HitCounterLabel.Content = player1Name + " hit count: " + p1HitCount;
             p2HitCounterLabel.Content = player2Name + " hit count: " + p2HitCount;
-
+            
             roundCounterLabel.Content += roundCounter.ToString();
         }
     }

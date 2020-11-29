@@ -43,3 +43,27 @@ C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerSt
 C:\Development\Visual Studio\Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.dll
 C:\Development\Visual Studio\Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.xml
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CopyComplete
+C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.exe.config
+C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.exe
+C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.pdb
+C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.dll
+C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.xml
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csprojAssemblyReference.cache
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.g.cs
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.g.cs
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.g.cs
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.g.cs
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\App.g.cs
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.cache
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.lref
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.baml
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.baml
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.baml
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.baml
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.g.resources
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.Properties.Resources.resources
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.GenerateResource.cache
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CoreCompileInputs.cache
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CopyComplete
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.exe
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.pdb
