@@ -24,10 +24,14 @@ namespace Torpedo
     {
         public class Gameresult
         {
-            public string winner, loser;
-            public int numOfRounds, p1HitCount, p2HitCount;
-            public string p1ShipsSats, p2ShipsSats;
-        }
+            public string winner { get; set; }
+            public string loser{ get; set; }
+            public int numOfRounds { get; set; }
+            public int p1HitCount{ get; set; }
+            public int p2HitCount{ get; set; }
+            public string p1ShipsSats { get; set; }
+            public string p2ShipsSats { get; set; }
+    }
         public TwoPlayerGameResult()
         {
             InitializeComponent();
@@ -76,7 +80,7 @@ namespace Torpedo
             {
                 gameResult.p2ShipsSats += ship.name.ToString() + " ";
             }
-            gameResult.p1ShipsSats += " ships sunken: ";
+            gameResult.p2ShipsSats += " ships sunken: ";
             foreach (var ship in p2Ships.Where(ship => ship.isDead == true))
             {
                 gameResult.p2ShipsSats += ship.name.ToString()+ " ";
