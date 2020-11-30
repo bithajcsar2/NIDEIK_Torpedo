@@ -33,7 +33,12 @@ namespace Torpedo
             player1Name = player.Text;
             player2Name = "AI";
             OnePlayerGameSate onePlayerGameState = new OnePlayerGameSate();
+
             onePlayerGameState.Show();
+            AI ai = new AI();
+
+            List<Button> buttons = onePlayerGameState.P2Grid.Children.OfType<Button>().ToList();
+            ai.BuildShipsByAi(buttons, ref onePlayerGameState);
             this.Close();
         }
 

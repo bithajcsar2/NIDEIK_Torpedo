@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OnePlayerGame\AI.cs" />
     <Compile Include="OnePlayerGame\OnePlayerGameSate.cs" />
     <Compile Include="Ships.cs" />
     <Compile Include="mainwindow.xaml.cs">

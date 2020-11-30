@@ -86,7 +86,7 @@ namespace Torpedo
                 }
             }
         }
-        void btnEvent(object sender, EventArgs e)
+        public void btnEvent(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             clickedButton.Background = new SolidColorBrush(Color.FromRgb(80, 154, 159));
@@ -405,9 +405,6 @@ namespace Torpedo
             p2GuessGridLabel.Content = MainWindow.player2Name + "'s firing board";
             p2GridLabel.Content = MainWindow.player2Name + "'s board";
             startGameSate();
-            //resultsWindow.FillDataGridWithResult();
-
-            resultsWindow.Show();
         }
 
     }
