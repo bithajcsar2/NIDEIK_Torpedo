@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OnePlayerGame\OnePlayerGameSate.cs" />
     <Compile Include="Ships.cs" />
     <Compile Include="mainwindow.xaml.cs">
       <DependentUpon>mainwindow.xaml</DependentUpon>
@@ -140,8 +141,6 @@
   <ItemGroup>
     <Resource Include="Images\logó.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="OnePlayerGame\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

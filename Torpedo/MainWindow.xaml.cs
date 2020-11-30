@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Torpedo.OnePlayerGame;
 
 namespace Torpedo
 {
@@ -20,7 +21,6 @@ namespace Torpedo
     public partial class MainWindow : Window
     {
 
-        public static string playerName;
         public static string player1Name;
         public static string player2Name;
         public MainWindow()
@@ -30,7 +30,10 @@ namespace Torpedo
 
         public void Start1PlayerGame(object sender, RoutedEventArgs e)
         {
-            playerName = player.Text;
+            player1Name = player.Text;
+            player2Name = "AI";
+            OnePlayerGameSate onePlayerGameState = new OnePlayerGameSate();
+            onePlayerGameState.Show();
             this.Close();
         }
 

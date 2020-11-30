@@ -405,9 +405,10 @@ namespace Torpedo
             p2GuessGridLabel.Content = MainWindow.player2Name + "'s firing board";
             p2GridLabel.Content = MainWindow.player2Name + "'s board";
             startGameSate();
-            resultsWindow.FillDataGridWithResult();
+            //resultsWindow.FillDataGridWithResult();
 
             resultsWindow.Show();
         }
+
     }
 }
