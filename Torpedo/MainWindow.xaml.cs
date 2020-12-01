@@ -35,10 +35,7 @@ namespace Torpedo
             OnePlayerGameSate onePlayerGameState = new OnePlayerGameSate();
 
             onePlayerGameState.Show();
-            AI ai = new AI();
 
-            List<Button> buttons = onePlayerGameState.P2Grid.Children.OfType<Button>().ToList();
-            ai.BuildShipsByAi(buttons, ref onePlayerGameState);
             this.Close();
         }
 

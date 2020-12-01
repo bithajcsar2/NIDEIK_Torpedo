@@ -22,14 +22,14 @@ namespace Torpedo
     /// </summary>
     public partial class TwoPlayerGameState : Window
     {
-        TwoPlayerStatsWindow statsWindow;
-        TwoPlayerGameResult resultsWindow = new TwoPlayerGameResult();
+        protected TwoPlayerStatsWindow statsWindow;
+        protected TwoPlayerGameResult resultsWindow = new TwoPlayerGameResult();
 
-        String nextPlayer; 
+        protected String nextPlayer;
 
-        bool turn = true;
-        List<Button> shipButtonListP1 = new List<Button>();
-        List<Ship> ShipsP1 = new List<Ship>()
+        protected bool turn = true;
+        protected List<Button> shipButtonListP1 = new List<Button>();
+        protected List<Ship> ShipsP1 = new List<Ship>()
         {
             new Ship(1, "Destroyer"),
             new Ship(2, "Submarine"),
@@ -37,8 +37,8 @@ namespace Torpedo
             new Ship(4, "Battleship"),
             new Ship(5, "Carrier")
         };
-        List<Button> shipButtonListP2 = new List<Button>();
-        List<Ship> ShipsP2 = new List<Ship>()
+        protected List<Button> shipButtonListP2 = new List<Button>();
+        protected List<Ship> ShipsP2 = new List<Ship>()
         {
             new Ship(1, "Destroyer"),
             new Ship(2, "Submarine"),
@@ -119,10 +119,9 @@ namespace Torpedo
                 checkHit(clickedButton);
             }
             updateGameState();
-
         }
 
-        public void updateGameState()
+        public virtual void updateGameState()
         {
            
             if (ShipsP1.TrueForAll(ship => ship.isDead == true) || ShipsP2.TrueForAll(ship => ship.isDead == true))
@@ -172,7 +171,7 @@ namespace Torpedo
             }
         }
 
-        public void checkHit(Button btnToCheck)
+        public virtual void checkHit(Button btnToCheck)
         {
             statsWindow.incRound();
             if(nextPlayer == MainWindow.player2Name)
@@ -242,7 +241,7 @@ namespace Torpedo
             }
         }
 
-        private void makeShipPartHit(Button guessbtn, int player)
+        public void makeShipPartHit(Button guessbtn, int player)
         {
             if (player == 2)
             {
@@ -270,7 +269,7 @@ namespace Torpedo
         }
     
 
-        private void makeShipLookDead(Ship ship, int player)
+        public void makeShipLookDead(Ship ship, int player)
         {
             if (player == 2)
             {
@@ -362,7 +361,8 @@ namespace Torpedo
         {
             statsWindow.nextStep(nextPlayer);
 
-            foreach (Button button in grid.Children.OfType<Button>().Where(btn => btn.Content == null))
+            foreach (Button button in grid.Children.OfType<Button>().Where(btn => btn.Content == null &&
+                btn.Background.ToString() != new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()))
             {
                 button.Click += new RoutedEventHandler(btnEvent);
             }
