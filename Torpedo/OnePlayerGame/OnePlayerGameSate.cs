@@ -16,7 +16,9 @@ namespace Torpedo.OnePlayerGame
     {
         AI ai = new AI();
         AI.Hitlevel hitlevel = new AI.Hitlevel();
-      
+        Ship shipDestroyedByAI;
+        List<Button> hitsByAi = new List<Button>();
+
 
         public override void checkHit(Button btnToCheck)
         {
@@ -71,14 +73,23 @@ namespace Torpedo.OnePlayerGame
                         Debug.WriteLine("P1's ship got hit");
                         ship.hits++;
                         hitlevel = AI.Hitlevel.Hit;
+                        hitsByAi.Add(btnToCheck);
                         makeShipPartHit(btnToCheck, 1);
+                        shipDestroyedByAI = null;
 
-                        statsWindow.incP2HitCount();
+                       statsWindow.incP2HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P1's {ship.Length} size ship is dead");
                             ship.isDead = true;
                             hitlevel = AI.Hitlevel.Sunk;
+                            shipDestroyedByAI = ship;
+                            foreach (var cord in ship.coordinates)
+                            {
+                                hitsByAi.RemoveAll(hit => (int)hit.GetValue(Grid.RowProperty) == cord[0] && (int)hit.GetValue(Grid.ColumnProperty) == cord[1]);
+                            }
+
+
                             statsWindow.listP1ShipStats(ShipsP1);
                             makeShipLookDead(ship, 1);
                         }
@@ -86,7 +97,8 @@ namespace Torpedo.OnePlayerGame
                     }
                 }
                 Debug.WriteLine("No hit on P1's ships");
-                hitlevel = AI.Hitlevel.NoHit;
+                shipDestroyedByAI = null;
+               hitlevel = AI.Hitlevel.NoHit;
             }
         }
 
@@ -129,14 +141,14 @@ namespace Torpedo.OnePlayerGame
                 if (turn)
                 {
                     reEnableNotClickedGridButtons(P1GuessGrid);
-                    disableGridButtons(P2GuessGrid);
-                    ai.InformAiAboutMove(hitlevel);
+                    disableGridButtons(P2GuessGrid);                    
                 }
                 else
                 {
                     reEnableNotClickedGridButtons(P2GuessGrid);
                     disableGridButtons(P1GuessGrid);                    
                 }
+                ai.InformAiAboutMove(hitlevel, shipDestroyedByAI, ref hitsByAi);
                 turn = !turn;
                 if (turn == true)
                 {

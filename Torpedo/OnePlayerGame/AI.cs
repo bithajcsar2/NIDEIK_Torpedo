@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace Torpedo.OnePlayerGame
 {
@@ -14,8 +11,10 @@ namespace Torpedo.OnePlayerGame
         List<int> shipLocNumbers = new List<int>();
         int dir = 0;
         Button clickedBtn;
-        Button firstHitOnShip;
-        bool foundShipFlag = false;
+        bool[] canMoveInDirs = { true, true, true, true };
+        int radiusFromFristHit = 1;
+        Ship shipDestroyedByAi;
+        List<Button> hitsByAi;
         public enum Hitlevel
         {
             NoHit,
@@ -25,95 +24,132 @@ namespace Torpedo.OnePlayerGame
 
         Hitlevel hitlevel = new Hitlevel();
 
-        public void InformAiAboutMove(Hitlevel passedHitLevel)
+        public void InformAiAboutMove(Hitlevel passedHitLevel, Ship shipDestroyedByAi, ref List<Button> hitsByAi)
         {
             hitlevel = passedHitLevel;
+            this.shipDestroyedByAi = shipDestroyedByAi;
+            this.hitsByAi = hitsByAi;
         }
 
         public Button MakeAiMove(List<Button> clickableBtns)
         {
-
-            if (Hitlevel.Sunk==hitlevel)
+            if (Hitlevel.Sunk == hitlevel)
             {
-                dir = random.Next(1, 5);
-                random.Next(clickableBtns.Count);
-                clickedBtn = clickableBtns.ElementAt(random.Next(clickableBtns.Count));
-                foundShipFlag = false;
-                return clickedBtn;
+                radiusFromFristHit = 1;
+                for (int i = 0; i < canMoveInDirs.Length; i++)
+                {
+                    canMoveInDirs[i] = true;
+                }
+                
+                if (hitsByAi.Any())
+                {
+                    dir = random.Next(1, 5);
+                    hitlevel = Hitlevel.Hit;
+                    clickedBtn = hitsByAi.ElementAt(0);
+                    MakeAiMove(clickableBtns);
+                }
+
+                else
+                {
+                    dir = random.Next(1, 5);
+                    random.Next(clickableBtns.Count);
+                    clickedBtn = clickableBtns.ElementAt(random.Next(clickableBtns.Count));
+                    return clickedBtn;
+                }
+
             }
             if (Hitlevel.Hit == hitlevel)
             {
-                if (foundShipFlag == false)
+                while (true)
                 {
-                    firstHitOnShip = clickedBtn;
-                }
+                    if (canMoveInDirs.All(canMoveInDir => canMoveInDir == false))
+                    {
+                        radiusFromFristHit++;
+                        for (int i = 0; i < canMoveInDirs.Length; i++)
+                        {
+                            canMoveInDirs[i] = true;
+                        }
+                    }
 
-                if (dir == 1)
-                {
-                    if(clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) - 1
-                    && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty))!=null)
+                    if (dir == 1)
                     {
-                        clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) - 1
-                            && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) );
+                        if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) - radiusFromFristHit
+                         && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty)) != null)
+                        {
+                            clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) - radiusFromFristHit
+                                && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty));
+                            canMoveInDirs[dir - 1] = true;
+                            return clickedBtn;
+                        }
+                        else
+                        {
+                            dir = random.Next(1, 5);
+                            canMoveInDirs[dir - 1] = false;
+                        }
                     }
-                    else
+                    if (dir == 2)
                     {
-                        dir = random.Next(1, 5);
-                        MakeAiMove(clickableBtns);
+                        if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
+                        && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) + radiusFromFristHit) != null)
+                        {
+                            clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
+                                && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) + radiusFromFristHit);
+                            canMoveInDirs[dir - 1] = true;
+                            return clickedBtn;
+                        }
+                        else
+                        {
+                            dir = random.Next(1, 5);
+                            canMoveInDirs[dir - 1] = false;
+                        }
+                    }
+                    if (dir == 3)
+                    {
+                        if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) + radiusFromFristHit
+                         && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty)) != null)
+                        {
+                            clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) + radiusFromFristHit
+                                && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty));
+                            return clickedBtn;
+
+                        }
+                        else
+                        {
+                            dir = random.Next(1, 5);
+                            canMoveInDirs[dir - 1] = false;
+
+                        }
+                    }
+                    if (dir == 4)
+                    {
+                        if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
+                        && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) - radiusFromFristHit) != null)
+                        {
+                            clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
+                                && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) - radiusFromFristHit);
+                            canMoveInDirs[dir - 1] = true;
+                            return clickedBtn;
+                        }
+                        else
+                        {
+                            dir = random.Next(1, 5);
+                            canMoveInDirs[dir - 1] = false;
+                        }
                     }
                 }
-                if (dir == 2)
-                {
-                    if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
-                    && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) +1) != null)
-                    {
-                        clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
-                            && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) + 1);
-                    }
-                    else
-                    {
-                        dir = random.Next(1, 5);
-                        MakeAiMove(clickableBtns);
-                    }
-                }
-                if (dir == 3)
-                {
-                    if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) + 1
-                     && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) ) != null)
-                    {
-                        clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) + 1
-                            && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) );
-                    }
-                    else
-                    {
-                        dir = random.Next(1, 5);
-                        MakeAiMove(clickableBtns);
-                    }
-                }
-                if (dir == 4)
-                {
-                    if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
-                    && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty)-1) != null)
-                    {
-                        clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) 
-                            && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty)-1);
-                    }
-                    else
-                    {
-                        dir = random.Next(1, 5);
-                        MakeAiMove(clickableBtns);
-                    }
-                }
-                foundShipFlag = true;
-                return clickedBtn;
             }
 
             if(Hitlevel.NoHit==hitlevel)
             {
-                if (foundShipFlag)
+                radiusFromFristHit = 1;
+                for (int i = 0; i < canMoveInDirs.Length; i++)
+                {
+                    canMoveInDirs[i] = true;
+                }
+                if (hitsByAi.Count>0)
                 {
                     dir = random.Next(1, 5);
-                    clickedBtn = firstHitOnShip;
+                    clickedBtn = hitsByAi.ElementAt(0);
                     hitlevel = Hitlevel.Hit;
                     MakeAiMove(clickableBtns);
                 }
@@ -122,7 +158,6 @@ namespace Torpedo.OnePlayerGame
                     dir = random.Next(1, 5);
                     random.Next(clickableBtns.Count);
                     clickedBtn = clickableBtns.ElementAt(random.Next(clickableBtns.Count));
-                    foundShipFlag = false;
                     return clickedBtn;
                 }
             }
