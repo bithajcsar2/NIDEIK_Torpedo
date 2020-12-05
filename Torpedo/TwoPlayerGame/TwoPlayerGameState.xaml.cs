@@ -23,7 +23,7 @@ namespace Torpedo
     public partial class TwoPlayerGameState : Window
     {
         protected TwoPlayerStatsWindow statsWindow;
-        protected TwoPlayerGameResult resultsWindow = new TwoPlayerGameResult();
+        protected GameResult resultsWindow = new GameResult();
 
         protected String nextPlayer;
 
@@ -131,7 +131,6 @@ namespace Torpedo
                 disableGridButtons(P1Grid);
                 disableGridButtons(P2Grid);
 
-                //Ide jön a fájlba írás!
 
                 if(ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {

@@ -52,14 +52,12 @@ D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.dll
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.xml
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csprojAssemblyReference.cache
-D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.g.cs
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.g.cs
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.g.cs
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.g.cs
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\App.g.cs
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.cache
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.lref
-D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.baml
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.baml
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.baml
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.baml
@@ -70,3 +68,5 @@ D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CopyComplete
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.exe
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.pdb
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.g.cs
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.baml

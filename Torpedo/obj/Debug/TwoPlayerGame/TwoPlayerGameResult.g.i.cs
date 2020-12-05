@@ -80,6 +80,12 @@ namespace Torpedo {
             {
             case 1:
             this.Results = ((System.Windows.Controls.DataGrid)(target));
+            
+            #line 17 "..\..\..\TwoPlayerGame\TwoPlayerGameResult.xaml"
+            this.Results.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.Results_SelectionChanged);
+            
+            #line default
+            #line hidden
             return;
             case 2:
             

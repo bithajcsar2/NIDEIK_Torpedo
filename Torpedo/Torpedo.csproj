@@ -65,13 +65,13 @@
     <Compile Include="mainwindow.xaml.cs">
       <DependentUpon>mainwindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TwoPlayerGame\TwoPlayerGameResult.xaml.cs">
-      <DependentUpon>TwoPlayerGameResult.xaml</DependentUpon>
+    <Compile Include="GameResult.xaml.cs">
+      <DependentUpon>GameResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="TwoPlayerGame\TwoPlayerStatsWindow.xaml.cs">
       <DependentUpon>TwoPlayerStatsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="TwoPlayerGame\TwoPlayerGameResult.xaml">
+    <Page Include="GameResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,6 +142,11 @@
   <ItemGroup>
     <Resource Include="Images\logó.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="background.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

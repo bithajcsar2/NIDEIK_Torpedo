@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\
 Torpedo
 none
 false
 DEBUG;TRACE
-C:\Development\Visual Studio\Torpedo\Torpedo\App.xaml
-4-1856694167
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\App.xaml
+4-1901317929
 
-121060363075
-1516386605
-TwoPlayerGame\TwoPlayerGameResult.xaml;TwoPlayerGame\TwoPlayerGameState.xaml;mainwindow.xaml;TwoPlayerGame\TwoPlayerStatsWindow.xaml;
+12-1506907082
+15-1021324811
+GameResult.xaml;TwoPlayerGame\TwoPlayerGameState.xaml;mainwindow.xaml;TwoPlayerGame\TwoPlayerStatsWindow.xaml;
 
-True
+False
 

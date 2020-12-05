@@ -20,7 +20,7 @@ namespace Torpedo
     /// <summary>
     /// Interaction logic for TwoPlayerGameResult.xaml
     /// </summary>
-    public partial class TwoPlayerGameResult : Window
+    public partial class GameResult : Window
     {
         public class Gameresult
         {
@@ -32,7 +32,7 @@ namespace Torpedo
             public string p1ShipsSats { get; set; }
             public string p2ShipsSats { get; set; }
     }
-        public TwoPlayerGameResult()
+        public GameResult()
         {
             InitializeComponent();
         }
@@ -112,6 +112,11 @@ namespace Torpedo
             
             list = (List<Gameresult>)serializer.Deserialize(reader, typeof(List<Gameresult>));
             return list;
+        }
+
+        private void Results_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

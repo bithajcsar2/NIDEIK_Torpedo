@@ -122,7 +122,7 @@ namespace Torpedo.OnePlayerGame
 
                     resultsWindow.Show();
                     statsWindow.Close();
-                    //this.Close();
+                    this.Close();
                 }
                 else
                 {
@@ -132,7 +132,7 @@ namespace Torpedo.OnePlayerGame
 
                     resultsWindow.Show();
                     statsWindow.Close();
-                    //this.Close();
+                    this.Close();
                 }
                 return;
             }
