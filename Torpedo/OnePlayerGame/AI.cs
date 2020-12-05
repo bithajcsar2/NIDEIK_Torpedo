@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
 
 namespace Torpedo.OnePlayerGame
 {
-    class AI
+    public class AI
     {
         Random random = new Random();
         List<int> shipLocNumbers = new List<int>();
@@ -186,7 +187,7 @@ namespace Torpedo.OnePlayerGame
                 if (location + 10 * size < 99)
                     return false;
             }
-            if(direction==4)
+            if(direction == 4)
             {
                 if (location / 10 == (location - size) / 10 && location-size>=0)
                 {
@@ -196,8 +197,9 @@ namespace Torpedo.OnePlayerGame
             return true;
         }
 
-        public bool ShipDetector(int direction, int location, int size)
+        public bool ShipDetector(int direction, int location, int size, List<int> shipLocNumbers)
         {
+
             int locToCheck=0;
             if (direction == 1)
             {
@@ -260,7 +262,7 @@ namespace Torpedo.OnePlayerGame
                 int direction = random.Next(1, 5);
                 
                 while (shipLocNumbers.Exists(num => num==randValue) ||
-                    ShipDetector(direction, randValue, shipsize)
+                    ShipDetector(direction, randValue, shipsize, shipLocNumbers)
                         || WallDetector(direction, randValue, shipsize))
                 {
                     randValue = random.Next(passedBtns.Count);
