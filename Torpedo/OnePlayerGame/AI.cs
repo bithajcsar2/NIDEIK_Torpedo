@@ -10,10 +10,10 @@ namespace Torpedo.OnePlayerGame
     {
         Random random = new Random();
         int dir = 0;
-        Button clickedBtn;
+        int clickedBtnCoord;
         bool[] canMoveInDirs = { true, true, true, true };
         int radiusFromFirstHit = 1;
-        List<Button> hitsByAi;
+        List<int> hitsByAi;
         public enum PrevHitLevel
         {
             NoHit,
@@ -23,13 +23,13 @@ namespace Torpedo.OnePlayerGame
 
         PrevHitLevel hitlevel = new PrevHitLevel();
 
-        public void InformAiAboutMove(PrevHitLevel passedHitLevel, ref List<Button> hitsByAi)
+        public void InformAiAboutMove(PrevHitLevel passedHitLevel, ref List<int> hitsByAi)
         {
             hitlevel = passedHitLevel;
             this.hitsByAi = hitsByAi;
         }
 
-        public Button MakeAiMove(List<Button> clickableBtns)
+        public int MakeAiMove(List<int> clickableCoords)
         {
             radiusFromFirstHit = 1;
             for (int i = 0; i < canMoveInDirs.Length; i++)
@@ -52,13 +52,11 @@ namespace Torpedo.OnePlayerGame
 
                     if (dir == 1)
                     {
-                        if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) - radiusFromFirstHit
-                         && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty)) != null)
+                        if (clickableCoords.Exists(coord => coord == clickedBtnCoord - 10 * radiusFromFirstHit))
                         {
-                            clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) - radiusFromFirstHit
-                                && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty));
+                            clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord - 10 * radiusFromFirstHit);
                             canMoveInDirs[dir - 1] = true;
-                            return clickedBtn;
+                            return clickedBtnCoord;
                         }
                         else
                         {
@@ -69,13 +67,11 @@ namespace Torpedo.OnePlayerGame
                     }
                     if (dir == 2)
                     {
-                        if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
-                        && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) + radiusFromFirstHit) != null)
+                        if (clickableCoords.Exists(coord => coord == clickedBtnCoord + radiusFromFirstHit)  && WallDetector(dir, clickedBtnCoord, radiusFromFirstHit) == false)
                         {
-                            clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
-                                && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) + radiusFromFirstHit);
+                            clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord + radiusFromFirstHit);
                             canMoveInDirs[dir - 1] = true;
-                            return clickedBtn;
+                            return clickedBtnCoord;
                         }
                         else
                         {
@@ -86,14 +82,11 @@ namespace Torpedo.OnePlayerGame
                     }
                     if (dir == 3)
                     {
-                        if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) + radiusFromFirstHit
-                         && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty)) != null)
+                        if (clickableCoords.Exists(coord => coord == clickedBtnCoord + 10 * radiusFromFirstHit))
                         {
-                            clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty) + radiusFromFirstHit
-                                && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty));
+                            clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord + 10 * radiusFromFirstHit);
                             canMoveInDirs[dir - 1] = true;
-                            return clickedBtn;
-
+                            return clickedBtnCoord;
                         }
                         else
                         {
@@ -104,13 +97,12 @@ namespace Torpedo.OnePlayerGame
                     }
                     if (dir == 4)
                     {
-                        if (clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
-                        && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) - radiusFromFirstHit) != null)
+
+                        if (clickableCoords.Exists(coord => coord == clickedBtnCoord - radiusFromFirstHit) && WallDetector(dir, clickedBtnCoord, radiusFromFirstHit) == false)
                         {
-                            clickedBtn = clickableBtns.FirstOrDefault(btn => (int)btn.GetValue(Grid.RowProperty) == (int)clickedBtn.GetValue(Grid.RowProperty)
-                                && (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedBtn.GetValue(Grid.ColumnProperty) - radiusFromFirstHit);
+                            clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord - radiusFromFirstHit);
                             canMoveInDirs[dir - 1] = true;
-                            return clickedBtn;
+                            return clickedBtnCoord;
                         }
                         else
                         {
@@ -128,16 +120,16 @@ namespace Torpedo.OnePlayerGame
                 {
                     dir = random.Next(1, 5);
                     hitlevel = PrevHitLevel.Hit;
-                    clickedBtn = hitsByAi.ElementAt(0);
-                    MakeAiMove(clickableBtns);
+                    clickedBtnCoord = hitsByAi.ElementAt(0);
+                    MakeAiMove(clickableCoords);
                 }
 
                 else
                 {
                     dir = random.Next(1, 5);
-                    random.Next(clickableBtns.Count);
-                    clickedBtn = clickableBtns.ElementAt(random.Next(clickableBtns.Count));
-                    return clickedBtn;
+                    random.Next(clickableCoords.Count);
+                    clickedBtnCoord = clickableCoords.ElementAt(random.Next(clickableCoords.Count));
+                    return clickedBtnCoord;
                 }
 
             }
@@ -159,7 +151,7 @@ namespace Torpedo.OnePlayerGame
                     return clickedBtn;
                 }
             }*/
-            return clickedBtn;
+            return clickedBtnCoord;
         }
 
 

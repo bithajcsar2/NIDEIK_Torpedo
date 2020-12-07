@@ -16,7 +16,7 @@ namespace Torpedo.OnePlayerGame
     {
         AI ai = new AI();
         AI.PrevHitLevel hitlevel = new AI.PrevHitLevel();
-        List<Button> hitsByAi = new List<Button>();
+        List<int> hitsByAi = new List<int>();
 
 
         public override void CheckHit(Button btnToCheck)
@@ -72,7 +72,8 @@ namespace Torpedo.OnePlayerGame
                         Debug.WriteLine("P1's ship got hit");
                         ship.hits++;
                         hitlevel = AI.PrevHitLevel.Hit;
-                        hitsByAi.Add(btnToCheck);
+                        int coordOfHit = (((int)btnToCheck.GetValue(Grid.RowProperty)-1) * 10) + ((int)btnToCheck.GetValue(Grid.ColumnProperty)-1);
+                        hitsByAi.Add(coordOfHit);
                         MakeShipPartHit(btnToCheck, 1);
 
                        statsWindow.IncP2HitCount();
@@ -83,7 +84,7 @@ namespace Torpedo.OnePlayerGame
                             hitlevel = AI.PrevHitLevel.Sunk;
                             foreach (var cord in ship.coordinates)
                             {
-                                hitsByAi.RemoveAll(hit => (int)hit.GetValue(Grid.RowProperty) == cord[0] && (int)hit.GetValue(Grid.ColumnProperty) == cord[1]);
+                                hitsByAi.RemoveAll(hit => hit == (cord[0]-1)*10+cord[1]-1);
                             }
 
 
@@ -148,8 +149,19 @@ namespace Torpedo.OnePlayerGame
                 turn = !turn;
                 if (turn == true)
                 {
-                    this.BtnEvent(ai.MakeAiMove(P2GuessGrid.Children.OfType<Button>().Where(btn => btn.Content == null&&
-                    btn.Background.ToString() !=  new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()).ToList()), new RoutedEventArgs(ButtonBase.ClickEvent));
+                    var pressableBtns = P2GuessGrid.Children.OfType<Button>().Where(btn => btn.Content == null
+                    && btn.Background.ToString() != new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()).ToList();
+                    List<int> pressableCoords = new List<int>();
+                    foreach (var btn in pressableBtns)
+                    {
+                        int coord = ((int)btn.GetValue(Grid.RowProperty)-1) * 10 + (int)btn.GetValue(Grid.ColumnProperty)-1;
+                        pressableCoords.Add(coord);
+                    }
+                    var coordOfBtnToPress = ai.MakeAiMove(pressableCoords);
+
+                    var btnToPress = pressableBtns.Find(btnToFind => (((int)btnToFind.GetValue(Grid.RowProperty)-1) * 10) + ((int)btnToFind.GetValue(Grid.ColumnProperty)-1) == coordOfBtnToPress);
+
+                    this.BtnEvent(btnToPress, new RoutedEventArgs(ButtonBase.ClickEvent));
                 }
             }
         }
