@@ -14,15 +14,15 @@ namespace TorpedoTest
         {
             AI ai = new AI();
 
-            Assert.IsTrue(ai.WallDetector(1,8,1));
+            Assert.IsTrue(ai.WallDetector(1, 8, 1));
             Assert.IsTrue(ai.WallDetector(2, 10, 10));
             Assert.IsTrue(ai.WallDetector(3, 9, 9));
             Assert.IsTrue(ai.WallDetector(4, 6, 7));
 
             Assert.IsFalse(ai.WallDetector(1, 21, 2));
-            Assert.IsFalse(ai.WallDetector(2,10,0));
-            Assert.IsFalse(ai.WallDetector(3,2,2));
-            Assert.IsFalse(ai.WallDetector(4,10,0));
+            Assert.IsFalse(ai.WallDetector(2, 10, 0));
+            Assert.IsFalse(ai.WallDetector(3, 2, 2));
+            Assert.IsFalse(ai.WallDetector(4, 10, 0));
         }
 
         [TestMethod]
@@ -41,6 +41,19 @@ namespace TorpedoTest
             Assert.IsTrue(ai.ShipDetector(3, 10, 15, shipLocNumbers));
             Assert.IsTrue(ai.ShipDetector(4, 30, 6, shipLocNumbers));
         }
+        [TestMethod]
+        public void GenerateShipsByAiTest()
+        {
+            AI ai = new AI();
+            for (int i = 0; i < 100; i++)
+            {
+                var coords = ai.GenerateShipsByAi();
+                int actualSize = coords.Count;
+                int expectedSize = 15;
+                CollectionAssert.AllItemsAreUnique(coords);
+                Assert.AreEqual(expectedSize, actualSize);
+            }
+            
+        }
     }
-
 }

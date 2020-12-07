@@ -154,10 +154,12 @@ namespace Torpedo.OnePlayerGame
             }
         }
 
-        public void BuildShipsByAICords(List<Button> btnsToPress)
+        public void BuildShipsByAICords(List<int> coordsOfBtnsToPress)
         {
-            foreach (var btn in btnsToPress)
+            List<Button> buttons = this.P2Grid.Children.OfType<Button>().ToList();
+            foreach (var coord in coordsOfBtnsToPress)
             {
+                Button btn = buttons.ElementAt(coord);
                 this.BtnEvent(btn, new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
@@ -170,8 +172,8 @@ namespace Torpedo.OnePlayerGame
             p2GuessGridLabel.Visibility = System.Windows.Visibility.Hidden;*/
             this.KeyDown += new KeyEventHandler(Window_KeyDown);
 
-            List<Button> buttons = this.P2Grid.Children.OfType<Button>().ToList();
-            BuildShipsByAICords(ai.GenerateShipsByAi(buttons));
+            //List<Button> buttons = this.P2Grid.Children.OfType<Button>().ToList();
+            BuildShipsByAICords(ai.GenerateShipsByAi());
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {

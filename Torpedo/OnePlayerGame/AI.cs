@@ -9,7 +9,6 @@ namespace Torpedo.OnePlayerGame
     public class AI
     {
         Random random = new Random();
-        List<int> shipLocNumbers = new List<int>();
         int dir = 0;
         Button clickedBtn;
         bool[] canMoveInDirs = { true, true, true, true };
@@ -245,33 +244,35 @@ namespace Torpedo.OnePlayerGame
             }
             return false;
         }
-        public List<Button> GenerateShipsByAi(List<Button> passedBtns)
+        public List<int> GenerateShipsByAi()
         {
             int shipsize = 0;
-            List<Button> btnsToPress = new List<Button>();
+            int boardSize = 100;
+            List<int> shipLocNumbers = new List<int>();
+
             while (true)
             {
                 shipsize++;
                 if (shipsize == 6)
                 {
-                    return btnsToPress;
+                    return shipLocNumbers;
                 }
-                int randLocValue = random.Next(passedBtns.Count);
+                int randLocValue = random.Next(boardSize);
                 int direction = random.Next(1, 5);
                 
                 while (shipLocNumbers.Exists(num => num==randLocValue) ||
                     ShipDetector(direction, randLocValue, shipsize, shipLocNumbers)
                         || WallDetector(direction, randLocValue, shipsize))
                 {
-                    randLocValue = random.Next(passedBtns.Count);
+                    randLocValue = random.Next(boardSize);
                     direction = random.Next(1, 5);
                 }
                 shipLocNumbers.Add(randLocValue);
 
-                Button shipFirstBtn = passedBtns.ElementAt(randLocValue);
+                //Button shipFirstBtn = passedBtns.ElementAt(randLocValue);
                 //passedBtns.RemoveAt(randValue);
                 //onePlayerGameState.btnEvent(btn, new RoutedEventArgs(ButtonBase.ClickEvent));
-                btnsToPress.Add(shipFirstBtn);
+                //btnsToPress.Add(shipFirstBtn);
                 if (shipLocNumbers.Count == 1)
                     continue;
                 if (shipsize<=5)
@@ -281,9 +282,9 @@ namespace Torpedo.OnePlayerGame
                     {
                         for (int i = 1; i < shipsize; i++)
                         {
-                            Button btnOthers = passedBtns.ElementAt(randLocValue-10*i);
+                            //Button btnOthers = passedBtns.ElementAt(randLocValue-10*i);
                             //onePlayerGameState.btnEvent(btnOthers, new RoutedEventArgs(ButtonBase.ClickEvent));
-                            btnsToPress.Add(btnOthers);
+                            //btnsToPress.Add(btnOthers);
                             shipLocNumbers.Add(randLocValue - 10 * i);
 
                         }
@@ -292,9 +293,9 @@ namespace Torpedo.OnePlayerGame
                     {
                         for (int i = 1; i < shipsize; i++)
                         {
-                            Button btnOthers = passedBtns.ElementAt(randLocValue+i);
+                            //Button btnOthers = passedBtns.ElementAt(randLocValue+i);
                             //onePlayerGameState.btnEvent(btnOthers, new RoutedEventArgs(ButtonBase.ClickEvent));
-                            btnsToPress.Add(btnOthers);
+                           // btnsToPress.Add(btnOthers);
                             shipLocNumbers.Add(randLocValue + i);
 
                         }
@@ -303,9 +304,9 @@ namespace Torpedo.OnePlayerGame
                     {
                         for (int i = 1; i < shipsize; i++)
                         {
-                            Button btnOthers = passedBtns.ElementAt(randLocValue + 10 * i);
+                            //Button btnOthers = passedBtns.ElementAt(randLocValue + 10 * i);
                             //onePlayerGameState.btnEvent(btnOthers, new RoutedEventArgs(ButtonBase.ClickEvent));
-                            btnsToPress.Add(btnOthers);
+                            //btnsToPress.Add(btnOthers);
                             shipLocNumbers.Add(randLocValue + 10 * i);
 
                         }
@@ -314,9 +315,9 @@ namespace Torpedo.OnePlayerGame
                     {
                         for (int i = 1; i < shipsize; i++)
                         {
-                            Button btnOthers = passedBtns.ElementAt(randLocValue -  i);
+                            //Button btnOthers = passedBtns.ElementAt(randLocValue -  i);
                             //onePlayerGameState.btnEvent(btnOthers, new RoutedEventArgs(ButtonBase.ClickEvent));
-                            btnsToPress.Add(btnOthers);
+                            //btnsToPress.Add(btnOthers);
                             shipLocNumbers.Add(randLocValue - i);
 
                         }
