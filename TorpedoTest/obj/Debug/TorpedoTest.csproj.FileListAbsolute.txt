@@ -17,3 +17,22 @@ D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\TorpedoT
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\TorpedoTest\obj\Debug\TorpedoTest.csproj.CopyComplete
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\TorpedoTest\obj\Debug\TorpedoTest.dll
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\TorpedoTest\obj\Debug\TorpedoTest.pdb
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\TorpedoTest.dll
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\TorpedoTest.pdb
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Torpedo.exe
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Newtonsoft.Json.dll
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Torpedo.pdb
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Torpedo.exe.config
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Development\Visual Studio\Torpedo\TorpedoTest\bin\Debug\Newtonsoft.Json.xml
+C:\Development\Visual Studio\Torpedo\TorpedoTest\obj\Debug\TorpedoTest.csprojAssemblyReference.cache
+C:\Development\Visual Studio\Torpedo\TorpedoTest\obj\Debug\TorpedoTest.csproj.CoreCompileInputs.cache
+C:\Development\Visual Studio\Torpedo\TorpedoTest\obj\Debug\TorpedoTest.csproj.CopyComplete
+C:\Development\Visual Studio\Torpedo\TorpedoTest\obj\Debug\TorpedoTest.dll
+C:\Development\Visual Studio\Torpedo\TorpedoTest\obj\Debug\TorpedoTest.pdb

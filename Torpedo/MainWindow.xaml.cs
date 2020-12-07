@@ -48,9 +48,5 @@ namespace Torpedo
             this.Close();
         }
 
-        private void firstPlayer_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

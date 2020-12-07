@@ -15,14 +15,13 @@ namespace Torpedo.OnePlayerGame
     class OnePlayerGameSate : TwoPlayerGameState
     {
         AI ai = new AI();
-        AI.Hitlevel hitlevel = new AI.Hitlevel();
-        Ship shipDestroyedByAI;
+        AI.PrevHitLevel hitlevel = new AI.PrevHitLevel();
         List<Button> hitsByAi = new List<Button>();
 
 
-        public override void checkHit(Button btnToCheck)
+        public override void CheckHit(Button btnToCheck)
         {
-            statsWindow.incRound();
+            statsWindow.IncRound();
             if (nextPlayer == MainWindow.player2Name)
             {
                 nextPlayer = MainWindow.player1Name;
@@ -31,7 +30,7 @@ namespace Torpedo.OnePlayerGame
             {
                 nextPlayer = MainWindow.player2Name;
             }
-            statsWindow.nextStep(nextPlayer);
+            statsWindow.NextStep(nextPlayer);
 
             if (!turn)
             {
@@ -45,15 +44,15 @@ namespace Torpedo.OnePlayerGame
                         Debug.WriteLine("P2's ship got hit");
                         ship.hits++;
 
-                        makeShipPartHit(btnToCheck, 2);
+                        MakeShipPartHit(btnToCheck, 2);
 
-                        statsWindow.incP1HitCount();
+                        statsWindow.IncP1HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P2's {ship.Length} size ship is dead");
                             ship.isDead = true;
-                            statsWindow.listP2ShipStats(ShipsP2);
-                            makeShipLookDead(ship, 2);
+                            statsWindow.ListP2ShipStats(ShipsP2);
+                            MakeShipLookDead(ship, 2);
                         }
                         return;
                     }
@@ -72,45 +71,42 @@ namespace Torpedo.OnePlayerGame
                     {
                         Debug.WriteLine("P1's ship got hit");
                         ship.hits++;
-                        hitlevel = AI.Hitlevel.Hit;
+                        hitlevel = AI.PrevHitLevel.Hit;
                         hitsByAi.Add(btnToCheck);
-                        makeShipPartHit(btnToCheck, 1);
-                        shipDestroyedByAI = null;
+                        MakeShipPartHit(btnToCheck, 1);
 
-                       statsWindow.incP2HitCount();
+                       statsWindow.IncP2HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P1's {ship.Length} size ship is dead");
                             ship.isDead = true;
-                            hitlevel = AI.Hitlevel.Sunk;
-                            shipDestroyedByAI = ship;
+                            hitlevel = AI.PrevHitLevel.Sunk;
                             foreach (var cord in ship.coordinates)
                             {
                                 hitsByAi.RemoveAll(hit => (int)hit.GetValue(Grid.RowProperty) == cord[0] && (int)hit.GetValue(Grid.ColumnProperty) == cord[1]);
                             }
 
 
-                            statsWindow.listP1ShipStats(ShipsP1);
-                            makeShipLookDead(ship, 1);
+                            statsWindow.ListP1ShipStats(ShipsP1);
+                            MakeShipLookDead(ship, 1);
                         }
                         return;
                     }
                 }
                 Debug.WriteLine("No hit on P1's ships");
-                shipDestroyedByAI = null;
-               hitlevel = AI.Hitlevel.NoHit;
+               hitlevel = AI.PrevHitLevel.NoHit;
             }
         }
 
-        public override void updateGameState()
+        public override void UpdateGameState()
         {
 
             if (ShipsP1.TrueForAll(ship => ship.isDead == true) || ShipsP2.TrueForAll(ship => ship.isDead == true))
             {
-                disableGridButtons(P1GuessGrid);
-                disableGridButtons(P2GuessGrid);
-                disableGridButtons(P1Grid);
-                disableGridButtons(P2Grid);
+                DisableGridButtons(P1GuessGrid);
+                DisableGridButtons(P2GuessGrid);
+                DisableGridButtons(P1Grid);
+                DisableGridButtons(P2Grid);
 
                 //Ide jön a fájlba írás!
 
@@ -140,19 +136,19 @@ namespace Torpedo.OnePlayerGame
             {
                 if (turn)
                 {
-                    reEnableNotClickedGridButtons(P1GuessGrid);
-                    disableGridButtons(P2GuessGrid);                    
+                    ReEnableNotClickedGridButtons(P1GuessGrid);
+                    DisableGridButtons(P2GuessGrid);                    
                 }
                 else
                 {
-                    reEnableNotClickedGridButtons(P2GuessGrid);
-                    disableGridButtons(P1GuessGrid);                    
+                    ReEnableNotClickedGridButtons(P2GuessGrid);
+                    DisableGridButtons(P1GuessGrid);                    
                 }
-                ai.InformAiAboutMove(hitlevel, shipDestroyedByAI, ref hitsByAi);
+                ai.InformAiAboutMove(hitlevel, ref hitsByAi);
                 turn = !turn;
                 if (turn == true)
                 {
-                    this.btnEvent(ai.MakeAiMove(P2GuessGrid.Children.OfType<Button>().Where(btn => btn.Content == null&&
+                    this.BtnEvent(ai.MakeAiMove(P2GuessGrid.Children.OfType<Button>().Where(btn => btn.Content == null&&
                     btn.Background.ToString() !=  new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()).ToList()), new RoutedEventArgs(ButtonBase.ClickEvent));
                 }
             }
@@ -162,7 +158,7 @@ namespace Torpedo.OnePlayerGame
         {
             foreach (var btn in btnsToPress)
             {
-                this.btnEvent(btn, new RoutedEventArgs(ButtonBase.ClickEvent));
+                this.BtnEvent(btn, new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
 

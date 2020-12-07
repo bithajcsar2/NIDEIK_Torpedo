@@ -58,18 +58,22 @@ namespace Torpedo
             {
                 gridToBuild.RowDefinitions.Add(new RowDefinition());
                 gridToBuild.ColumnDefinitions.Add(new ColumnDefinition());
-                Label horLabel = new Label();
-                horLabel.Content = (char)('A' + i - 1);
-                horLabel.VerticalAlignment = VerticalAlignment.Center;
-                horLabel.HorizontalAlignment = HorizontalAlignment.Center;
+                Label horLabel = new Label
+                {
+                    Content = (char)('A' + i - 1),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };
                 gridToBuild.Children.Add(horLabel);
                 Grid.SetRow(horLabel, 0);
                 Grid.SetColumn(horLabel, i);
 
-                Label verLabel = new Label();
-                verLabel.Content = i;
-                verLabel.VerticalAlignment = VerticalAlignment.Center;
-                verLabel.HorizontalAlignment = HorizontalAlignment.Center;
+                Label verLabel = new Label
+                {
+                    Content = i,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };
                 gridToBuild.Children.Add(verLabel);
                 Grid.SetRow(verLabel, i);
                 Grid.SetColumn(verLabel, 0);
@@ -79,18 +83,18 @@ namespace Torpedo
                 for (int j = 1; j < 11; j++)
                 {
                     Button button = new Button();
-                    button.Click += new RoutedEventHandler(btnEvent);
+                    button.Click += new RoutedEventHandler(BtnEvent);
                     gridToBuild.Children.Add(button);
                     Grid.SetRow(button, i);
                     Grid.SetColumn(button, j);
                 }
             }
         }
-        public void btnEvent(object sender, EventArgs e)
+        public void BtnEvent(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             clickedButton.Background = new SolidColorBrush(Color.FromRgb(80, 154, 159));
-            clickedButton.Click -= new RoutedEventHandler(btnEvent);
+            clickedButton.Click -= new RoutedEventHandler(BtnEvent);
             int _row = (int)clickedButton.GetValue(Grid.RowProperty);
             int _column = (int)clickedButton.GetValue(Grid.ColumnProperty);
             var btnsGrid = VisualTreeHelper.GetParent(clickedButton) as Grid;
@@ -100,36 +104,36 @@ namespace Torpedo
             if (btnsGrid.Name == P1Grid.Name)
             {
                 shipButtonListP1.Add(clickedButton);
-                buildShip(btnsGrid);
+                BuildShip(btnsGrid);
             }
 
             if (btnsGrid.Name == P2Grid.Name)
             {
                 shipButtonListP2.Add(clickedButton);
-                buildShip(btnsGrid);
+                BuildShip(btnsGrid);
             }
 
             if (btnsGrid.Name == P1GuessGrid.Name)
             {
-                checkHit(clickedButton);
+                CheckHit(clickedButton);
             }
 
             if (btnsGrid.Name == P2GuessGrid.Name)
             {
-                checkHit(clickedButton);
+                CheckHit(clickedButton);
             }
-            updateGameState();
+            UpdateGameState();
         }
 
-        public virtual void updateGameState()
+        public virtual void UpdateGameState()
         {
            
             if (ShipsP1.TrueForAll(ship => ship.isDead == true) || ShipsP2.TrueForAll(ship => ship.isDead == true))
             {
-                disableGridButtons(P1GuessGrid);
-                disableGridButtons(P2GuessGrid);
-                disableGridButtons(P1Grid);
-                disableGridButtons(P2Grid);
+                DisableGridButtons(P1GuessGrid);
+                DisableGridButtons(P2GuessGrid);
+                DisableGridButtons(P1Grid);
+                DisableGridButtons(P2Grid);
 
 
                 if(ShipsP1.TrueForAll(ship => ship.isDead == true))
@@ -158,21 +162,21 @@ namespace Torpedo
             {
                 if (turn)
                 {
-                    reEnableNotClickedGridButtons(P1GuessGrid);
-                    disableGridButtons(P2GuessGrid);
+                    ReEnableNotClickedGridButtons(P1GuessGrid);
+                    DisableGridButtons(P2GuessGrid);
                 }
                 else
                 {
-                    reEnableNotClickedGridButtons(P2GuessGrid);
-                    disableGridButtons(P1GuessGrid);
+                    ReEnableNotClickedGridButtons(P2GuessGrid);
+                    DisableGridButtons(P1GuessGrid);
                 }
                 turn = !turn;
             }
         }
 
-        public virtual void checkHit(Button btnToCheck)
+        public virtual void CheckHit(Button btnToCheck)
         {
-            statsWindow.incRound();
+            statsWindow.IncRound();
             if(nextPlayer == MainWindow.player2Name)
             {
                 nextPlayer = MainWindow.player1Name;
@@ -181,7 +185,7 @@ namespace Torpedo
             {
                 nextPlayer = MainWindow.player2Name;
             }
-            statsWindow.nextStep(nextPlayer);
+            statsWindow.NextStep(nextPlayer);
 
             if (!turn)
             {
@@ -195,15 +199,15 @@ namespace Torpedo
                         Debug.WriteLine("P2's ship got hit");
                         ship.hits++;
 
-                        makeShipPartHit(btnToCheck, 2);
+                        MakeShipPartHit(btnToCheck, 2);
 
-                        statsWindow.incP1HitCount();
+                        statsWindow.IncP1HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P2's {ship.Length} size ship is dead");
                             ship.isDead = true;
-                            statsWindow.listP2ShipStats(ShipsP2);
-                            makeShipLookDead(ship, 2);
+                            statsWindow.ListP2ShipStats(ShipsP2);
+                            MakeShipLookDead(ship, 2);
                         }
                         return;
                     }
@@ -223,15 +227,15 @@ namespace Torpedo
                         Debug.WriteLine("P1's ship got hit");
                         ship.hits++;
 
-                        makeShipPartHit(btnToCheck, 1);
+                        MakeShipPartHit(btnToCheck, 1);
 
-                        statsWindow.incP2HitCount();
+                        statsWindow.IncP2HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P1's {ship.Length} size ship is dead");
                             ship.isDead = true;
-                            statsWindow.listP1ShipStats(ShipsP1);
-                            makeShipLookDead(ship, 1);
+                            statsWindow.ListP1ShipStats(ShipsP1);
+                            MakeShipLookDead(ship, 1);
                         }
                         return;
                     }
@@ -240,7 +244,7 @@ namespace Torpedo
             }
         }
 
-        public void makeShipPartHit(Button guessbtn, int player)
+        public void MakeShipPartHit(Button guessbtn, int player)
         {
             if (player == 2)
             {
@@ -268,7 +272,7 @@ namespace Torpedo
         }
     
 
-        public void makeShipLookDead(Ship ship, int player)
+        public void MakeShipLookDead(Ship ship, int player)
         {
             if (player == 2)
             {
@@ -306,7 +310,7 @@ namespace Torpedo
             }
         }
 
-        public void buildShip(Grid gridToBuildOn)
+        public void BuildShip(Grid gridToBuildOn)
         {
             if (gridToBuildOn.Name == P1Grid.Name)
             {
@@ -322,7 +326,7 @@ namespace Torpedo
                     shipSizeP1++;
                     if (shipButtonListP1.Count() == 5)
                     {
-                        disableGridButtons(P1Grid);
+                        DisableGridButtons(P1Grid);
                     }
                     shipButtonListP1.Clear();
                 }
@@ -341,33 +345,33 @@ namespace Torpedo
                     shipSizeP2++;
                     if (shipButtonListP2.Count() == 5)
                     {
-                        disableGridButtons(P2Grid);
+                        DisableGridButtons(P2Grid);
                     }
                     shipButtonListP2.Clear();
                 }
             }          
         }
-        public void disableGridButtons(Grid grid)
+        public void DisableGridButtons(Grid grid)
         {
             foreach (Button button in grid.Children.OfType<Button>())
             {
-                button.Click -= new RoutedEventHandler(btnEvent);
+                button.Click -= new RoutedEventHandler(BtnEvent);
             }
         }
 
 
-        public void reEnableNotClickedGridButtons(Grid grid)
+        public void ReEnableNotClickedGridButtons(Grid grid)
         {
-            statsWindow.nextStep(nextPlayer);
+            statsWindow.NextStep(nextPlayer);
 
             foreach (Button button in grid.Children.OfType<Button>().Where(btn => btn.Content == null &&
                 btn.Background.ToString() != new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()))
             {
-                button.Click += new RoutedEventHandler(btnEvent);
+                button.Click += new RoutedEventHandler(BtnEvent);
             }
         }
 
-        public void startGameSate()
+        public void StartGameSate()
         {
             var rand = new Random();
 
@@ -384,8 +388,8 @@ namespace Torpedo
             {
                 nextPlayer = MainWindow.player2Name;
             }
-            disableGridButtons(P1GuessGrid);
-            disableGridButtons(P2GuessGrid);
+            DisableGridButtons(P1GuessGrid);
+            DisableGridButtons(P2GuessGrid);
             statsWindow.Show();
         }
 
@@ -403,7 +407,7 @@ namespace Torpedo
             p1GridLabel.Content = MainWindow.player1Name + "'s board";
             p2GuessGridLabel.Content = MainWindow.player2Name + "'s firing board";
             p2GridLabel.Content = MainWindow.player2Name + "'s board";
-            startGameSate();
+            StartGameSate();
         }
 
     }

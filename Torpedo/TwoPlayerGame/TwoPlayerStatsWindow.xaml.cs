@@ -23,30 +23,30 @@ namespace Torpedo
         public int p1HitCount = 0, p2HitCount = 0;
         string player1Name, player2Name;
 
-        public void nextStep(String playerName)
+        public void NextStep(String playerName)
         {
             nextPlayerLabel.Content = "You're the next " + playerName + "!";
         }
 
-        public void incRound()
+        public void IncRound()
         {
             roundCounter++;
             roundCounterLabel.Content = "Round: " + roundCounter;
         }
 
-        public void incP1HitCount()
+        public void IncP1HitCount()
         {
             p1HitCount++;
             p1HitCounterLabel.Content = player1Name+ " hit count: " + p1HitCount;
         }
 
-        public void incP2HitCount()
+        public void IncP2HitCount()
         {
             p2HitCount++;
             p2HitCounterLabel.Content = player2Name+" hit count: " + p2HitCount;
         }
 
-        public void listP1ShipStats(List<Ship> p1Ships)
+        public void ListP1ShipStats(List<Ship> p1Ships)
         {
             p1ShipsSatusLabel.Content = player1Name + "'s ships alive: ";
             foreach (var ship in p1Ships.Where(ship => ship.isDead == false))
@@ -60,7 +60,7 @@ namespace Torpedo
             }
         }
         
-        public void listP2ShipStats(List<Ship> p2Ships)
+        public void ListP2ShipStats(List<Ship> p2Ships)
         {
             p2ShipsSatusLabel.Content = player2Name + "'s ships alive: ";
             foreach (var ship in p2Ships.Where(ship=>ship.isDead==false))

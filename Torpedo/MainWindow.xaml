@@ -25,7 +25,7 @@
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="61" Margin="10,10,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
                 <TextBlock TextWrapping="Wrap" Text="Első játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
-                <TextBox Height="32" TextWrapping="Wrap" x:Name="firstPlayer" FontFamily="Tahoma" Padding="5,8" TextChanged="firstPlayer_TextChanged" BorderBrush="{x:Null}"/>
+                <TextBox Height="32" TextWrapping="Wrap" x:Name="firstPlayer" FontFamily="Tahoma" Padding="5,8" BorderBrush="{x:Null}"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="127" Margin="10,76,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="316">
                 <TextBlock TextWrapping="Wrap" Text="Második játékos neve:" Height="18" FontSize="14" FontFamily="Tahoma" TextDecorations="{x:Null}" Foreground="White"/>
