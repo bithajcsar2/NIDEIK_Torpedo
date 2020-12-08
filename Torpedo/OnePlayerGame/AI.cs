@@ -10,9 +10,9 @@ namespace Torpedo.OnePlayerGame
     {
         Random random = new Random();
         int dir = 0;
-        int clickedBtnCoord;
+        public int clickedBtnCoord;
         bool[] canMoveInDirs = { true, true, true, true };
-        int radiusFromFirstHit = 1;
+        public int radiusFromFirstHit = 1;
         List<int> hitsByAi;
         public enum PrevHitLevel
         {
@@ -55,14 +55,12 @@ namespace Torpedo.OnePlayerGame
                         if (clickableCoords.Exists(coord => coord == clickedBtnCoord - 10 * radiusFromFirstHit))
                         {
                             clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord - 10 * radiusFromFirstHit);
-                            canMoveInDirs[dir - 1] = true;
-                            return clickedBtnCoord;
+                            break;
                         }
                         else
                         {
                             dir = random.Next(1, 5);
                             canMoveInDirs[dir - 1] = false;
-                            continue;
                         }
                     }
                     if (dir == 2)
@@ -70,14 +68,12 @@ namespace Torpedo.OnePlayerGame
                         if (clickableCoords.Exists(coord => coord == clickedBtnCoord + radiusFromFirstHit)  && WallDetector(dir, clickedBtnCoord, radiusFromFirstHit) == false)
                         {
                             clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord + radiusFromFirstHit);
-                            canMoveInDirs[dir - 1] = true;
-                            return clickedBtnCoord;
+                            break;
                         }
                         else
                         {
                             dir = random.Next(1, 5);
                             canMoveInDirs[dir - 1] = false;
-                            continue;
                         }
                     }
                     if (dir == 3)
@@ -85,14 +81,12 @@ namespace Torpedo.OnePlayerGame
                         if (clickableCoords.Exists(coord => coord == clickedBtnCoord + 10 * radiusFromFirstHit))
                         {
                             clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord + 10 * radiusFromFirstHit);
-                            canMoveInDirs[dir - 1] = true;
-                            return clickedBtnCoord;
+                            break;
                         }
                         else
                         {
                             dir = random.Next(1, 5);
                             canMoveInDirs[dir - 1] = false;
-                            continue;
                         }
                     }
                     if (dir == 4)
@@ -101,14 +95,13 @@ namespace Torpedo.OnePlayerGame
                         if (clickableCoords.Exists(coord => coord == clickedBtnCoord - radiusFromFirstHit) && WallDetector(dir, clickedBtnCoord, radiusFromFirstHit) == false)
                         {
                             clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord - radiusFromFirstHit);
-                            canMoveInDirs[dir - 1] = true;
-                            return clickedBtnCoord;
+                            break;
                         }
                         else
                         {
                             dir = random.Next(1, 5);
                             canMoveInDirs[dir - 1] = false;
-                            continue;
+                            
                         }
                     }
                 }
@@ -129,7 +122,6 @@ namespace Torpedo.OnePlayerGame
                     dir = random.Next(1, 5);
                     random.Next(clickableCoords.Count);
                     clickedBtnCoord = clickableCoords.ElementAt(random.Next(clickableCoords.Count));
-                    return clickedBtnCoord;
                 }
 
             }

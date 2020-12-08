@@ -55,5 +55,76 @@ namespace TorpedoTest
             }
             
         }
+
+        [TestMethod]
+
+        public void MakeAiMoveTest()
+        {
+            int coord;
+            AI ai = new AI();
+            List<int> hitsByAi = new List<int>();
+            
+            ai.InformAiAboutMove(AI.PrevHitLevel.NoHit, ref hitsByAi);
+            List<int> clickableCoords = new List<int>();
+            for (int i = 0; i < 50; i++)
+            {
+                clickableCoords.Add(i);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.IsTrue(ai.MakeAiMove(clickableCoords) < 50);
+            }
+
+            clickableCoords.Clear();
+            for (int i = 0; i < 100; i++)
+            {
+                if(i!=22)
+                    clickableCoords.Add(i);
+            }
+            hitsByAi.Add(22);
+            ai.InformAiAboutMove(AI.PrevHitLevel.Hit, ref hitsByAi);
+            for (int i = 0; i < 100; i++)
+            {
+                ai.clickedBtnCoord = 22;
+                coord = ai.MakeAiMove(clickableCoords);
+                Assert.IsTrue(coord == 12 || coord == 23 || coord == 32 || coord == 21);
+            }
+            clickableCoords.Remove(12);
+            clickableCoords.Remove(23);
+            clickableCoords.Remove(32);
+            clickableCoords.Remove(21);
+
+            for (int i = 0; i < 100; i++)
+            {
+                ai.clickedBtnCoord = 22;
+                coord = ai.MakeAiMove(clickableCoords);
+                Assert.IsTrue(ai.radiusFromFirstHit == 2);
+                Assert.IsTrue(coord == 2 || coord == 24 || coord == 42 || coord == 20);
+            }
+            
+            hitsByAi.Add(77);
+            clickableCoords.Remove(77);
+            ai.InformAiAboutMove(AI.PrevHitLevel.Sunk, ref hitsByAi);
+            hitsByAi.Remove(22);
+            coord = ai.MakeAiMove(clickableCoords);
+            Assert.IsTrue(ai.radiusFromFirstHit == 1);
+            Assert.IsTrue(coord == 67 || coord == 78 || coord == 87 || coord == 76);
+
+            hitsByAi.Clear();
+            ai.InformAiAboutMove(AI.PrevHitLevel.Hit, ref hitsByAi);
+            for (int i = 0; i < 100; i++)
+            {
+                ai.clickedBtnCoord = 9;
+                coord = ai.MakeAiMove(clickableCoords);
+                Assert.IsTrue(ai.radiusFromFirstHit == 1);
+                Assert.IsTrue(coord == 8 || coord == 19);
+            }
+
+            clickableCoords.Remove(8);
+            ai.clickedBtnCoord = 9;
+            coord = ai.MakeAiMove(clickableCoords);
+            Assert.IsTrue(ai.radiusFromFirstHit == 1);
+            Assert.IsTrue(coord == 19);
+        }
     }
 }
