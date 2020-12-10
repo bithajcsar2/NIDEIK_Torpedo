@@ -410,7 +410,7 @@ namespace Torpedo
             StartGameSate();
         }
 
-        private void Player1GiveUp(object sender, RoutedEventArgs e)
+        private void PlayerGiveUp(object sender, RoutedEventArgs e)
         {
             if (nextPlayer == MainWindow.player1Name)
             {
@@ -427,11 +427,7 @@ namespace Torpedo
                 statsWindow.Close();
                 this.Close();
             }
-        }
-
-        private void Player2GiveUp(object sender, RoutedEventArgs e)
-        {
-            if (nextPlayer == MainWindow.player2Name)
+            else if(nextPlayer == MainWindow.player2Name)
             {
                 DisableGridButtons(P1GuessGrid);
                 DisableGridButtons(P2GuessGrid);
