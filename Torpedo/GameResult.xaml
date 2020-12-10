@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GameResult" Height="450" Width="800" Foreground="White" ResizeMode="NoResize">
     <Window.Background>
-        <ImageBrush ImageSource="background.png"/>
+        <ImageBrush ImageSource="Images/background.png"/>
     </Window.Background>
     <Grid HorizontalAlignment="Left" Height="392" Margin="10,10,0,0" VerticalAlignment="Top" Width="759">
         <Grid.ColumnDefinitions>

@@ -410,5 +410,42 @@ namespace Torpedo
             StartGameSate();
         }
 
+        private void Player1GiveUp(object sender, RoutedEventArgs e)
+        {
+            if (nextPlayer == MainWindow.player1Name)
+            {
+                DisableGridButtons(P1GuessGrid);
+                DisableGridButtons(P2GuessGrid);
+                DisableGridButtons(P1Grid);
+                DisableGridButtons(P2Grid);
+
+                Debug.WriteLine("P2 won!");
+                resultsWindow.WriteJson(MainWindow.player2Name, MainWindow.player1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, ShipsP1, ShipsP2);
+                resultsWindow.FillDataGridWithResult();
+
+                resultsWindow.Show();
+                statsWindow.Close();
+                this.Close();
+            }
+        }
+
+        private void Player2GiveUp(object sender, RoutedEventArgs e)
+        {
+            if (nextPlayer == MainWindow.player2Name)
+            {
+                DisableGridButtons(P1GuessGrid);
+                DisableGridButtons(P2GuessGrid);
+                DisableGridButtons(P1Grid);
+                DisableGridButtons(P2Grid);
+
+                Debug.WriteLine("P1 won!");
+                resultsWindow.WriteJson(MainWindow.player1Name, MainWindow.player2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, ShipsP1, ShipsP2);
+                resultsWindow.FillDataGridWithResult();
+
+                resultsWindow.Show();
+                statsWindow.Close();
+                this.Close();
+            }
+        }
     }
 }
