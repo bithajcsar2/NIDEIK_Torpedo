@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace Torpedo.OnePlayerGame
 {
@@ -65,7 +63,7 @@ namespace Torpedo.OnePlayerGame
                     }
                     if (dir == 2)
                     {
-                        if (clickableCoords.Exists(coord => coord == clickedBtnCoord + radiusFromFirstHit)  && WallDetector(dir, clickedBtnCoord, radiusFromFirstHit) == false)
+                        if (clickableCoords.Exists(coord => coord == clickedBtnCoord + radiusFromFirstHit) && WallDetector(dir, clickedBtnCoord, radiusFromFirstHit) == false)
                         {
                             clickedBtnCoord = clickableCoords.Find(coord => coord == clickedBtnCoord + radiusFromFirstHit);
                             break;
@@ -101,7 +99,7 @@ namespace Torpedo.OnePlayerGame
                         {
                             dir = random.Next(1, 5);
                             canMoveInDirs[dir - 1] = false;
-                            
+
                         }
                     }
                 }
@@ -126,23 +124,7 @@ namespace Torpedo.OnePlayerGame
 
             }
 
-            /*if (Hitlevel.NoHit==hitlevel)
-            {
-                if (hitsByAi.Count>0)
-                {
-                    dir = random.Next(1, 5);
-                    clickedBtn = hitsByAi.ElementAt(0);
-                    hitlevel = Hitlevel.Hit;
-                    MakeAiMove(clickableBtns);
-                }
-                else
-                {
-                    dir = random.Next(1, 5);
-                    random.Next(clickableBtns.Count);
-                    clickedBtn = clickableBtns.ElementAt(random.Next(clickableBtns.Count));
-                    return clickedBtn;
-                }
-            }*/
+
             return clickedBtnCoord;
         }
 
@@ -168,9 +150,9 @@ namespace Torpedo.OnePlayerGame
                 if (location + 10 * size < 99)
                     return false;
             }
-            if(direction == 4)
+            if (direction == 4)
             {
-                if (location / 10 == (location - size) / 10 && location-size>=0)
+                if (location / 10 == (location - size) / 10 && location - size >= 0)
                 {
                     return false;
                 }
@@ -181,13 +163,13 @@ namespace Torpedo.OnePlayerGame
         public bool ShipDetector(int direction, int location, int size, List<int> shipLocNumbers)
         {
 
-            int locToCheck=0;
+            int locToCheck = 0;
             if (direction == 1)
             {
                 for (int i = 0; i < size; i++)
                 {
                     locToCheck = location - 10 * i;
-                    if(shipLocNumbers.Exists(num => num == locToCheck))
+                    if (shipLocNumbers.Exists(num => num == locToCheck))
                     {
                         return true;
                     }
@@ -243,8 +225,8 @@ namespace Torpedo.OnePlayerGame
                 }
                 int randLocValue = random.Next(boardSize);
                 int direction = random.Next(1, 5);
-                
-                while (shipLocNumbers.Exists(num => num==randLocValue) ||
+
+                while (shipLocNumbers.Exists(num => num == randLocValue) ||
                     ShipDetector(direction, randLocValue, shipsize, shipLocNumbers)
                         || WallDetector(direction, randLocValue, shipsize))
                 {
@@ -253,61 +235,41 @@ namespace Torpedo.OnePlayerGame
                 }
                 shipLocNumbers.Add(randLocValue);
 
-                //Button shipFirstBtn = passedBtns.ElementAt(randLocValue);
-                //passedBtns.RemoveAt(randValue);
-                //onePlayerGameState.btnEvent(btn, new RoutedEventArgs(ButtonBase.ClickEvent));
-                //btnsToPress.Add(shipFirstBtn);
                 if (shipLocNumbers.Count == 1)
                     continue;
-                if (shipsize<=5)
+                if (shipsize <= 5)
                 {
 
                     if (direction == 1)
                     {
                         for (int i = 1; i < shipsize; i++)
                         {
-                            //Button btnOthers = passedBtns.ElementAt(randLocValue-10*i);
-                            //onePlayerGameState.btnEvent(btnOthers, new RoutedEventArgs(ButtonBase.ClickEvent));
-                            //btnsToPress.Add(btnOthers);
                             shipLocNumbers.Add(randLocValue - 10 * i);
-
                         }
                     }
                     if (direction == 2)
                     {
                         for (int i = 1; i < shipsize; i++)
                         {
-                            //Button btnOthers = passedBtns.ElementAt(randLocValue+i);
-                            //onePlayerGameState.btnEvent(btnOthers, new RoutedEventArgs(ButtonBase.ClickEvent));
-                           // btnsToPress.Add(btnOthers);
                             shipLocNumbers.Add(randLocValue + i);
-
                         }
                     }
                     if (direction == 3)
                     {
                         for (int i = 1; i < shipsize; i++)
                         {
-                            //Button btnOthers = passedBtns.ElementAt(randLocValue + 10 * i);
-                            //onePlayerGameState.btnEvent(btnOthers, new RoutedEventArgs(ButtonBase.ClickEvent));
-                            //btnsToPress.Add(btnOthers);
                             shipLocNumbers.Add(randLocValue + 10 * i);
-
                         }
                     }
                     if (direction == 4)
                     {
                         for (int i = 1; i < shipsize; i++)
                         {
-                            //Button btnOthers = passedBtns.ElementAt(randLocValue -  i);
-                            //onePlayerGameState.btnEvent(btnOthers, new RoutedEventArgs(ButtonBase.ClickEvent));
-                            //btnsToPress.Add(btnOthers);
                             shipLocNumbers.Add(randLocValue - i);
-
                         }
                     }
                 }
-            }            
+            }
         }
     }
 }

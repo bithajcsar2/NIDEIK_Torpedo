@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Dev\NIDEIK_Torpedo\Torpedo\App.xaml
-4-1901317929
+42039223702
 
-121595414595
+161645942512
 15947151915
-GameResult.xaml;TwoPlayerGame\TwoPlayerGameState.xaml;mainwindow.xaml;TwoPlayerGame\TwoPlayerStatsWindow.xaml;
+GameResult.xaml;TwoPlayerGame\TwoPlayerGameView.xaml;mainwindow.xaml;TwoPlayerGame\TwoPlayerStatsWindow.xaml;
 
-True
+False
 

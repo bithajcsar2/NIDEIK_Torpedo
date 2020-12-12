@@ -1,40 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using Torpedo.TwoPlayerGame;
 
 namespace Torpedo.OnePlayerGame
 {
-    class OnePlayerGameSate : TwoPlayerGameView
+    class OnePlayerGameController : TwoPLayerGameController
     {
         AI ai = new AI();
         AI.PrevHitLevel hitlevel = new AI.PrevHitLevel();
         List<int> hitsByAi = new List<int>();
-
-
         public override void CheckHit(Button btnToCheck)
         {
             statsWindow.IncRound();
-            if (nextPlayer == MainWindow.player2Name)
+            if (Model.NextPlayerName == MainWindow.player2Name)
             {
-                nextPlayer = MainWindow.player1Name;
+                Model.NextPlayerName = MainWindow.player1Name;
             }
-            else if (nextPlayer == MainWindow.player1Name)
+            else if (Model.NextPlayerName == MainWindow.player1Name)
             {
-                nextPlayer = MainWindow.player2Name;
+                Model.NextPlayerName = MainWindow.player2Name;
             }
-            statsWindow.NextStep(nextPlayer);
+            statsWindow.NextStep(Model.NextPlayerName);
 
-            if (!turn)
+            if (!Model.turn)
             {
-                foreach (Ship ship in ShipsP2)
+                foreach (Ship ship in Model.ShipsP2)
                 {
                     int[] matchedCoords = ship.coordinates.FirstOrDefault(coords => (coords[0] == (int)btnToCheck.GetValue(Grid.RowProperty) &&
                      coords[1] == (int)btnToCheck.GetValue(Grid.ColumnProperty)));
@@ -44,15 +40,15 @@ namespace Torpedo.OnePlayerGame
                         Debug.WriteLine("P2's ship got hit");
                         ship.hits++;
 
-                        MakeShipPartHit(btnToCheck, 2);
+                        View.MakeShipPartHit(btnToCheck, 2);
 
                         statsWindow.IncP1HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P2's {ship.Length} size ship is dead");
                             ship.isDead = true;
-                            statsWindow.ListP2ShipStats(ShipsP2);
-                            MakeShipLookDead(ship, 2);
+                            statsWindow.ListP2ShipStats(Model.ShipsP2);
+                            View.MakeShipLookDead(ship, 2);
                         }
                         return;
                     }
@@ -62,7 +58,7 @@ namespace Torpedo.OnePlayerGame
 
             else
             {
-                foreach (Ship ship in ShipsP1)
+                foreach (Ship ship in Model.ShipsP1)
                 {
                     int[] matchedCoords = ship.coordinates.FirstOrDefault(coords => (coords[0] == (int)btnToCheck.GetValue(Grid.RowProperty) &&
                      coords[1] == (int)btnToCheck.GetValue(Grid.ColumnProperty)));
@@ -72,11 +68,11 @@ namespace Torpedo.OnePlayerGame
                         Debug.WriteLine("P1's ship got hit");
                         ship.hits++;
                         hitlevel = AI.PrevHitLevel.Hit;
-                        int coordOfHit = (((int)btnToCheck.GetValue(Grid.RowProperty)-1) * 10) + ((int)btnToCheck.GetValue(Grid.ColumnProperty)-1);
+                        int coordOfHit = (((int)btnToCheck.GetValue(Grid.RowProperty) - 1) * 10) + ((int)btnToCheck.GetValue(Grid.ColumnProperty) - 1);
                         hitsByAi.Add(coordOfHit);
-                        MakeShipPartHit(btnToCheck, 1);
+                        View.MakeShipPartHit(btnToCheck, 1);
 
-                       statsWindow.IncP2HitCount();
+                        statsWindow.IncP2HitCount();
                         if (ship.hits >= ship.Length)
                         {
                             Debug.WriteLine($"P1's {ship.Length} size ship is dead");
@@ -84,91 +80,93 @@ namespace Torpedo.OnePlayerGame
                             hitlevel = AI.PrevHitLevel.Sunk;
                             foreach (var cord in ship.coordinates)
                             {
-                                hitsByAi.RemoveAll(hit => hit == (cord[0]-1)*10+cord[1]-1);
+                                hitsByAi.RemoveAll(hit => hit == (cord[0] - 1) * 10 + cord[1] - 1);
                             }
 
 
-                            statsWindow.ListP1ShipStats(ShipsP1);
-                            MakeShipLookDead(ship, 1);
+                            statsWindow.ListP1ShipStats(Model.ShipsP1);
+                            View.MakeShipLookDead(ship, 1);
                         }
                         return;
                     }
                 }
                 Debug.WriteLine("No hit on P1's ships");
-               hitlevel = AI.PrevHitLevel.NoHit;
+                hitlevel = AI.PrevHitLevel.NoHit;
             }
         }
 
         public override void UpdateGameState()
         {
 
-            if (ShipsP1.TrueForAll(ship => ship.isDead == true) || ShipsP2.TrueForAll(ship => ship.isDead == true))
+            if (Model.ShipsP1.TrueForAll(ship => ship.isDead == true) || Model.ShipsP2.TrueForAll(ship => ship.isDead == true))
             {
-                DisableGridButtons(P1GuessGrid);
-                DisableGridButtons(P2GuessGrid);
-                DisableGridButtons(P1Grid);
-                DisableGridButtons(P2Grid);
+                View.DisableGridButtons(View.P1Grid);
+                View.DisableGridButtons(View.P1Grid);
+                View.DisableGridButtons(View.P2GGrid);
+                View.DisableGridButtons(View.P2GGrid);
 
                 //Ide jön a fájlba írás!
 
-                if (ShipsP1.TrueForAll(ship => ship.isDead == true))
+                if (Model.ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {
                     Debug.WriteLine("P2 won!");
-                    resultsWindow.WriteJson(MainWindow.player2Name, MainWindow.player1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, ShipsP1, ShipsP2);
+                    resultsWindow.WriteJson(MainWindow.player2Name, MainWindow.player1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
                     resultsWindow.FillDataGridWithResult();
 
                     resultsWindow.Show();
                     statsWindow.Close();
-                    this.Close();
+                    View.CloseWindow();
                 }
                 else
                 {
                     Debug.WriteLine("P1 won!");
-                    resultsWindow.WriteJson(MainWindow.player1Name, MainWindow.player2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, ShipsP1, ShipsP2);
+                    resultsWindow.WriteJson(MainWindow.player1Name, MainWindow.player2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
                     resultsWindow.FillDataGridWithResult();
 
                     resultsWindow.Show();
                     statsWindow.Close();
-                    this.Close();
+                    View.CloseWindow();
                 }
                 return;
             }
-            if (shipSizeP1 == 6 && shipSizeP2 == 6)
+            if (Model.ShipSizeP1 == 6 && Model.ShipSizeP2 == 6)
             {
-                if (turn)
+                if (Model.turn)
                 {
-                    ReEnableNotClickedGridButtons(P1GuessGrid);
-                    DisableGridButtons(P2GuessGrid);                    
+                    View.ReEnableNotClickedGridButtons(View.P1GGrid);
+                    View.DisableGridButtons(View.P2GGrid);
                 }
                 else
                 {
-                    ReEnableNotClickedGridButtons(P2GuessGrid);
-                    DisableGridButtons(P1GuessGrid);                    
+                    View.ReEnableNotClickedGridButtons(View.P2GGrid);
+                    View.DisableGridButtons(View.P1GGrid);
                 }
+                Model.turn = !Model.turn;
+
                 ai.InformAiAboutMove(hitlevel, ref hitsByAi);
-                turn = !turn;
-                if (turn == true)
+                if (Model.turn == true)
                 {
-                    var pressableBtns = P2GuessGrid.Children.OfType<Button>().Where(btn => btn.Content == null
+                    var pressableBtns = View.P2GGrid.Children.OfType<Button>().Where(btn => btn.Content == null
                     && btn.Background.ToString() != new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()).ToList();
                     List<int> pressableCoords = new List<int>();
                     foreach (var btn in pressableBtns)
                     {
-                        int coord = ((int)btn.GetValue(Grid.RowProperty)-1) * 10 + (int)btn.GetValue(Grid.ColumnProperty)-1;
+                        int coord = ((int)btn.GetValue(Grid.RowProperty) - 1) * 10 + (int)btn.GetValue(Grid.ColumnProperty) - 1;
                         pressableCoords.Add(coord);
                     }
                     var coordOfBtnToPress = ai.MakeAiMove(pressableCoords);
 
-                    var btnToPress = pressableBtns.Find(btnToFind => (((int)btnToFind.GetValue(Grid.RowProperty)-1) * 10) + ((int)btnToFind.GetValue(Grid.ColumnProperty)-1) == coordOfBtnToPress);
+                    var btnToPress = pressableBtns.Find(btnToFind => (((int)btnToFind.GetValue(Grid.RowProperty) - 1) * 10) + ((int)btnToFind.GetValue(Grid.ColumnProperty) - 1) == coordOfBtnToPress);
 
                     this.BtnEvent(btnToPress, new RoutedEventArgs(ButtonBase.ClickEvent));
                 }
             }
         }
 
-        public void BuildShipsByAICords(List<int> coordsOfBtnsToPress)
+        public override void BuildShipsByAICords()
         {
-            List<Button> buttons = this.P2Grid.Children.OfType<Button>().ToList();
+            List<int> coordsOfBtnsToPress = ai.GenerateShipsByAi();
+             List<Button> buttons = View.P2Grid.Children.OfType<Button>().ToList();
             foreach (var coord in coordsOfBtnsToPress)
             {
                 Button btn = buttons.ElementAt(coord);
@@ -176,35 +174,10 @@ namespace Torpedo.OnePlayerGame
             }
         }
 
-        public OnePlayerGameSate()
+        public OnePlayerGameController()
         {
-            /*P2Grid.Visibility = System.Windows.Visibility.Hidden;
-            P2GuessGrid.Visibility = System.Windows.Visibility.Hidden;
-            p2GridLabel.Visibility = Visibility.Hidden;
-            p2GuessGridLabel.Visibility = System.Windows.Visibility.Hidden;*/
-            this.KeyDown += new KeyEventHandler(Window_KeyDown);
 
-            //List<Button> buttons = this.P2Grid.Children.OfType<Button>().ToList();
-            BuildShipsByAICords(ai.GenerateShipsByAi());
         }
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
-            {
-                Debug.WriteLine("user is pressed Ctrl+S");
-                P2Grid.Visibility = System.Windows.Visibility.Visible;
-                P2GuessGrid.Visibility = System.Windows.Visibility.Visible;
-                p2GridLabel.Visibility = Visibility.Visible;
-                p2GuessGridLabel.Visibility = System.Windows.Visibility.Visible;
-            }
-            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.H)
-            {
-                Debug.WriteLine("user is pressed Ctrl+H");
-                P2Grid.Visibility = Visibility.Hidden;
-                P2GuessGrid.Visibility = System.Windows.Visibility.Hidden;
-                p2GridLabel.Visibility = Visibility.Hidden;
-                p2GuessGridLabel.Visibility = System.Windows.Visibility.Hidden;
-            }
-        }
+        
     }
 }

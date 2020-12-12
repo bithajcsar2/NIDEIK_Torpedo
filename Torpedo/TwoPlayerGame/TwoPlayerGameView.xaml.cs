@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Torpedo.TwoPlayerGame;
-
+using Torpedo.OnePlayerGame;
 namespace Torpedo
 {
     /// <summary>
@@ -12,8 +14,14 @@ namespace Torpedo
     /// </summary>
     public partial class TwoPlayerGameView : Window, ITwoPlayerGameView
     {
-        private ITwoPLayerGameModel Model;
-        private ITwoPlayerGameController Controller;
+        private ITwoPLayerGameModel Model=new TwoPlayerGameModel();
+        private ITwoPlayerGameController Controller ;
+        Grid ITwoPlayerGameView.P1Grid { get => P1Grid; set => P1Grid = value; }
+        public Grid P1GGrid { get => P1GuessGrid; set => P1GuessGrid = value; }
+        Grid ITwoPlayerGameView.P2Grid { get => P2Grid; set => P2Grid = value; }
+        public Grid P2GGrid { get => P2GuessGrid; set => P2GuessGrid = value; }
+        public Label P2GridLabel { get => p2GridLabel; set => p2GridLabel = value; }
+        public Label P2GuessGridLabel { get => p2GuessGridLabel; set => p2GuessGridLabel = value; }
 
         public void MakeShipPartHit(Button guessbtn, int player)
         {
@@ -85,40 +93,40 @@ namespace Torpedo
         {
             if (gridToBuildOn.Name == P1Grid.Name)
             {
-                if (shipButtonListP1.Count == shipSizeP1)
+                if (Model.shipButtonListP1.Count == Model.ShipSizeP1)
                 {
-                    for (int i = 0; i < shipSizeP1; i++)
+                    for (int i = 0; i < Model.ShipSizeP1; i++)
                     {
-                        int coordx = (int)shipButtonListP1.ElementAt(i).GetValue(Grid.RowProperty);
-                        int coordy = (int)shipButtonListP1.ElementAt(i).GetValue(Grid.ColumnProperty);
+                        int coordx = (int)Model.shipButtonListP1.ElementAt(i).GetValue(Grid.RowProperty);
+                        int coordy = (int)Model.shipButtonListP1.ElementAt(i).GetValue(Grid.ColumnProperty);
                         int[] coords = { coordx, coordy };
-                        ShipsP1.ElementAt(shipSizeP1 - 1).coordinates.Add(coords);
+                        Model.ShipsP1.ElementAt(Model.ShipSizeP1 - 1).coordinates.Add(coords);
                     }
-                    shipSizeP1++;
-                    if (shipButtonListP1.Count() == 5)
+                    Model.ShipSizeP1++;
+                    if (Model.shipButtonListP1.Count() == 5)
                     {
                         DisableGridButtons(P1Grid);
                     }
-                    shipButtonListP1.Clear();
+                    Model.shipButtonListP1.Clear();
                 }
             }
             if (gridToBuildOn.Name == P2Grid.Name)
             {
-                if (shipButtonListP2.Count == shipSizeP2)
+                if (Model.shipButtonListP2.Count == Model.ShipSizeP2)
                 {
-                    for (int i = 0; i < shipSizeP2; i++)
+                    for (int i = 0; i < Model.ShipSizeP2; i++)
                     {
-                        int coordx = (int)shipButtonListP2.ElementAt(i).GetValue(Grid.RowProperty);
-                        int coordy = (int)shipButtonListP2.ElementAt(i).GetValue(Grid.ColumnProperty);
+                        int coordx = (int)Model.shipButtonListP2.ElementAt(i).GetValue(Grid.RowProperty);
+                        int coordy = (int)Model.shipButtonListP2.ElementAt(i).GetValue(Grid.ColumnProperty);
                         int[] coords = { coordx, coordy };
-                        ShipsP2.ElementAt(shipSizeP2 - 1).coordinates.Add(coords);
+                        Model.ShipsP2.ElementAt(Model.ShipSizeP2 - 1).coordinates.Add(coords);
                     }
-                    shipSizeP2++;
-                    if (shipButtonListP2.Count() == 5)
+                    Model.ShipSizeP2++;
+                    if (Model.shipButtonListP2.Count() == 5)
                     {
                         DisableGridButtons(P2Grid);
                     }
-                    shipButtonListP2.Clear();
+                    Model.shipButtonListP2.Clear();
                 }
             }
         }
@@ -133,7 +141,6 @@ namespace Torpedo
 
         public void ReEnableNotClickedGridButtons(Grid grid)
         {
-            //statsWindow.NextStep(nextPlayer);
 
             foreach (Button button in grid.Children.OfType<Button>().Where(btn => btn.Content == null &&
                 btn.Background.ToString() != new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()))
@@ -184,29 +191,76 @@ namespace Torpedo
             }
         }
 
-        public Grid getGrid(string name)
+        public void CloseWindow()
         {
-            throw new System.NotImplementedException();
+            this.Close();
         }
 
-        public TwoPlayerGameView(ITwoPlayerGameController paramController, ITwoPLayerGameModel paramModel)
+        public TwoPlayerGameView(bool AI)
         {
             InitializeComponent();
 
-            Controller = paramController;
-            Model = paramModel;
+            if (!AI)
+                Controller = new TwoPLayerGameController();
+            else
+                Controller = new OnePlayerGameController();
+            
+            WireUp(Controller, Model);
 
             BuildGrid(P1GuessGrid);
             BuildGrid(P1Grid);
             BuildGrid(P2GuessGrid);
             BuildGrid(P2Grid);
 
-            TwoPlayerStatsWindow statsWindow;
-            statsWindow = new TwoPlayerStatsWindow(MainWindow.player1Name, MainWindow.player2Name);
             p1GuessGridLabel.Content = MainWindow.player1Name + "'s firing board";
             p1GridLabel.Content = MainWindow.player1Name + "'s board";
             p2GuessGridLabel.Content = MainWindow.player2Name + "'s firing board";
             p2GridLabel.Content = MainWindow.player2Name + "'s board";
+
+            this.KeyDown += new KeyEventHandler(Window_KeyDown);
+
+
+            if (AI)
+                Controller.BuildShipsByAICords();
+
+            Controller.StartGameSate();
+            this.Show();
+            
         }
+        public void WireUp(ITwoPlayerGameController paramControl, ITwoPLayerGameModel paramModel)
+        {
+            Model = paramModel;
+            Controller = paramControl;
+            Controller.SetModel(Model);
+            Controller.SetView(this);
+        }
+    
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
+            {
+                Debug.WriteLine("user is pressed Ctrl+S");
+                P2Grid.Visibility = Visibility.Visible;
+                P2GGrid.Visibility = Visibility.Visible;
+                P2GridLabel.Visibility = Visibility.Visible;
+                P2GuessGridLabel.Visibility = Visibility.Visible;
+            }
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.H)
+            {
+                Debug.WriteLine("user is pressed Ctrl+H");
+                P2Grid.Visibility = Visibility.Hidden;
+                P2GGrid.Visibility = Visibility.Hidden;
+                P2GridLabel.Visibility = Visibility.Hidden;
+                P2GuessGridLabel.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void RequestGiveUp(object sender, RoutedEventArgs e)
+        {
+            Controller.PlayerGiveUp();
+        }
+
+
     }
 }

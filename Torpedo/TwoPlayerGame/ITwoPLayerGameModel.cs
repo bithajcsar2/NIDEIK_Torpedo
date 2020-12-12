@@ -9,9 +9,15 @@ namespace Torpedo.TwoPlayerGame
 {
     public interface ITwoPLayerGameModel
     {
-        string P1Name { get; set; }
-        string P2Name { get; set; }
+        string NextPlayerName { get; set; }
 
         bool turn { get; set; }
+
+        List<Button> shipButtonListP1 { get; set; }
+        List<Button> shipButtonListP2 { get; set; }
+        List<Ship> ShipsP1 { get; set; }
+        List<Ship> ShipsP2 { get; set; }
+        int ShipSizeP1 { get; set; }
+        int ShipSizeP2 { get; set; }
     }
 }

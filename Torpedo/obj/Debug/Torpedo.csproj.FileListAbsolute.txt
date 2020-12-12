@@ -26,15 +26,11 @@ C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.pdb
 C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.dll
 C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.xml
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csprojAssemblyReference.cache
-C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.g.cs
-C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.g.cs
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.g.cs
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.g.cs
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\App.g.cs
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.cache
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.lref
-C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameResult.baml
-C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameState.baml
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.baml
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.baml
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.g.resources
@@ -70,3 +66,7 @@ D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\
 D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.baml
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\GameResult.g.cs
 C:\Development\Visual Studio\Torpedo\Torpedo\obj\Debug\GameResult.baml
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.g.cs
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameView.g.cs
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.baml
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameView.baml

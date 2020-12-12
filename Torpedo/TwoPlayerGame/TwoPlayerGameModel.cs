@@ -1,26 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace Torpedo.TwoPlayerGame
 {
     class TwoPlayerGameModel : ITwoPLayerGameModel
     {
-        ITwoPlayerGameController twoPlayerGameController;
-        ITwoPlayerGameView twoPlayerGameView;
-
-        public TwoPlayerGameModel(ITwoPlayerGameController twoPlayerGameController, ITwoPlayerGameView twoPlayerGameView)
-        {
-            this.twoPlayerGameController = twoPlayerGameController;
-            this.twoPlayerGameView = twoPlayerGameView;
-        }
-
-
-
 
         protected List<Button> shipButtonListP1 = new List<Button>();
         protected List<Ship> ShipsP1 = new List<Ship>()
@@ -51,21 +35,31 @@ namespace Torpedo.TwoPlayerGame
             {
                 return turnHelper;
             }
-            set 
+            set
             {
                 turnHelper = value;
             }
         }
 
-        string p1Name;
-        public string P1Name { get { return p1Name; }
-            set { p1Name = value; } }
-        
+        string nextPlayerName;
+        public string NextPlayerName
+        {
+            get { return nextPlayerName; }
+            set { nextPlayerName = value; }
+        }
+
         string p2Name;
         public string P2Name
         {
             get { return p2Name; }
             set { p2Name = value; }
         }
+
+        List<Button> ITwoPLayerGameModel.shipButtonListP1 { get => shipButtonListP1; set => shipButtonListP1 = value; }
+        List<Button> ITwoPLayerGameModel.shipButtonListP2 { get => shipButtonListP2; set => shipButtonListP2 = value; }
+        List<Ship> ITwoPLayerGameModel.ShipsP1 { get => ShipsP1; set => ShipsP1 = value; }
+        List<Ship> ITwoPLayerGameModel.ShipsP2 { get => ShipsP1; set => ShipsP1 = value; }
+        public int ShipSizeP1 { get => shipSizeP1; set => shipSizeP1 = value; }
+        public int ShipSizeP2 { get => shipSizeP2; set => shipSizeP2 = value; }
     }
 }

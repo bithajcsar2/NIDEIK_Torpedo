@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Torpedo.TwoPlayerGame
 {
-    interface ITwoPlayerGameView
+    public interface ITwoPlayerGameView
     {
 
         void ReEnableNotClickedGridButtons(Grid grid);
         void DisableGridButtons(Grid grid);
 
-        Grid getGrid(string name);
+        Grid P1Grid { get; set; }
+        Grid P1GGrid { get; set; }
+        Grid P2Grid { get; set; }
+        Grid P2GGrid { get; set; }
+        void MakeShipPartHit(Button guessbtn, int player);
+        void MakeShipLookDead(Ship ship, int player);
+        void BuildShip(Grid gridToBuildOn);
+        Label P2GridLabel { get; set; }
+        Label P2GuessGridLabel { get; set; }
+
+        void CloseWindow();
     }
 }

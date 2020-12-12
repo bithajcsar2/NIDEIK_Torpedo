@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Torpedo.OnePlayerGame;
+using Torpedo.TwoPlayerGame;
 
 namespace Torpedo
 {
@@ -23,6 +24,8 @@ namespace Torpedo
 
         public static string player1Name;
         public static string player2Name;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,10 +35,7 @@ namespace Torpedo
         {
             player1Name = player.Text;
             player2Name = "AI";
-            OnePlayerGameSate onePlayerGameState = new OnePlayerGameSate();
-
-            onePlayerGameState.Show();
-
+            TwoPlayerGameView twoPlayerGameView = new TwoPlayerGameView(true);
             this.Close();
         }
 
@@ -43,8 +43,7 @@ namespace Torpedo
         {
             player1Name = firstPlayer.Text;
             player2Name = secondPlayer.Text;
-            TwoPlayerGameView twoPlayerGameState = new TwoPlayerGameView();
-            twoPlayerGameState.Show();
+            TwoPlayerGameView twoPlayerGameView=new TwoPlayerGameView(false);
             this.Close();
         }
 
