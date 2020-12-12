@@ -43,7 +43,7 @@ namespace Torpedo
         {
             player1Name = firstPlayer.Text;
             player2Name = secondPlayer.Text;
-            TwoPlayerGameState twoPlayerGameState = new TwoPlayerGameState();
+            TwoPlayerGameView twoPlayerGameState = new TwoPlayerGameView();
             twoPlayerGameState.Show();
             this.Close();
         }

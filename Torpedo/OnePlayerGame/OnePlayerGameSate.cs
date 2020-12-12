@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace Torpedo.OnePlayerGame
 {
-    class OnePlayerGameSate : TwoPlayerGameState
+    class OnePlayerGameSate : TwoPlayerGameView
     {
         AI ai = new AI();
         AI.PrevHitLevel hitlevel = new AI.PrevHitLevel();

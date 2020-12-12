@@ -68,6 +68,11 @@
     <Compile Include="GameResult.xaml.cs">
       <DependentUpon>GameResult.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TwoPlayerGame\ITwoPlayerGameController.cs" />
+    <Compile Include="TwoPlayerGame\ITwoPLayerGameModel.cs" />
+    <Compile Include="TwoPlayerGame\ITwoPlayerGameView.cs" />
+    <Compile Include="TwoPlayerGame\TwoPLayerGameController.cs" />
+    <Compile Include="TwoPlayerGame\TwoPlayerGameModel.cs" />
     <Compile Include="TwoPlayerGame\TwoPlayerStatsWindow.xaml.cs">
       <DependentUpon>TwoPlayerStatsWindow.xaml</DependentUpon>
     </Compile>
@@ -75,7 +80,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TwoPlayerGame\TwoPlayerGameState.xaml">
+    <Page Include="TwoPlayerGame\TwoPlayerGameView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -83,8 +88,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TwoPlayerGame\TwoPlayerGameState.xaml.cs">
-      <DependentUpon>TwoPlayerGameState.xaml</DependentUpon>
+    <Compile Include="TwoPlayerGame\TwoPlayerGameView.xaml.cs">
+      <DependentUpon>TwoPlayerGameView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="mainwindow.xaml">
