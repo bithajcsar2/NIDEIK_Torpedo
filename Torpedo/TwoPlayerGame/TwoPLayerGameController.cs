@@ -105,7 +105,7 @@ namespace Torpedo.TwoPlayerGame
                 return false;
             if (ShipDetector(direction, lockForShipDet, shipSize, shipLocNumbers))
                 return false;
-            
+
 
             return true;
         }
@@ -129,7 +129,7 @@ namespace Torpedo.TwoPlayerGame
                 for (int i = 1; i < size; i++)
                 {
                     toPress.Add((Button)grid.Children.OfType<Button>().Where(btn =>
-                     (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedButton.GetValue(Grid.ColumnProperty) + i&&
+                     (int)btn.GetValue(Grid.ColumnProperty) == (int)clickedButton.GetValue(Grid.ColumnProperty) + i &&
                      (int)btn.GetValue(Grid.RowProperty) == (int)clickedButton.GetValue(Grid.RowProperty)).First());
                 }
             }
@@ -300,20 +300,19 @@ namespace Torpedo.TwoPlayerGame
                 }
                 else
                 {
-                    var toPress=GenerateShipCoordsByPlayerSelection(clickedButton, Model.ShipSizeP1, Model.UserSelectedDirection, btnsGrid);
+                    var toPress = GenerateShipCoordsByPlayerSelection(clickedButton, Model.ShipSizeP1, Model.UserSelectedDirection, btnsGrid);
                     foreach (var button in toPress)
                     {
                         button.Background = new SolidColorBrush(Color.FromRgb(80, 154, 159));
                         button.Click -= new RoutedEventHandler(BtnEvent);
-                        Model.shipButtonListP1.Add(clickedButton);
+                        Model.shipButtonListP1.Add(button);
                         coordx = (int)button.GetValue(Grid.RowProperty);
                         coordy = (int)button.GetValue(Grid.ColumnProperty);
                         int[] crds = { coordx, coordy };
                         Model.shipsCoordsListP1.Add(crds);
                     }
-                }
-
-                FillShipCoords(btnsGrid);
+                    FillShipCoords(btnsGrid);
+                }               
             }
 
             if (btnsGrid.Name == View.P2Grid.Name)
@@ -342,15 +341,18 @@ namespace Torpedo.TwoPlayerGame
                         {
                             button.Background = new SolidColorBrush(Color.FromRgb(80, 154, 159));
                             button.Click -= new RoutedEventHandler(BtnEvent);
-                            Model.shipButtonListP2.Add(clickedButton);
+                            Model.shipButtonListP2.Add(button);
                             coordx = (int)button.GetValue(Grid.RowProperty);
                             coordy = (int)button.GetValue(Grid.ColumnProperty);
                             int[] crds = { coordx, coordy };
                             Model.shipsCoordsListP2.Add(crds);
                         }
+                        FillShipCoords(btnsGrid);
+
                     }
                 }
-                FillShipCoords(btnsGrid);
+                else
+                    FillShipCoords(btnsGrid);
             }
 
             if (btnsGrid.Name == View.P1GGrid.Name)
@@ -491,7 +493,7 @@ namespace Torpedo.TwoPlayerGame
         {
             resultsWindow = new GameResult();
             statsWindow = new TwoPlayerStatsWindow(Model.P1Name, Model.P2Name);
-
+            statsWindow.Show();
             var rand = new Random();
 
             if (rand.Next(2) == 1)

@@ -53,7 +53,7 @@ namespace Torpedo.TwoPlayerGame
         List<Button> ITwoPLayerGameModel.shipButtonListP1 { get => shipButtonListP1; set => shipButtonListP1 = value; }
         List<Button> ITwoPLayerGameModel.shipButtonListP2 { get => shipButtonListP2; set => shipButtonListP2 = value; }
         List<Ship> ITwoPLayerGameModel.ShipsP1 { get => ShipsP1; set => ShipsP1 = value; }
-        List<Ship> ITwoPLayerGameModel.ShipsP2 { get => ShipsP1; set => ShipsP1 = value; }
+        List<Ship> ITwoPLayerGameModel.ShipsP2 { get => ShipsP2; set => ShipsP2 = value; }
         public int ShipSizeP1 { get => shipSizeP1; set => shipSizeP1 = value; }
         public int ShipSizeP2 { get => shipSizeP2; set => shipSizeP2 = value; }
         public int UserSelectedDirection { get; set; }
