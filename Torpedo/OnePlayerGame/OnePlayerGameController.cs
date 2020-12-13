@@ -18,17 +18,17 @@ namespace Torpedo.OnePlayerGame
         public override void CheckHit(Button btnToCheck)
         {
             statsWindow.IncRound();
-            if (Model.NextPlayerName == MainWindow.player2Name)
+            if (Model.NextPlayerName == Model.P2Name)
             {
-                Model.NextPlayerName = MainWindow.player1Name;
+                Model.NextPlayerName = Model.P1Name;
             }
-            else if (Model.NextPlayerName == MainWindow.player1Name)
+            else if (Model.NextPlayerName == Model.P1Name)
             {
-                Model.NextPlayerName = MainWindow.player2Name;
+                Model.NextPlayerName = Model.P2Name;
             }
             statsWindow.NextStep(Model.NextPlayerName);
 
-            if (!Model.turn)
+            if (!Model.Turn)
             {
                 foreach (Ship ship in Model.ShipsP2)
                 {
@@ -110,7 +110,7 @@ namespace Torpedo.OnePlayerGame
                 if (Model.ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {
                     Debug.WriteLine("P2 won!");
-                    resultsWindow.WriteJson(MainWindow.player2Name, MainWindow.player1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
+                    resultsWindow.WriteJson(Model.P2Name, Model.P1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
                     resultsWindow.FillDataGridWithResult();
 
                     resultsWindow.Show();
@@ -120,7 +120,7 @@ namespace Torpedo.OnePlayerGame
                 else
                 {
                     Debug.WriteLine("P1 won!");
-                    resultsWindow.WriteJson(MainWindow.player1Name, MainWindow.player2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
+                    resultsWindow.WriteJson(Model.P1Name, Model.P2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
                     resultsWindow.FillDataGridWithResult();
 
                     resultsWindow.Show();
@@ -131,7 +131,7 @@ namespace Torpedo.OnePlayerGame
             }
             if (Model.ShipSizeP1 == 6 && Model.ShipSizeP2 == 6)
             {
-                if (Model.turn)
+                if (Model.Turn)
                 {
                     View.ReEnableNotClickedGridButtons(View.P1GGrid);
                     View.DisableGridButtons(View.P2GGrid);
@@ -141,10 +141,10 @@ namespace Torpedo.OnePlayerGame
                     View.ReEnableNotClickedGridButtons(View.P2GGrid);
                     View.DisableGridButtons(View.P1GGrid);
                 }
-                Model.turn = !Model.turn;
+                Model.Turn = !Model.Turn;
 
                 ai.InformAiAboutMove(hitlevel, ref hitsByAi);
-                if (Model.turn == true)
+                if (Model.Turn == true)
                 {
                     var pressableBtns = View.P2GGrid.Children.OfType<Button>().Where(btn => btn.Content == null
                     && btn.Background.ToString() != new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()).ToList();
@@ -166,7 +166,7 @@ namespace Torpedo.OnePlayerGame
         public override void BuildShipsByAICords()
         {
             List<int> coordsOfBtnsToPress = ai.GenerateShipsByAi();
-             List<Button> buttons = View.P2Grid.Children.OfType<Button>().ToList();
+            List<Button> buttons = View.P2Grid.Children.OfType<Button>().ToList();
             foreach (var coord in coordsOfBtnsToPress)
             {
                 Button btn = buttons.ElementAt(coord);

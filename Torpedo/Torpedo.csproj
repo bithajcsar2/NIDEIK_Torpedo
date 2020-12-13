@@ -60,7 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="OnePlayerGame\AI.cs" />
-    <Compile Include="OnePlayerGame\OnePlayerGameSate.cs" />
+    <Compile Include="OnePlayerGame\OnePlayerGameController.cs" />
     <Compile Include="Ships.cs" />
     <Compile Include="mainwindow.xaml.cs">
       <DependentUpon>mainwindow.xaml</DependentUpon>

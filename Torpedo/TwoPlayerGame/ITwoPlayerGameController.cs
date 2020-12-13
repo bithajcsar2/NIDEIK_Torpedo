@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Torpedo.TwoPlayerGame
 {
@@ -17,5 +18,6 @@ namespace Torpedo.TwoPlayerGame
 
         void StartGameSate();
         void BuildShipsByAICords();
+        void FillShipCoords(Grid gridToBuildOn);
     }
 }

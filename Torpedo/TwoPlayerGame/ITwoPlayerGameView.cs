@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Torpedo.TwoPlayerGame
 {
@@ -14,9 +15,10 @@ namespace Torpedo.TwoPlayerGame
         Grid P2GGrid { get; set; }
         void MakeShipPartHit(Button guessbtn, int player);
         void MakeShipLookDead(Ship ship, int player);
-        void BuildShip(Grid gridToBuildOn);
         Label P2GridLabel { get; set; }
         Label P2GuessGridLabel { get; set; }
+
+        void Window_KeyDown(object sender, KeyEventArgs e);
 
         void CloseWindow();
     }

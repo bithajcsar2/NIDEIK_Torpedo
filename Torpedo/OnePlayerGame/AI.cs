@@ -135,7 +135,7 @@ namespace Torpedo.OnePlayerGame
         {
             if (direction == 1)
             {
-                if (location - 10 * size > 0)
+                if (location - 10 * size >= 0)
                     return false;
             }
             if (direction == 2)
@@ -147,7 +147,7 @@ namespace Torpedo.OnePlayerGame
             }
             if (direction == 3)
             {
-                if (location + 10 * size < 99)
+                if (location + 10 * size <= 99)
                     return false;
             }
             if (direction == 4)

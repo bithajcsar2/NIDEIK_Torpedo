@@ -5,8 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Torpedo.TwoPlayerGame;
 using Torpedo.OnePlayerGame;
+using Torpedo.TwoPlayerGame;
 namespace Torpedo
 {
     /// <summary>
@@ -14,8 +14,8 @@ namespace Torpedo
     /// </summary>
     public partial class TwoPlayerGameView : Window, ITwoPlayerGameView
     {
-        private ITwoPLayerGameModel Model=new TwoPlayerGameModel();
-        private ITwoPlayerGameController Controller ;
+        private ITwoPLayerGameModel Model = new TwoPlayerGameModel(MainWindow.player1Name, MainWindow.player2Name);
+        private ITwoPlayerGameController Controller;
         Grid ITwoPlayerGameView.P1Grid { get => P1Grid; set => P1Grid = value; }
         public Grid P1GGrid { get => P1GuessGrid; set => P1GuessGrid = value; }
         Grid ITwoPlayerGameView.P2Grid { get => P2Grid; set => P2Grid = value; }
@@ -89,47 +89,7 @@ namespace Torpedo
             }
         }
 
-        public void BuildShip(Grid gridToBuildOn)
-        {
-            if (gridToBuildOn.Name == P1Grid.Name)
-            {
-                if (Model.shipButtonListP1.Count == Model.ShipSizeP1)
-                {
-                    for (int i = 0; i < Model.ShipSizeP1; i++)
-                    {
-                        int coordx = (int)Model.shipButtonListP1.ElementAt(i).GetValue(Grid.RowProperty);
-                        int coordy = (int)Model.shipButtonListP1.ElementAt(i).GetValue(Grid.ColumnProperty);
-                        int[] coords = { coordx, coordy };
-                        Model.ShipsP1.ElementAt(Model.ShipSizeP1 - 1).coordinates.Add(coords);
-                    }
-                    Model.ShipSizeP1++;
-                    if (Model.shipButtonListP1.Count() == 5)
-                    {
-                        DisableGridButtons(P1Grid);
-                    }
-                    Model.shipButtonListP1.Clear();
-                }
-            }
-            if (gridToBuildOn.Name == P2Grid.Name)
-            {
-                if (Model.shipButtonListP2.Count == Model.ShipSizeP2)
-                {
-                    for (int i = 0; i < Model.ShipSizeP2; i++)
-                    {
-                        int coordx = (int)Model.shipButtonListP2.ElementAt(i).GetValue(Grid.RowProperty);
-                        int coordy = (int)Model.shipButtonListP2.ElementAt(i).GetValue(Grid.ColumnProperty);
-                        int[] coords = { coordx, coordy };
-                        Model.ShipsP2.ElementAt(Model.ShipSizeP2 - 1).coordinates.Add(coords);
-                    }
-                    Model.ShipSizeP2++;
-                    if (Model.shipButtonListP2.Count() == 5)
-                    {
-                        DisableGridButtons(P2Grid);
-                    }
-                    Model.shipButtonListP2.Clear();
-                }
-            }
-        }
+
         public void DisableGridButtons(Grid grid)
         {
             foreach (Button button in grid.Children.OfType<Button>())
@@ -204,7 +164,7 @@ namespace Torpedo
                 Controller = new TwoPLayerGameController();
             else
                 Controller = new OnePlayerGameController();
-            
+
             WireUp(Controller, Model);
 
             BuildGrid(P1GuessGrid);
@@ -212,10 +172,10 @@ namespace Torpedo
             BuildGrid(P2GuessGrid);
             BuildGrid(P2Grid);
 
-            p1GuessGridLabel.Content = MainWindow.player1Name + "'s firing board";
-            p1GridLabel.Content = MainWindow.player1Name + "'s board";
-            p2GuessGridLabel.Content = MainWindow.player2Name + "'s firing board";
-            p2GridLabel.Content = MainWindow.player2Name + "'s board";
+            p1GuessGridLabel.Content = Model.P1Name + "'s firing board";
+            p1GridLabel.Content = Model.P1Name + "'s board";
+            p2GuessGridLabel.Content = Model.P2Name + "'s firing board";
+            p2GridLabel.Content = Model.P2Name + "'s board";
 
             this.KeyDown += new KeyEventHandler(Window_KeyDown);
 
@@ -225,7 +185,7 @@ namespace Torpedo
 
             Controller.StartGameSate();
             this.Show();
-            
+
         }
         public void WireUp(ITwoPlayerGameController paramControl, ITwoPLayerGameModel paramModel)
         {
@@ -234,9 +194,9 @@ namespace Torpedo
             Controller.SetModel(Model);
             Controller.SetView(this);
         }
-    
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+
+        public void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
             {
@@ -254,6 +214,25 @@ namespace Torpedo
                 P2GridLabel.Visibility = Visibility.Hidden;
                 P2GuessGridLabel.Visibility = Visibility.Hidden;
             }
+            if (e.Key == Key.W)
+            {
+                Model.UserSelectedDirection = 1;
+            }
+            if (e.Key == Key.S)
+            {
+                Model.UserSelectedDirection = 3;
+            }
+
+            if (e.Key == Key.A)
+            {
+                Model.UserSelectedDirection = 4;
+            }
+
+            if (e.Key == Key.D)
+            {
+                Model.UserSelectedDirection = 2;
+            }
+
         }
 
         private void RequestGiveUp(object sender, RoutedEventArgs e)
