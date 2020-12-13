@@ -221,9 +221,9 @@ namespace Torpedo.TwoPlayerGame
             int[] locToCheck = location;
             if (direction == 1)
             {
-                for (int i = 1; i <= size; i++)
+                for (int i = 1; i < size; i++)
                 {
-                    locToCheck[0] -= i;
+                    locToCheck[0] -= 1;
                     if (shipLocNumbers.Exists(num => num[0] == locToCheck[0] && num[1] == locToCheck[1]))
                     {
                         return true;
@@ -232,9 +232,9 @@ namespace Torpedo.TwoPlayerGame
             }
             if (direction == 2)
             {
-                for (int i = 1; i <= size; i++)
+                for (int i = 1; i < size; i++)
                 {
-                    locToCheck[1] += i;
+                    locToCheck[1] += 1;
                     if (shipLocNumbers.Exists(num => num[0] == locToCheck[0] && num[1] == locToCheck[1]))
                     {
                         return true;
@@ -243,9 +243,9 @@ namespace Torpedo.TwoPlayerGame
             }
             if (direction == 3)
             {
-                for (int i = 1; i <= size; i++)
+                for (int i = 1; i < size; i++)
                 {
-                    locToCheck[0] += i;
+                    locToCheck[0] += 1;
                     if (shipLocNumbers.Exists(num => num[0] == locToCheck[0] && num[1] == locToCheck[1]))
                     {
                         return true;
@@ -254,9 +254,9 @@ namespace Torpedo.TwoPlayerGame
             }
             if (direction == 4)
             {
-                for (int i = 1; i <= size; i++)
+                for (int i = 1; i < size; i++)
                 {
-                    locToCheck[1] -= i;
+                    locToCheck[1] -= 1;
                     if (shipLocNumbers.Exists(num => num[0] == locToCheck[0] && num[1] == locToCheck[1]))
                     {
                         return true;
