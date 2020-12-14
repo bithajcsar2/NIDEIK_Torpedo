@@ -198,38 +198,40 @@ namespace Torpedo
 
         public void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S && Model.P2Name == "AI")
             {
                 Debug.WriteLine("user is pressed Ctrl+S");
-                P2Grid.Visibility = Visibility.Visible;
-                P2GGrid.Visibility = Visibility.Visible;
-                P2GridLabel.Visibility = Visibility.Visible;
-                P2GuessGridLabel.Visibility = Visibility.Visible;
+                if(P2Grid.Visibility == Visibility.Visible)
+                {
+                    P2Grid.Visibility = Visibility.Hidden;
+                }
+                else if (P2Grid.Visibility == Visibility.Hidden)
+                {
+                    P2Grid.Visibility = Visibility.Visible;
+                }
             }
-            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.H)
-            {
-                Debug.WriteLine("user is pressed Ctrl+H");
-                P2Grid.Visibility = Visibility.Hidden;
-                P2GGrid.Visibility = Visibility.Hidden;
-                P2GridLabel.Visibility = Visibility.Hidden;
-                P2GuessGridLabel.Visibility = Visibility.Hidden;
-            }
+
             if (e.Key == Key.W)
             {
+                activeDirection.Content = FindResource("Up");
                 Model.UserSelectedDirection = 1;
             }
+
             if (e.Key == Key.S)
             {
+                activeDirection.Content = FindResource("Down");
                 Model.UserSelectedDirection = 3;
             }
 
             if (e.Key == Key.A)
             {
+                activeDirection.Content = FindResource("Left");
                 Model.UserSelectedDirection = 4;
             }
 
             if (e.Key == Key.D)
             {
+                activeDirection.Content = FindResource("Right");
                 Model.UserSelectedDirection = 2;
             }
 

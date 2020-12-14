@@ -70,3 +70,27 @@ C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.g.cs
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameView.g.cs
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.baml
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameView.baml
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.exe.config
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.exe
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.pdb
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.dll
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.xml
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csprojAssemblyReference.cache
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.g.cs
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameView.g.cs
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.g.cs
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.g.cs
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\App.g.cs
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.cache
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo_MarkupCompile.lref
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult.baml
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameView.baml
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.baml
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerStatsWindow.baml
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.g.resources
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.Properties.Resources.resources
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.GenerateResource.cache
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CoreCompileInputs.cache
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CopyComplete
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.exe
+D:\Dina\Others\University\Szoftverfejlesztés C# nyelven\fix\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.pdb

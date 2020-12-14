@@ -156,5 +156,11 @@
   <ItemGroup>
     <Resource Include="Images\giveUp.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\down.png" />
+    <Resource Include="Images\left.png" />
+    <Resource Include="Images\right.png" />
+    <Resource Include="Images\up.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

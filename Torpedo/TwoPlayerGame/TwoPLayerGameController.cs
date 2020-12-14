@@ -32,6 +32,8 @@ namespace Torpedo.TwoPlayerGame
             int indexHelper = 0;
             if (gridToBuildOn.Name == View.P1Grid.Name)
             {
+                View.P2Grid.Visibility = Visibility.Hidden;
+                View.P1Grid.Visibility = Visibility.Visible;
                 for (int i = Model.ShipSizeP1; i > 0; i--)
                 {
                     indexHelper += i;
@@ -51,11 +53,30 @@ namespace Torpedo.TwoPlayerGame
                     if (Model.shipButtonListP1.Count() == 15)
                     {
                         View.DisableGridButtons(View.P1Grid);
+                        if (Model.P2Name == "AI")
+                        {
+                            View.P2Grid.Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            View.P2Grid.Visibility = Visibility.Visible;
+                            View.P1Grid.Visibility = Visibility.Hidden;
+                        }
                     }
                 }
+        
             }
             if (gridToBuildOn.Name == View.P2Grid.Name)
             {
+                if (Model.P2Name == "AI")
+                {
+                    View.P2Grid.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    View.P2Grid.Visibility = Visibility.Visible;
+                    View.P1Grid.Visibility = Visibility.Hidden;
+                }
 
                 for (int i = Model.ShipSizeP2; i > 0; i--)
                 {
@@ -76,8 +97,11 @@ namespace Torpedo.TwoPlayerGame
                     if (Model.shipButtonListP2.Count() == 15)
                     {
                         View.DisableGridButtons(View.P2Grid);
+                        View.P2Grid.Visibility = Visibility.Hidden;
+                        View.P1Grid.Visibility = Visibility.Visible;
                     }
                 }
+                
             }
         }
 
@@ -434,6 +458,8 @@ namespace Torpedo.TwoPlayerGame
 
             if (!Model.Turn)
             {
+                View.P2Grid.Visibility = Visibility.Hidden;
+                View.P1Grid.Visibility = Visibility.Visible;
                 foreach (Ship ship in Model.ShipsP2)
                 {
                     int[] matchedCoords = ship.coordinates.FirstOrDefault(coords => (coords[0] == (int)btnToCheck.GetValue(Grid.RowProperty) &&
@@ -457,11 +483,21 @@ namespace Torpedo.TwoPlayerGame
                         return;
                     }
                 }
+                
                 Debug.WriteLine("No hit on P2's ships");
             }
 
             else
             {
+                if (Model.P2Name == "AI")
+                {
+                    View.P2Grid.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    View.P1Grid.Visibility = Visibility.Hidden;
+                    View.P2Grid.Visibility = Visibility.Visible;
+                }
                 foreach (Ship ship in Model.ShipsP1)
                 {
                     int[] matchedCoords = ship.coordinates.FirstOrDefault(coords => (coords[0] == (int)btnToCheck.GetValue(Grid.RowProperty) &&
@@ -504,11 +540,22 @@ namespace Torpedo.TwoPlayerGame
             if (Model.Turn)
             {
                 Model.NextPlayerName = Model.P1Name;
+                View.P2Grid.Visibility = Visibility.Hidden;
+                View.P1Grid.Visibility = Visibility.Visible;
+            }
+            else if (Model.P2Name == "AI")
+            {
+                View.P1Grid.Visibility = Visibility.Visible;
+                View.P2Grid.Visibility = Visibility.Hidden;
             }
             else
             {
                 Model.NextPlayerName = Model.P2Name;
+                View.P2Grid.Visibility = Visibility.Visible;
+                View.P1Grid.Visibility = Visibility.Hidden;
             }
+
+
             View.DisableGridButtons(View.P1GGrid);
             View.DisableGridButtons(View.P2GGrid);
         }
