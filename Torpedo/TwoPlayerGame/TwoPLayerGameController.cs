@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,8 +13,10 @@ namespace Torpedo.TwoPlayerGame
     {
         protected ITwoPLayerGameModel Model;
         protected ITwoPlayerGameView View;
+
         protected IGameResultsView resultsWindowView;
         protected TwoPlayerStatsWindow statsWindow;
+
         public TwoPLayerGameController(ITwoPLayerGameModel twoPlayerGameModel, ITwoPlayerGameView twoPlayerGameView)
         {
             Model = twoPlayerGameModel;
@@ -126,7 +127,7 @@ namespace Torpedo.TwoPlayerGame
 
         public bool CanGenerateShipCoordsByPlayerSelection(int direction, Button clickedBtn, int shipSize, List<int[]> shipLocNumbers)
         {
-            int locForWallDet = ((int)clickedBtn.GetValue(Grid.RowProperty) - 1) * 10
+            int locForWallDetAndNonNormal = ((int)clickedBtn.GetValue(Grid.RowProperty) - 1) * 10
                 + ((int)clickedBtn.GetValue(Grid.ColumnProperty) - 1);
 
 
@@ -140,11 +141,11 @@ namespace Torpedo.TwoPlayerGame
                 int prevLockForNonNormal = (shipLocNumbers.ElementAt(shipLocNumbers.Count - 2)[0] - 1) * 10 +
                         shipLocNumbers.ElementAt(shipLocNumbers.Count - 2)[1] - 1;
 
-                if (NonNormalLookingShipDetector(direction, locForWallDet, prevLockForNonNormal))
+                if (NonNormalLookingShipDetector(direction, locForWallDetAndNonNormal, prevLockForNonNormal))
                     return false;
             }
 
-            if (WallDetector(direction, locForWallDet, shipSize))
+            if (WallDetector(direction, locForWallDetAndNonNormal, shipSize))
                 return false;
             if (ShipDetector(direction, lockForShipDet, shipSize, shipLocNumbers))
                 return false;

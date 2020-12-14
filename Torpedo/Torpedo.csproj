@@ -155,9 +155,6 @@
     <Resource Include="Images\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TwoPlayerGame\giveUp.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\giveUp.png" />
   </ItemGroup>
   <ItemGroup>

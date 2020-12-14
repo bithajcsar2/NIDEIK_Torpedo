@@ -27,33 +27,33 @@ namespace Torpedo.GameResult
         {
             GameResultModel gameResult = new GameResultModel
             {
-                winner = winner,
-                loser = loser,
-                numOfRounds = numOfRounds,
-                p1HitCount = p1HitCount,
-                p2HitCount = p2HitCount,
+                Winner = winner,
+                Loser = loser,
+                NumOfRounds = numOfRounds,
+                P1HitCount = p1HitCount,
+                P2HitCount = p2HitCount,
 
-                p1ShipsSats = "Ships alive: "
+                P1ShipsSats = "Ships alive: "
             };
             foreach (var ship in p1Ships.Where(ship => ship.isDead == false))
             {
-                gameResult.p1ShipsSats += ship.name.ToString() + " ";
+                gameResult.P1ShipsSats += ship.name.ToString() + " ";
             }
-            gameResult.p1ShipsSats += " ships sunken: ";
+            gameResult.P1ShipsSats += " ships sunken: ";
             foreach (var ship in p1Ships.Where(ship => ship.isDead == true))
             {
-                gameResult.p1ShipsSats += ship.name.ToString() + " ";
+                gameResult.P1ShipsSats += ship.name.ToString() + " ";
             }
 
-            gameResult.p2ShipsSats = "Ships alive: ";
+            gameResult.P2ShipsSats = "Ships alive: ";
             foreach (var ship in p2Ships.Where(ship => ship.isDead == false))
             {
-                gameResult.p2ShipsSats += ship.name.ToString() + " ";
+                gameResult.P2ShipsSats += ship.name.ToString() + " ";
             }
-            gameResult.p2ShipsSats += " ships sunken: ";
+            gameResult.P2ShipsSats += " ships sunken: ";
             foreach (var ship in p2Ships.Where(ship => ship.isDead == true))
             {
-                gameResult.p2ShipsSats += ship.name.ToString() + " ";
+                gameResult.P2ShipsSats += ship.name.ToString() + " ";
             }
 
 

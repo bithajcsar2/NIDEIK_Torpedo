@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Torpedo.OnePlayerGame;
+﻿using System.Windows;
 using Torpedo.TwoPlayerGame;
 
 namespace Torpedo
@@ -32,19 +19,25 @@ namespace Torpedo
         }
 
         public void Start1PlayerGame(object sender, RoutedEventArgs e)
-        {
-            player1Name = player.Text;
-            player2Name = "AI";
-            ITwoPlayerGameView twoPlayerGameView = new TwoPlayerGameView(true);
-            this.Close();
+        {          
+            if (player.Text != "")
+            {
+                player1Name = player.Text;
+                player2Name = "AI";
+                ITwoPlayerGameView twoPlayerGameView = new TwoPlayerGameView(true);
+                this.Close();
+            }
         }
 
         public void Start2PlayerGame(object sender, RoutedEventArgs e)
         {
-            player1Name = firstPlayer.Text;
-            player2Name = secondPlayer.Text;
-            ITwoPlayerGameView twoPlayerGameView=new TwoPlayerGameView(false);
-            this.Close();
+            if (firstPlayer.Text != "" && secondPlayer.Text != "")
+            {
+                player1Name = firstPlayer.Text;
+                player2Name = secondPlayer.Text;
+                ITwoPlayerGameView twoPlayerGameView = new TwoPlayerGameView(false);
+                this.Close();
+            }
         }
 
     }

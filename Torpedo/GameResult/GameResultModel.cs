@@ -8,12 +8,12 @@ namespace Torpedo.GameResult
 {
     public class GameResultModel
     {
-        public string winner { get; set; }
-        public string loser { get; set; }
-        public int numOfRounds { get; set; }
-        public int p1HitCount { get; set; }
-        public int p2HitCount { get; set; }
-        public string p1ShipsSats { get; set; }
-        public string p2ShipsSats { get; set; }
+        public string Winner { get; set; }
+        public string Loser { get; set; }
+        public int NumOfRounds { get; set; }
+        public int P1HitCount { get; set; }
+        public int P2HitCount { get; set; }
+        public string P1ShipsSats { get; set; }
+        public string P2ShipsSats { get; set; }
     }
 }

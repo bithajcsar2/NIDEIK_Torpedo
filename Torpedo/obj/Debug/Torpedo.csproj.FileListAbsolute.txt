@@ -75,7 +75,6 @@ C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.exe
 C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Torpedo.pdb
 C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.dll
 C:\Dev\NIDEIK_Torpedo\Torpedo\bin\Debug\Newtonsoft.Json.xml
-C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csprojAssemblyReference.cache
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\GameResult\GameResultView.g.cs
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\TwoPlayerGame\TwoPlayerGameView.g.cs
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\mainwindow.g.cs
@@ -94,3 +93,4 @@ C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CoreCompileInputs.cache
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csproj.CopyComplete
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.exe
 C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.pdb
+C:\Dev\NIDEIK_Torpedo\Torpedo\obj\Debug\Torpedo.csprojAssemblyReference.cache

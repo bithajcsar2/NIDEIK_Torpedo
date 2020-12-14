@@ -16,7 +16,7 @@ namespace TorpedoTest
 
             Assert.IsTrue(ai.WallDetector(1, 8, 1));
             Assert.IsTrue(ai.WallDetector(2, 10, 10));
-            Assert.IsTrue(ai.WallDetector(3, 9, 9));
+            Assert.IsTrue(ai.WallDetector(3, 9, 10));
             Assert.IsTrue(ai.WallDetector(4, 6, 7));
 
             Assert.IsFalse(ai.WallDetector(1, 21, 2));
