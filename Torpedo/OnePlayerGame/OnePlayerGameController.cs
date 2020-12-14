@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Media;
 using Torpedo.TwoPlayerGame;
 
@@ -53,6 +52,13 @@ namespace Torpedo.OnePlayerGame
                         return;
                     }
                 }
+
+
+                Button buttonOnEnemyGrid = View.P2Grid.Children.OfType<Button>().Where(btn =>
+                    (int)btn.GetValue(Grid.RowProperty) == (int)btnToCheck.GetValue(Grid.RowProperty) &&
+                     (int)btn.GetValue(Grid.ColumnProperty) == (int)btnToCheck.GetValue(Grid.ColumnProperty)).First();
+                buttonOnEnemyGrid.Background = new SolidColorBrush(Color.FromRgb(100, 100, 100));
+
                 Debug.WriteLine("No hit on P2's ships");
             }
 
@@ -90,6 +96,12 @@ namespace Torpedo.OnePlayerGame
                         return;
                     }
                 }
+
+                Button buttonOnEnemyGrid = View.P1Grid.Children.OfType<Button>().Where(btn =>
+                (int)btn.GetValue(Grid.RowProperty) == (int)btnToCheck.GetValue(Grid.RowProperty) &&
+                 (int)btn.GetValue(Grid.ColumnProperty) == (int)btnToCheck.GetValue(Grid.ColumnProperty)).First();
+                buttonOnEnemyGrid.Background = new SolidColorBrush(Color.FromRgb(100, 100, 100));
+
                 Debug.WriteLine("No hit on P1's ships");
                 hitlevel = AI.PrevHitLevel.NoHit;
             }
@@ -178,6 +190,6 @@ namespace Torpedo.OnePlayerGame
         {
 
         }
-        
+
     }
 }

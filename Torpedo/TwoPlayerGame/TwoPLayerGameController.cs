@@ -29,7 +29,7 @@ namespace Torpedo.TwoPlayerGame
 
         public void GridVisibilitySet(bool isPlayerOne)
         {
-            if(isPlayerOne)
+            if (isPlayerOne)
             {
                 View.P1Grid.Visibility = Visibility.Visible;
                 View.P1GGrid.Visibility = Visibility.Visible;
@@ -84,7 +84,7 @@ namespace Torpedo.TwoPlayerGame
                         }
                     }
                 }
-        
+
             }
             if (gridToBuildOn.Name == View.P2Grid.Name)
             {
@@ -120,7 +120,7 @@ namespace Torpedo.TwoPlayerGame
                         GridVisibilitySet(true);
                     }
                 }
-                
+
             }
         }
 
@@ -355,7 +355,7 @@ namespace Torpedo.TwoPlayerGame
                         Model.shipsCoordsListP1.Add(crds);
                     }
                     FillShipCoords(btnsGrid);
-                }               
+                }
             }
 
             if (btnsGrid.Name == View.P2Grid.Name)
@@ -502,7 +502,12 @@ namespace Torpedo.TwoPlayerGame
                         return;
                     }
                 }
-                
+
+                Button buttonOnEnemyGrid = View.P2Grid.Children.OfType<Button>().Where(btn =>
+                    (int)btn.GetValue(Grid.RowProperty) == (int)btnToCheck.GetValue(Grid.RowProperty) &&
+                     (int)btn.GetValue(Grid.ColumnProperty) == (int)btnToCheck.GetValue(Grid.ColumnProperty)).First();
+                buttonOnEnemyGrid.Background = new SolidColorBrush(Color.FromRgb(100, 100, 100));
+
                 Debug.WriteLine("No hit on P2's ships");
             }
 
@@ -540,6 +545,11 @@ namespace Torpedo.TwoPlayerGame
                         return;
                     }
                 }
+
+                Button buttonOnEnemyGrid = View.P1Grid.Children.OfType<Button>().Where(btn =>
+                        (int)btn.GetValue(Grid.RowProperty) == (int)btnToCheck.GetValue(Grid.RowProperty) &&
+                         (int)btn.GetValue(Grid.ColumnProperty) == (int)btnToCheck.GetValue(Grid.ColumnProperty)).First();
+                buttonOnEnemyGrid.Background = new SolidColorBrush(Color.FromRgb(100, 100, 100));
                 Debug.WriteLine("No hit on P1's ships");
             }
         }

@@ -204,10 +204,12 @@ namespace Torpedo
                 if(P2Grid.Visibility == Visibility.Visible)
                 {
                     P2Grid.Visibility = Visibility.Hidden;
+                    P2GGrid.Visibility = Visibility.Hidden;
                 }
                 else if (P2Grid.Visibility == Visibility.Hidden)
                 {
                     P2Grid.Visibility = Visibility.Visible;
+                    P2GGrid.Visibility = Visibility.Visible;
                 }
             }
 
