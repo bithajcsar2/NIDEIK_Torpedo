@@ -27,13 +27,34 @@ namespace Torpedo.TwoPlayerGame
 
         }
 
+        public void GridVisibilitySet(bool isPlayerOne)
+        {
+            if(isPlayerOne)
+            {
+                View.P1Grid.Visibility = Visibility.Visible;
+                View.P1GGrid.Visibility = Visibility.Visible;
+
+                View.P2Grid.Visibility = Visibility.Hidden;
+                View.P2GGrid.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                View.P1Grid.Visibility = Visibility.Hidden;
+                View.P1GGrid.Visibility = Visibility.Hidden;
+
+                View.P2Grid.Visibility = Visibility.Visible;
+                View.P2GGrid.Visibility = Visibility.Visible;
+            }
+        }
+
+
         public void FillShipCoords(Grid gridToBuildOn)
         {
             int indexHelper = 0;
             if (gridToBuildOn.Name == View.P1Grid.Name)
             {
-                View.P2Grid.Visibility = Visibility.Hidden;
-                View.P1Grid.Visibility = Visibility.Visible;
+                GridVisibilitySet(true);
+
                 for (int i = Model.ShipSizeP1; i > 0; i--)
                 {
                     indexHelper += i;
@@ -59,8 +80,7 @@ namespace Torpedo.TwoPlayerGame
                         }
                         else
                         {
-                            View.P2Grid.Visibility = Visibility.Visible;
-                            View.P1Grid.Visibility = Visibility.Hidden;
+                            GridVisibilitySet(false);
                         }
                     }
                 }
@@ -74,8 +94,7 @@ namespace Torpedo.TwoPlayerGame
                 }
                 else
                 {
-                    View.P2Grid.Visibility = Visibility.Visible;
-                    View.P1Grid.Visibility = Visibility.Hidden;
+                    GridVisibilitySet(false);
                 }
 
                 for (int i = Model.ShipSizeP2; i > 0; i--)
@@ -97,8 +116,8 @@ namespace Torpedo.TwoPlayerGame
                     if (Model.shipButtonListP2.Count() == 15)
                     {
                         View.DisableGridButtons(View.P2Grid);
-                        View.P2Grid.Visibility = Visibility.Hidden;
-                        View.P1Grid.Visibility = Visibility.Visible;
+
+                        GridVisibilitySet(true);
                     }
                 }
                 
@@ -458,8 +477,8 @@ namespace Torpedo.TwoPlayerGame
 
             if (!Model.Turn)
             {
-                View.P2Grid.Visibility = Visibility.Hidden;
-                View.P1Grid.Visibility = Visibility.Visible;
+                GridVisibilitySet(false);
+
                 foreach (Ship ship in Model.ShipsP2)
                 {
                     int[] matchedCoords = ship.coordinates.FirstOrDefault(coords => (coords[0] == (int)btnToCheck.GetValue(Grid.RowProperty) &&
@@ -492,11 +511,11 @@ namespace Torpedo.TwoPlayerGame
                 if (Model.P2Name == "AI")
                 {
                     View.P2Grid.Visibility = Visibility.Hidden;
+                    View.P2GGrid.Visibility = Visibility.Hidden;
                 }
                 else
                 {
-                    View.P1Grid.Visibility = Visibility.Hidden;
-                    View.P2Grid.Visibility = Visibility.Visible;
+                    GridVisibilitySet(true);
                 }
                 foreach (Ship ship in Model.ShipsP1)
                 {
@@ -540,19 +559,19 @@ namespace Torpedo.TwoPlayerGame
             if (Model.Turn)
             {
                 Model.NextPlayerName = Model.P1Name;
-                View.P2Grid.Visibility = Visibility.Hidden;
-                View.P1Grid.Visibility = Visibility.Visible;
+                GridVisibilitySet(true);
             }
             else if (Model.P2Name == "AI")
             {
                 View.P1Grid.Visibility = Visibility.Visible;
                 View.P2Grid.Visibility = Visibility.Hidden;
+                View.P2GGrid.Visibility = Visibility.Hidden;
             }
             else
             {
                 Model.NextPlayerName = Model.P2Name;
-                View.P2Grid.Visibility = Visibility.Visible;
-                View.P1Grid.Visibility = Visibility.Hidden;
+                GridVisibilitySet(false);
+
             }
 
 
