@@ -35,7 +35,7 @@ namespace Torpedo
         {
             player1Name = player.Text;
             player2Name = "AI";
-            TwoPlayerGameView twoPlayerGameView = new TwoPlayerGameView(true);
+            ITwoPlayerGameView twoPlayerGameView = new TwoPlayerGameView(true);
             this.Close();
         }
 
@@ -43,7 +43,7 @@ namespace Torpedo
         {
             player1Name = firstPlayer.Text;
             player2Name = secondPlayer.Text;
-            TwoPlayerGameView twoPlayerGameView=new TwoPlayerGameView(false);
+            ITwoPlayerGameView twoPlayerGameView=new TwoPlayerGameView(false);
             this.Close();
         }
 

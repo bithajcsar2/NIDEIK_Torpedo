@@ -59,14 +59,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameResult\GameResultControler.cs" />
+    <Compile Include="GameResult\GameResultModel.cs" />
+    <Compile Include="GameResult\IGameResultContoler.cs" />
+    <Compile Include="GameResult\IGameResultsView.cs" />
     <Compile Include="OnePlayerGame\AI.cs" />
     <Compile Include="OnePlayerGame\OnePlayerGameController.cs" />
     <Compile Include="Ships.cs" />
     <Compile Include="mainwindow.xaml.cs">
       <DependentUpon>mainwindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameResult.xaml.cs">
-      <DependentUpon>GameResult.xaml</DependentUpon>
+    <Compile Include="GameResult\GameResultView.xaml.cs">
+      <DependentUpon>GameResultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="TwoPlayerGame\ITwoPlayerGameController.cs" />
     <Compile Include="TwoPlayerGame\ITwoPLayerGameModel.cs" />
@@ -76,7 +80,7 @@
     <Compile Include="TwoPlayerGame\TwoPlayerStatsWindow.xaml.cs">
       <DependentUpon>TwoPlayerStatsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="GameResult.xaml">
+    <Page Include="GameResult\GameResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,5 +166,6 @@
     <Resource Include="Images\right.png" />
     <Resource Include="Images\up.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

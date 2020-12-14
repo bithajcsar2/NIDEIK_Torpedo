@@ -122,20 +122,20 @@ namespace Torpedo.OnePlayerGame
                 if (Model.ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {
                     Debug.WriteLine("P2 won!");
-                    resultsWindow.WriteJson(Model.P2Name, Model.P1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
-                    resultsWindow.FillDataGridWithResult();
+                    resultsWindowView.shareContoler.WriteJson(Model.P2Name, Model.P1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
+                    resultsWindowView.shareContoler.FillDataGridWithResult();
 
-                    resultsWindow.Show();
+                    resultsWindowView.show();
                     statsWindow.Close();
                     View.CloseWindow();
                 }
                 else
                 {
                     Debug.WriteLine("P1 won!");
-                    resultsWindow.WriteJson(Model.P1Name, Model.P2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
-                    resultsWindow.FillDataGridWithResult();
+                    resultsWindowView.shareContoler.WriteJson(Model.P1Name, Model.P2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
+                    resultsWindowView.shareContoler.FillDataGridWithResult();
 
-                    resultsWindow.Show();
+                    resultsWindowView.show();
                     statsWindow.Close();
                     View.CloseWindow();
                 }
@@ -143,6 +143,9 @@ namespace Torpedo.OnePlayerGame
             }
             if (Model.ShipSizeP1 == 6 && Model.ShipSizeP2 == 6)
             {
+                if (statsWindow.roundCounter == 0)
+                    statsWindow.NextStep(Model.NextPlayerName);
+
                 if (Model.Turn)
                 {
                     View.ReEnableNotClickedGridButtons(View.P1GGrid);
@@ -160,7 +163,9 @@ namespace Torpedo.OnePlayerGame
                 {
                     var pressableBtns = View.P2GGrid.Children.OfType<Button>().Where(btn => btn.Content == null
                     && btn.Background.ToString() != new SolidColorBrush(Color.FromRgb(80, 154, 159)).ToString()).ToList();
+
                     List<int> pressableCoords = new List<int>();
+
                     foreach (var btn in pressableBtns)
                     {
                         int coord = ((int)btn.GetValue(Grid.RowProperty) - 1) * 10 + (int)btn.GetValue(Grid.ColumnProperty) - 1;

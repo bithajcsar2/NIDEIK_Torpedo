@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Torpedo.GameResult;
 
 namespace Torpedo.TwoPlayerGame
 {
@@ -13,9 +14,8 @@ namespace Torpedo.TwoPlayerGame
     {
         protected ITwoPLayerGameModel Model;
         protected ITwoPlayerGameView View;
-        protected GameResult resultsWindow;
+        protected IGameResultsView resultsWindowView;
         protected TwoPlayerStatsWindow statsWindow;
-        ManualResetEvent man = new ManualResetEvent(false);
         public TwoPLayerGameController(ITwoPLayerGameModel twoPlayerGameModel, ITwoPlayerGameView twoPlayerGameView)
         {
             Model = twoPlayerGameModel;
@@ -395,20 +395,20 @@ namespace Torpedo.TwoPlayerGame
                     }
                 }
                 else
+                {
                     FillShipCoords(btnsGrid);
+                }
             }
 
             if (btnsGrid.Name == View.P1GGrid.Name)
             {
                 CheckHit(clickedButton);
-                statsWindow.NextStep(Model.NextPlayerName);
 
             }
 
             if (btnsGrid.Name == View.P2GGrid.Name)
             {
                 CheckHit(clickedButton);
-                statsWindow.NextStep(Model.NextPlayerName);
 
             }
             UpdateGameState();
@@ -427,20 +427,21 @@ namespace Torpedo.TwoPlayerGame
                 if (Model.ShipsP1.TrueForAll(ship => ship.isDead == true))
                 {
                     Debug.WriteLine("P2 won!");
-                    resultsWindow.WriteJson(Model.P2Name, Model.P1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
-                    resultsWindow.FillDataGridWithResult();
+                    resultsWindowView.shareContoler.WriteJson(Model.P2Name, Model.P1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
+                    resultsWindowView.shareContoler.FillDataGridWithResult();
 
-                    resultsWindow.Show();
+                    resultsWindowView.show();
                     statsWindow.Close();
                     View.CloseWindow();
                 }
                 else
                 {
                     Debug.WriteLine("P1 won!");
-                    resultsWindow.WriteJson(Model.P1Name, Model.P2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
-                    resultsWindow.FillDataGridWithResult();
+                    
+                    resultsWindowView.shareContoler.WriteJson(Model.P1Name, Model.P2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
+                    resultsWindowView.shareContoler.FillDataGridWithResult();
 
-                    resultsWindow.Show();
+                    resultsWindowView.show();
                     statsWindow.Close();
                     View.CloseWindow();
                 }
@@ -448,6 +449,9 @@ namespace Torpedo.TwoPlayerGame
             }
             if (Model.ShipSizeP1 == 6 && Model.ShipSizeP2 == 6)
             {
+                if (statsWindow.roundCounter == 0)
+                    statsWindow.NextStep(Model.NextPlayerName);
+
                 if (Model.Turn)
                 {
                     View.ReEnableNotClickedGridButtons(View.P1GGrid);
@@ -556,7 +560,7 @@ namespace Torpedo.TwoPlayerGame
 
         public void StartGameSate()
         {
-            resultsWindow = new GameResult();
+            resultsWindowView = new GameResultView();
             statsWindow = new TwoPlayerStatsWindow(Model.P1Name, Model.P2Name);
             statsWindow.Show();
             var rand = new Random();
@@ -601,20 +605,20 @@ namespace Torpedo.TwoPlayerGame
 
 
                 Debug.WriteLine("P2 won!");
-                resultsWindow.WriteJson(Model.P2Name, Model.P1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
-                resultsWindow.FillDataGridWithResult();
+                resultsWindowView.shareContoler.WriteJson(Model.P2Name, Model.P1Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
+                resultsWindowView.shareContoler.FillDataGridWithResult();
 
             }
             else if (Model.NextPlayerName == Model.P2Name)
             {
                 Debug.WriteLine("P1 won!");
-                resultsWindow.WriteJson(Model.P1Name, Model.P2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
-                resultsWindow.FillDataGridWithResult();
+                resultsWindowView.shareContoler.WriteJson(Model.P1Name, Model.P2Name, statsWindow.roundCounter, statsWindow.p1HitCount, statsWindow.p2HitCount, Model.ShipsP1, Model.ShipsP2);
+                resultsWindowView.shareContoler.FillDataGridWithResult();
 
 
             }
 
-            resultsWindow.Show();
+            resultsWindowView.show();
             statsWindow.Close();
             View.CloseWindow();
         }
